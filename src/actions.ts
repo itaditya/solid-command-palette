@@ -2,6 +2,7 @@ import { defineAction } from './lib';
 
 const firstAction = defineAction({
   id: 'first',
+  shortcut: '$mod+e',
   run: ({ actionsContext }) => {
     console.log('run first');
 
@@ -13,6 +14,7 @@ const firstAction = defineAction({
 
 const secondAction = defineAction({
   id: 'second',
+  shortcut: 'g p',
   run: () => {
     console.log('run second');
   },

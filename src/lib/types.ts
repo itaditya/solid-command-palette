@@ -8,6 +8,10 @@ export type RunArgs = {
 
 export type Action = {
   id: string;
+  /**
+   * Keyboard Shortcut like `$mod + E`, `Shift + P`.
+   */
+  shortcut: string | null;
   run: (args: RunArgs) => void;
 };
 

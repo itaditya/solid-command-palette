@@ -3,6 +3,7 @@ import { createStore } from 'solid-js/store';
 import tinykeys from 'tinykeys';
 import { RootProps, StoreState, StoreMethods, StoreContext } from './types';
 import { Provider, useStore } from './StoreContext';
+import { createShortcutHandlersMap } from './kbdUtils';
 
 const RootInternal: Component = () => {
   const [state, { open, toggle }] = useStore();
@@ -10,11 +11,17 @@ const RootInternal: Component = () => {
   let unsubscribe = null;
 
   onMount(() => {
+    const shortcutMap = createShortcutHandlersMap(state.actions, state.actionsContext);
+
+    const commandPaletteHandler = (event: KeyboardEvent) => {
+      event.preventDefault();
+      console.log('ran from kbd');
+      toggle();
+    };
+
     unsubscribe = tinykeys(window, {
-      '$mod+k': () => {
-        console.log('ran from kbd');
-        toggle();
-      },
+      ...shortcutMap,
+      '$mod+k': commandPaletteHandler,
     });
   });
 
@@ -30,8 +37,8 @@ const RootInternal: Component = () => {
       <button onClick={() => open()}>Open Command Palette</button>
       <Show when={state.visibility === 'opened'}>
         <ul>
-          <For each={Object.entries(state.actions)} fallback={<div>No Actions</div>}>
-            {([actionId, action]) => {
+          <For each={Object.values(state.actions)} fallback={<div>No Actions</div>}>
+            {(action) => {
               return (
                 <li>
                   <button
@@ -39,7 +46,7 @@ const RootInternal: Component = () => {
                       action.run({ actionsContext: state.actionsContext });
                     }}
                   >
-                    Run Action {actionId}
+                    Run Action {action.id}
                   </button>
                 </li>
               );
@@ -69,7 +76,7 @@ export const Root: Component<RootProps> = (p) => {
       setState('visibility', 'closed');
     },
     toggle() {
-      setState('visibility', (prev) => prev === 'opened' ? 'closed' : 'opened');
+      setState('visibility', (prev) => (prev === 'opened' ? 'closed' : 'opened'));
     },
   };
 
