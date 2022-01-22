@@ -1,13 +1,21 @@
-import { Store } from "solid-js/store";
+import { Store } from 'solid-js/store';
 
 export type Action = {
   id: string;
   run: () => void;
 };
 
+export type PartialAction = Partial<Action>;
+
+export type Actions = Record<Action['id'], Action>;
+
+export type RootProps = {
+  actions: Actions;
+};
+
 export type StoreState = {
   visibility: 'opened' | 'closed';
-  actions: Array<Action>;
+  actions: Actions;
 };
 
 export type StoreStateWrapped = Store<StoreState>;
