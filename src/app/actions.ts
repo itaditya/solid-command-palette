@@ -1,4 +1,4 @@
-import { defineAction } from './lib';
+import { defineAction } from '../lib';
 
 const firstAction = defineAction({
   id: 'first',

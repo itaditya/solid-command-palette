@@ -1,5 +1,5 @@
 import { Component, createSignal } from 'solid-js';
-import { Root, CommandPalette } from './lib';
+import { Root, CommandPalette } from '../lib';
 import { actions } from './actions';
 
 const App: Component = () => {
