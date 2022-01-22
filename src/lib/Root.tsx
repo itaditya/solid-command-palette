@@ -1,11 +1,11 @@
-import { Component, onCleanup, onMount } from 'solid-js';
+import { Component, For, onCleanup, onMount, Show } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import tinykeys from 'tinykeys';
 import { RootProps, StoreState, StoreMethods, StoreContext } from './types';
 import { Provider, useStore } from './StoreContext';
 
 const RootInternal: Component = () => {
-  const [state, { open }] = useStore();
+  const [state, { open, toggle }] = useStore();
 
   let unsubscribe = null;
 
@@ -13,7 +13,7 @@ const RootInternal: Component = () => {
     unsubscribe = tinykeys(window, {
       '$mod+k': () => {
         console.log('ran from kbd');
-        open();
+        toggle();
       },
     });
   });
@@ -27,10 +27,26 @@ const RootInternal: Component = () => {
   return (
     <div>
       RootInternal is {state.visibility}
-      <button onClick={() => state.actions.first.run({ actionsContext: state.actionsContext })}>
-        Run Action
-      </button>
       <button onClick={() => open()}>Open Command Palette</button>
+      <Show when={state.visibility === 'opened'}>
+        <ul>
+          <For each={Object.entries(state.actions)} fallback={<div>No Actions</div>}>
+            {([actionId, action]) => {
+              return (
+                <li>
+                  <button
+                    onClick={() => {
+                      action.run({ actionsContext: state.actionsContext });
+                    }}
+                  >
+                    Run Action {actionId}
+                  </button>
+                </li>
+              );
+            }}
+          </For>
+        </ul>
+      </Show>
     </div>
   );
 };
@@ -48,6 +64,12 @@ export const Root: Component<RootProps> = (p) => {
   const storeMethods: StoreMethods = {
     open() {
       setState('visibility', 'opened');
+    },
+    close() {
+      setState('visibility', 'closed');
+    },
+    toggle() {
+      setState('visibility', (prev) => prev === 'opened' ? 'closed' : 'opened');
     },
   };
 

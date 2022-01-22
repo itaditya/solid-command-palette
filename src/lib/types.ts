@@ -30,6 +30,8 @@ export type StoreStateWrapped = Store<StoreState>;
 
 export type StoreMethods = {
   open: () => void;
+  close: () => void;
+  toggle: () => void;
 };
 
 export type StoreContext = [StoreStateWrapped, StoreMethods];
