@@ -2,8 +2,12 @@ import { defineAction } from './lib';
 
 const firstAction = defineAction({
   id: 'first',
-  run: () => {
+  run: ({ actionsContext }) => {
     console.log('run first');
+
+    if (typeof actionsContext.increment === 'function') {
+      actionsContext.increment();
+    }
   },
 });
 

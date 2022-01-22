@@ -27,7 +27,9 @@ const RootInternal: Component = () => {
   return (
     <div>
       RootInternal is {state.visibility}
-      <button onClick={() => state.actions.first.run()}>Run Action</button>
+      <button onClick={() => state.actions.first.run({ actionsContext: state.actionsContext })}>
+        Run Action
+      </button>
       <button onClick={() => open()}>Open Command Palette</button>
     </div>
   );
@@ -35,9 +37,12 @@ const RootInternal: Component = () => {
 
 export const Root: Component<RootProps> = (p) => {
   const initialActions = p.actions || {};
+  const initialActionsContext = p.actionsContext || {};
+
   const [state, setState] = createStore<StoreState>({
     visibility: 'closed',
     actions: initialActions,
+    actionsContext: initialActionsContext,
   });
 
   const storeMethods: StoreMethods = {
