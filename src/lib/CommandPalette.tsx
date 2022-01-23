@@ -1,11 +1,13 @@
-import { Component, For, onMount, Show } from 'solid-js';
+import { Component, For, JSX, onMount, Show } from 'solid-js';
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
 import styles from './CommandPalette.module.css';
 
+type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
+
 export const CommandPaletteInternal: Component = () => {
-  const [state, { closePalette }] = useStore();
+  const [state, { closePalette, setSearchText }] = useStore();
 
   let wrapperElem: HTMLDivElement;
   let paletteElem: HTMLDivElement;
@@ -18,6 +20,11 @@ export const CommandPaletteInternal: Component = () => {
   function handlePaletteClick(event: MouseEvent) {
     event.stopPropagation();
   }
+
+  const handleSearchInput: InputEventHandler = (event) => {
+    const newValue = event.currentTarget.value;
+    setSearchText(newValue);
+  };
 
   function handleActionSelect(action) {
     action.run({ actionsContext: state.actionsContext });
@@ -38,7 +45,13 @@ export const CommandPaletteInternal: Component = () => {
     <div class={styles.wrapper} ref={wrapperElem} onClick={handleWrapperClick}>
       <div class={styles.palette} ref={paletteElem} onClick={handlePaletteClick}>
         <div>
-          <input type="text" placeholder="Search for stuff" ref={searchInputElem} />
+          <input
+            type="text"
+            placeholder="Search for stuff"
+            ref={searchInputElem}
+            value={state.searchText}
+            onInput={handleSearchInput}
+          />
         </div>
         <div>
           <ul>

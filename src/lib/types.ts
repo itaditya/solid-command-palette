@@ -26,6 +26,7 @@ export type RootProps = {
 
 export type StoreState = {
   visibility: 'opened' | 'closed';
+  searchText: string;
   actions: Actions;
   actionsContext: ActionsContext;
 };
@@ -36,6 +37,7 @@ export type StoreMethods = {
   openPalette: () => void;
   closePalette: () => void;
   togglePalette: () => void;
+  setSearchText: (newValue: string) => void;
 };
 
 export type StoreContext = [StoreStateWrapped, StoreMethods];

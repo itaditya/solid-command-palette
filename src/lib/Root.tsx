@@ -16,6 +16,7 @@ export const Root: Component<RootProps> = (p) => {
 
   const [state, setState] = createStore<StoreState>({
     visibility: 'closed',
+    searchText: '',
     actions: initialActions,
     actionsContext: initialActionsContext,
   });
@@ -29,6 +30,9 @@ export const Root: Component<RootProps> = (p) => {
     },
     togglePalette() {
       setState('visibility', (prev) => (prev === 'opened' ? 'closed' : 'opened'));
+    },
+    setSearchText(newValue) {
+      setState('searchText', newValue);
     },
   };
 
