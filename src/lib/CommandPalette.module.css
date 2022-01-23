@@ -22,7 +22,7 @@
 .searchInput {
   width: 100%;
   border: none;
-  padding-block: 15px;
+  padding-block: 20px;
   padding-inline: var(--inline-gutter-space);
   font-size: 20px;
   outline: 0;
@@ -38,12 +38,38 @@
 }
 
 .resultItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
   user-select: none;
-  padding-block: 10px;
+  padding-block: 15px;
   padding-inline: var(--inline-gutter-space);
 }
 
 .resultItem.activeItem {
-  background-color: turquoise;
+  background-color: #f1f5f9;
+}
+
+.resultTitle, .resultSubtitle {
+  font-family: sans-serif;
+}
+
+.resultTitle {
+  color: #1e293b;
+  font-weight: normal;
+}
+
+.resultSubtitle {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 300;
+  margin-top: 7px;
+}
+
+.actionShortcut {
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 5px 10px;
+  border-radius: 5px;
 }

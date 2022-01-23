@@ -17,7 +17,8 @@ const App: Component = () => {
     <Root actions={actions} actionsContext={actionsContext}>
       <div>
         <CommandPalette />
-        <h1>Hello {count()}</h1>
+        <h1>Try the command palette by pressing CMD + K on Mac or Control + K on Windows</h1>
+        <p>Count is {count()}</p>
         <button onClick={increment}>Increase Count</button>
       </div>
     </Root>

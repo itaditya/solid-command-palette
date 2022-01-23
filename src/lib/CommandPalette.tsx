@@ -13,8 +13,8 @@ import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
 import { createSearchResultList } from './createActionList';
 import { StoreStateWrapped } from './types';
-import styles from './CommandPalette.module.css';
 import utilStyles from './utils.module.css';
+import styles from './CommandPalette.module.css';
 
 type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
 type WrappedAction = StoreStateWrapped['actions'][string];
@@ -151,7 +151,7 @@ export const CommandPaletteInternal: Component = () => {
                 return (
                   <li
                     role="option"
-                    class={styles.resultItem}
+                    class={`${styles.resultItem} ${utilStyles.boxBorder}`}
                     classList={{
                       [styles.activeItem]: action.id === activeItemId(),
                     }}
@@ -159,10 +159,17 @@ export const CommandPaletteInternal: Component = () => {
                     onClick={[handleActionItemSelect, action]}
                     onMouseEnter={[handleActionItemHover, action]}
                   >
-                    <h4 class={utilStyles.stripSpace}>{action.title}</h4>
-                    <Show when={action.subtitle}>
-                      <p class={utilStyles.stripSpace}>{action.subtitle}</p>
-                    </Show>
+                    <div>
+                      <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>{action.title}</h4>
+                      <Show when={action.subtitle}>
+                        <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>{action.subtitle}</p>
+                      </Show>
+                    </div>
+                    <div>
+                      <Show when={action.shortcut}>
+                        <kbd class={styles.actionShortcut}>{action.shortcut}</kbd>
+                      </Show>
+                    </div>
                   </li>
                 );
               }}
