@@ -1,4 +1,13 @@
-import { Component, createEffect, createSignal, For, JSX, onMount, Show } from 'solid-js';
+import {
+  Component,
+  createEffect,
+  createSignal,
+  createUniqueId,
+  For,
+  JSX,
+  onMount,
+  Show,
+} from 'solid-js';
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
@@ -14,6 +23,8 @@ export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal(null);
+  const searchLabelId = createUniqueId();
+  const searchInputId = createUniqueId();
 
   let wrapperElem: HTMLDivElement;
   let paletteElem: HTMLDivElement;
@@ -115,8 +126,12 @@ export const CommandPaletteInternal: Component = () => {
     <div class={styles.wrapper} ref={wrapperElem} onClick={handleWrapperClick}>
       <div class={styles.palette} ref={paletteElem} onClick={handlePaletteClick}>
         <div>
+          <label htmlFor={searchInputId} id={searchLabelId} class={utilStyles.visuallyHidden}>
+            Search for an action and then select one of the option.
+          </label>
           <input
-            type="text"
+            type="search"
+            id={searchInputId}
             class={`${styles.searchInput} ${utilStyles.boxBorder}`}
             placeholder="Type a command or search..."
             ref={searchInputElem}
@@ -125,15 +140,21 @@ export const CommandPaletteInternal: Component = () => {
           />
         </div>
         <div>
-          <ul class={`${styles.resultList} ${utilStyles.stripSpace}`}>
+          <ul
+            role="listbox"
+            aria-labelledby={searchInputId}
+            class={`${styles.resultList} ${utilStyles.stripSpace}`}
+          >
             <For each={resultsList()} fallback={<div>No Actions</div>}>
               {(action) => {
                 return (
                   <li
+                    role="option"
                     class={styles.resultItem}
                     classList={{
                       [styles.activeItem]: action.id === activeItemId(),
                     }}
+                    aria-selected={action.id === activeItemId()}
                     onClick={[handleActionItemSelect, action]}
                     onMouseEnter={[handleActionItemHover, action]}
                   >
