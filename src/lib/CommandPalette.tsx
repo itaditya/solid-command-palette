@@ -1,12 +1,31 @@
-import { createSignal, Component } from 'solid-js';
+import { Component, For, Show } from 'solid-js';
+import { useStore } from './StoreContext';
 import styles from './CommandPalette.module.css';
 
 export const CommandPalette: Component = () => {
-  const [count, setCount] = createSignal(0);
+  const [state] = useStore();
+
   return (
     <div>
-      <h1 class={styles.myBtn}>CommandPalette!</h1>
-      <button onClick={() => setCount((prev) => (prev += 1))}>Count {count()}</button>
+      <Show when={state.visibility === 'opened'}>
+        <ul>
+          <For each={Object.values(state.actions)} fallback={<div>No Actions</div>}>
+            {(action) => {
+              return (
+                <li>
+                  <button
+                    onClick={() => {
+                      action.run({ actionsContext: state.actionsContext });
+                    }}
+                  >
+                    Run Action {action.id}
+                  </button>
+                </li>
+              );
+            }}
+          </For>
+        </ul>
+      </Show>
     </div>
   );
 };

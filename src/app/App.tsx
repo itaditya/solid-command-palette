@@ -16,7 +16,7 @@ const App: Component = () => {
   return (
     <Root actions={actions} actionsContext={actionsContext}>
       <div>
-        <h1>Hello {count()}</h1>;
+        <h1>Hello {count()}</h1>
         <CommandPalette />
       </div>
     </Root>
