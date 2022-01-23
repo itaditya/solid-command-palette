@@ -10,6 +10,7 @@ export const defineAction = (partialAction: PartialAction): Action => {
   const id = partialAction.id || Math.random().toString();
   const title = partialAction.title;
   const subtitle = partialAction.subtitle || null;
+  const keywords = partialAction.keywords || [];
   const shortcut = partialAction.shortcut || null;
   const run = partialAction.run || defaultRun;
 
@@ -17,6 +18,7 @@ export const defineAction = (partialAction: PartialAction): Action => {
     id,
     title,
     subtitle,
+    keywords,
     shortcut,
     run,
   };

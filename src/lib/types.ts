@@ -3,7 +3,7 @@ import { Store } from 'solid-js/store';
 export type ActionsContext = Record<string, unknown>;
 
 export type RunArgs = {
-  actionId: Action['id'],
+  actionId: Action['id'];
   actionsContext: ActionsContext;
 };
 
@@ -11,6 +11,7 @@ export type Action = {
   id: string;
   title: string;
   subtitle?: string;
+  keywords: Array<string>;
   /**
    * Keyboard Shortcut like `$mod+e`, `Shift+p`.
    */

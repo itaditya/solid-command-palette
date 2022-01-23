@@ -17,6 +17,7 @@ const firstAction = defineAction({
 const secondAction = defineAction({
   id: 'second',
   title: 'Second Action',
+  keywords: ['2nd', 'two'],
   shortcut: 'g p',
   run: () => {
     console.log('run second');
