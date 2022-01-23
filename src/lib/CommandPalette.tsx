@@ -6,7 +6,10 @@ import styles from './CommandPalette.module.css';
 
 export const CommandPaletteInternal: Component = () => {
   const [state, { close }] = useStore();
-  let wrapperRef;
+
+  let wrapperElem: HTMLDivElement;
+  let paletteElem: HTMLDivElement;
+  let searchInputElem: HTMLInputElement;
 
   function handleWrapperClick() {
     close();
@@ -17,7 +20,9 @@ export const CommandPaletteInternal: Component = () => {
   }
 
   onMount(() => {
-    tinykeys(wrapperRef, {
+    searchInputElem.select();
+
+    tinykeys(wrapperElem, {
       Escape: () => {
         console.log('escape press');
         close();
@@ -26,10 +31,10 @@ export const CommandPaletteInternal: Component = () => {
   });
 
   return (
-    <div class={styles.wrapper} ref={wrapperRef} onClick={handleWrapperClick}>
-      <div class={styles.palette} onClick={handlePaletteClick}>
+    <div class={styles.wrapper} ref={wrapperElem} onClick={handleWrapperClick}>
+      <div class={styles.palette} ref={paletteElem} onClick={handlePaletteClick}>
         <div>
-          <input type="text" placeholder="Search for stuff" />
+          <input type="text" placeholder="Search for stuff" ref={searchInputElem} />
         </div>
         <div>
           <ul>
