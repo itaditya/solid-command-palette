@@ -19,6 +19,10 @@ export const CommandPaletteInternal: Component = () => {
     event.stopPropagation();
   }
 
+  function handleActionSelect(action) {
+    action.run({ actionsContext: state.actionsContext });
+  }
+
   onMount(() => {
     searchInputElem.select();
 
@@ -42,13 +46,7 @@ export const CommandPaletteInternal: Component = () => {
               {(action) => {
                 return (
                   <li>
-                    <button
-                      onClick={() => {
-                        action.run({ actionsContext: state.actionsContext });
-                      }}
-                    >
-                      Run Action {action.id}
-                    </button>
+                    <button onClick={[handleActionSelect, action]}>Run Action {action.id}</button>
                   </li>
                 );
               }}
