@@ -146,7 +146,16 @@ export const CommandPaletteInternal: Component = () => {
             aria-labelledby={searchInputId}
             class={`${styles.resultList} ${utilStyles.stripSpace}`}
           >
-            <For each={resultsList()} fallback={<div>No Actions</div>}>
+            <For
+              each={resultsList()}
+              fallback={
+                <div class={styles.resultItem}>
+                  <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>
+                    Couldn't find any matching actions
+                  </h4>
+                </div>
+              }
+            >
               {(action) => {
                 return (
                   <li
@@ -160,9 +169,13 @@ export const CommandPaletteInternal: Component = () => {
                     onMouseEnter={[handleActionItemHover, action]}
                   >
                     <div>
-                      <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>{action.title}</h4>
+                      <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>
+                        {action.title}
+                      </h4>
                       <Show when={action.subtitle}>
-                        <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>{action.subtitle}</p>
+                        <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>
+                          {action.subtitle}
+                        </p>
                       </Show>
                     </div>
                     <div>
