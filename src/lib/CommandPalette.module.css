@@ -8,6 +8,8 @@
 .palette {
   --inline-gutter-space: 20px;
 
+  display: flex;
+  flex-direction: column;
   background-color: white;
   width: 600px;
   max-height: 400px;
@@ -24,6 +26,11 @@
   padding-inline: var(--inline-gutter-space);
   font-size: 20px;
   outline: 0;
+}
+
+.resultWrapper {
+  flex: 1;
+  overflow: auto;
 }
 
 .resultList {

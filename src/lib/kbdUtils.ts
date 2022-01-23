@@ -11,6 +11,13 @@ export function createShortcutHandlersMap(
     .filter((action) => Boolean(action.shortcut))
     .forEach((action) => {
       const actionHandler = (event: KeyboardEvent) => {
+        const targetElem = event.target as HTMLElement;
+        const shortcutsAttr = targetElem.dataset.cpKbdShortcuts;
+
+        if (shortcutsAttr === 'disabled') {
+          return;
+        }
+
         event.preventDefault();
         action.run({ actionId: action.id, actionsContext });
       };

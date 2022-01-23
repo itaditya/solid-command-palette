@@ -134,12 +134,13 @@ export const CommandPaletteInternal: Component = () => {
             id={searchInputId}
             class={`${styles.searchInput} ${utilStyles.boxBorder}`}
             placeholder="Type a command or search..."
+            data-cp-kbd-shortcuts="disabled"
             ref={searchInputElem}
             value={state.searchText}
             onInput={handleSearchInput}
           />
         </div>
-        <div>
+        <div class={styles.resultWrapper}>
           <ul
             role="listbox"
             aria-labelledby={searchInputId}
