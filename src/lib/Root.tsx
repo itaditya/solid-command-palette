@@ -21,13 +21,13 @@ export const Root: Component<RootProps> = (p) => {
   });
 
   const storeMethods: StoreMethods = {
-    open() {
+    openPalette() {
       setState('visibility', 'opened');
     },
-    close() {
+    closePalette() {
       setState('visibility', 'closed');
     },
-    toggle() {
+    togglePalette() {
       setState('visibility', (prev) => (prev === 'opened' ? 'closed' : 'opened'));
     },
   };

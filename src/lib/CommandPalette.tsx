@@ -5,14 +5,14 @@ import { CommandPalettePortal } from './CommandPalettePortal';
 import styles from './CommandPalette.module.css';
 
 export const CommandPaletteInternal: Component = () => {
-  const [state, { close }] = useStore();
+  const [state, { closePalette }] = useStore();
 
   let wrapperElem: HTMLDivElement;
   let paletteElem: HTMLDivElement;
   let searchInputElem: HTMLInputElement;
 
   function handleWrapperClick() {
-    close();
+    closePalette();
   }
 
   function handlePaletteClick(event: MouseEvent) {
@@ -25,7 +25,7 @@ export const CommandPaletteInternal: Component = () => {
     tinykeys(wrapperElem, {
       Escape: () => {
         console.log('escape press');
-        close();
+        closePalette();
       },
     });
   });

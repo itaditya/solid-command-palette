@@ -4,7 +4,7 @@ import { useStore } from './StoreContext';
 import { createShortcutHandlersMap } from './kbdUtils';
 
 export function createKbdShortcuts() {
-  const [state, { toggle }] = useStore();
+  const [state, { togglePalette }] = useStore();
 
   let unsubscribe = null;
 
@@ -14,7 +14,7 @@ export function createKbdShortcuts() {
     const commandPaletteHandler = (event: KeyboardEvent) => {
       event.preventDefault();
       console.log('ran from kbd');
-      toggle();
+      togglePalette();
     };
 
     unsubscribe = tinykeys(window, {
