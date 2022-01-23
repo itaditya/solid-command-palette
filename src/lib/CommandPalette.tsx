@@ -1,4 +1,4 @@
-import { Component, createSignal, For, JSX, onMount, Show } from 'solid-js';
+import { Component, createEffect, createSignal, For, JSX, onMount, Show } from 'solid-js';
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
@@ -43,7 +43,14 @@ export const CommandPaletteInternal: Component = () => {
 
   function handleKbdEnter(event: KeyboardEvent) {
     event.preventDefault();
-    const action = state.actions[activeItemId()];
+
+    const activeActionId = activeItemId();
+
+    if (!activeActionId) {
+      return null;
+    }
+
+    const action = state.actions[activeActionId];
     triggerRun(action);
   }
 
@@ -91,6 +98,17 @@ export const CommandPaletteInternal: Component = () => {
       ArrowUp: handleKbdPrev,
       ArrowDown: handleKbdNext,
     });
+  });
+
+  createEffect(() => {
+    const actionsList = resultsList();
+    const firstResultId = actionsList[0]?.id;
+
+    if (firstResultId) {
+      setActiveItemId(firstResultId);
+    } else {
+      setActiveItemId(null);
+    }
   });
 
   return (
