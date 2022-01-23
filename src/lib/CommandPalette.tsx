@@ -13,7 +13,7 @@ type WrappedAction = StoreStateWrapped['actions'][string];
 export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
   const resultsList = createSearchResultList();
-  const [activeItemId, setActiveItemId] = createSignal('initial');
+  const [activeItemId, setActiveItemId] = createSignal(null);
 
   let wrapperElem: HTMLDivElement;
   let paletteElem: HTMLDivElement;
@@ -21,6 +21,7 @@ export const CommandPaletteInternal: Component = () => {
 
   function triggerRun(action: WrappedAction) {
     action.run({ actionId: action.id, actionsContext: state.actionsContext });
+    // closePalette(); // commented for easy dev.
   }
 
   function handleWrapperClick() {
@@ -46,6 +47,34 @@ export const CommandPaletteInternal: Component = () => {
     triggerRun(action);
   }
 
+  function handleKbdPrev(event: KeyboardEvent) {
+    event.preventDefault();
+
+    const actionsList = resultsList();
+    const actionsCount = actionsList.length;
+    const activeActionId = activeItemId();
+
+    const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
+    const prevActionIndex = (actionsCount + currentActionIndex - 1) % actionsCount;
+    const prevActionId = actionsList[prevActionIndex].id;
+
+    setActiveItemId(prevActionId);
+  }
+
+  function handleKbdNext(event: KeyboardEvent) {
+    event.preventDefault();
+
+    const actionsList = resultsList();
+    const actionsCount = actionsList.length;
+    const activeActionId = activeItemId();
+
+    const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
+    const nextActionIndex = (currentActionIndex + 1) % actionsCount;
+    const nextActionId = actionsList[nextActionIndex].id;
+
+    setActiveItemId(nextActionId);
+  }
+
   function handleActionItemHover(action: WrappedAction) {
     setActiveItemId(action.id);
   }
@@ -59,6 +88,8 @@ export const CommandPaletteInternal: Component = () => {
         closePalette();
       },
       Enter: handleKbdEnter,
+      ArrowUp: handleKbdPrev,
+      ArrowDown: handleKbdNext,
     });
   });
 
