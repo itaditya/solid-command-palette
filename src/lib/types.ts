@@ -24,6 +24,7 @@ export type PartialAction = Partial<Action> & {
 };
 
 export type Actions = Record<Action['id'], Action>;
+export type ActionsList = Array<Action>;
 
 export type RootProps = {
   actions: Actions;

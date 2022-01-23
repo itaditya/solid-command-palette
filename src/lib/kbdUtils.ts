@@ -1,10 +1,13 @@
 import { KeyBindingMap } from 'tinykeys';
-import { Actions, ActionsContext } from './types';
+import { ActionsList, ActionsContext } from './types';
 
-export function createShortcutHandlersMap(actions: Actions, actionsContext: ActionsContext) {
+export function createShortcutHandlersMap(
+  actionsList: ActionsList,
+  actionsContext: ActionsContext,
+) {
   const shortcutMap: KeyBindingMap = {};
 
-  Object.values(actions)
+  actionsList
     .filter((action) => Boolean(action.shortcut))
     .forEach((action) => {
       const actionHandler = (event: KeyboardEvent) => {

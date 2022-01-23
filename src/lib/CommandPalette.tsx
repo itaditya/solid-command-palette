@@ -2,6 +2,7 @@ import { Component, createSignal, For, JSX, onMount, Show } from 'solid-js';
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
+import { createActionList } from './createActionList';
 import { StoreStateWrapped } from './types';
 import styles from './CommandPalette.module.css';
 import utilStyles from './utils.module.css';
@@ -11,6 +12,7 @@ type WrappedAction = StoreStateWrapped['actions'][string];
 
 export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
+  const actionsList = createActionList();
   const [activeItemId, setActiveItemId] = createSignal('initial');
 
   let wrapperElem: HTMLDivElement;
@@ -75,7 +77,7 @@ export const CommandPaletteInternal: Component = () => {
         </div>
         <div>
           <ul class={`${styles.resultList} ${utilStyles.stripSpace}`}>
-            <For each={Object.values(state.actions)} fallback={<div>No Actions</div>}>
+            <For each={actionsList()} fallback={<div>No Actions</div>}>
               {(action) => {
                 return (
                   <li
