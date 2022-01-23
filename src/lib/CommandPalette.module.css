@@ -17,6 +17,13 @@
   box-shadow: 0 0 50px -12px rgb(0 0 0 / 0.25);
   border-radius: 8px;
   overflow: hidden;
+  animation: anim-fade-in 100ms ease-in;
+}
+
+@keyframes anim-fade-in {
+  from {
+    opacity: 0;
+  }
 }
 
 .searchInput {
