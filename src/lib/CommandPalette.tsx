@@ -1,19 +1,25 @@
-import { Component, For, JSX, onMount, Show } from 'solid-js';
+import { Component, createSignal, For, JSX, onMount, Show } from 'solid-js';
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
 import { StoreStateWrapped } from './types';
 import styles from './CommandPalette.module.css';
+import utilStyles from './utils.module.css';
 
 type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
 type WrappedAction = StoreStateWrapped['actions'][string];
 
 export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
+  const [activeItemId, setActiveItemId] = createSignal('initial');
 
   let wrapperElem: HTMLDivElement;
   let paletteElem: HTMLDivElement;
   let searchInputElem: HTMLInputElement;
+
+  function triggerRun(action: WrappedAction) {
+    action.run({ actionId: action.id, actionsContext: state.actionsContext });
+  }
 
   function handleWrapperClick() {
     closePalette();
@@ -28,8 +34,18 @@ export const CommandPaletteInternal: Component = () => {
     setSearchText(newValue);
   };
 
-  function handleActionSelect(action: WrappedAction) {
-    action.run({ actionId: action.id, actionsContext: state.actionsContext });
+  function handleActionItemSelect(action: WrappedAction) {
+    triggerRun(action);
+  }
+
+  function handleKbdEnter(event: KeyboardEvent) {
+    event.preventDefault();
+    const action = state.actions[activeItemId()];
+    triggerRun(action);
+  }
+
+  function handleActionItemHover(action: WrappedAction) {
+    setActiveItemId(action.id);
   }
 
   onMount(() => {
@@ -40,6 +56,7 @@ export const CommandPaletteInternal: Component = () => {
         console.log('escape press');
         closePalette();
       },
+      Enter: handleKbdEnter,
     });
   });
 
@@ -49,27 +66,30 @@ export const CommandPaletteInternal: Component = () => {
         <div>
           <input
             type="text"
-            placeholder="Search for stuff"
+            class={`${styles.searchInput} ${utilStyles.boxBorder}`}
+            placeholder="Type a command or search..."
             ref={searchInputElem}
             value={state.searchText}
             onInput={handleSearchInput}
           />
         </div>
         <div>
-          <ul>
+          <ul class={`${styles.resultList} ${utilStyles.stripSpace}`}>
             <For each={Object.values(state.actions)} fallback={<div>No Actions</div>}>
               {(action) => {
                 return (
-                  <li>
-                    <h4>
-                      {action.title}
-                    </h4>
+                  <li
+                    class={styles.resultItem}
+                    classList={{
+                      [styles.activeItem]: action.id === activeItemId(),
+                    }}
+                    onClick={[handleActionItemSelect, action]}
+                    onMouseEnter={[handleActionItemHover, action]}
+                  >
+                    <h4 class={utilStyles.stripSpace}>{action.title}</h4>
                     <Show when={action.subtitle}>
-                      <p>
-                        {action.subtitle}
-                      </p>
+                      <p class={utilStyles.stripSpace}>{action.subtitle}</p>
                     </Show>
-                    <button onClick={[handleActionSelect, action]}>Run Action {action.id}</button>
                   </li>
                 );
               }}
