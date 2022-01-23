@@ -2,9 +2,11 @@ import { Component, For, JSX, onMount, Show } from 'solid-js';
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
+import { StoreStateWrapped } from './types';
 import styles from './CommandPalette.module.css';
 
 type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
+type WrappedAction = StoreStateWrapped['actions'][string];
 
 export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
@@ -26,8 +28,8 @@ export const CommandPaletteInternal: Component = () => {
     setSearchText(newValue);
   };
 
-  function handleActionSelect(action) {
-    action.run({ actionsContext: state.actionsContext });
+  function handleActionSelect(action: WrappedAction) {
+    action.run({ actionId: action.id, actionsContext: state.actionsContext });
   }
 
   onMount(() => {
@@ -59,6 +61,14 @@ export const CommandPaletteInternal: Component = () => {
               {(action) => {
                 return (
                   <li>
+                    <h4>
+                      {action.title}
+                    </h4>
+                    <Show when={action.subtitle}>
+                      <p>
+                        {action.subtitle}
+                      </p>
+                    </Show>
                     <button onClick={[handleActionSelect, action]}>Run Action {action.id}</button>
                   </li>
                 );

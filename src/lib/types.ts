@@ -3,19 +3,25 @@ import { Store } from 'solid-js/store';
 export type ActionsContext = Record<string, unknown>;
 
 export type RunArgs = {
+  actionId: Action['id'],
   actionsContext: ActionsContext;
 };
 
 export type Action = {
   id: string;
+  title: string;
+  subtitle?: string;
   /**
-   * Keyboard Shortcut like `$mod + E`, `Shift + P`.
+   * Keyboard Shortcut like `$mod+e`, `Shift+p`.
    */
   shortcut: string | null;
   run: (args: RunArgs) => void;
 };
 
-export type PartialAction = Partial<Action>;
+export type PartialAction = Partial<Action> & {
+  id: Action['id'];
+  title: Action['title'];
+};
 
 export type Actions = Record<Action['id'], Action>;
 

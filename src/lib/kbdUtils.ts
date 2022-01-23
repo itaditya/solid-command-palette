@@ -9,7 +9,7 @@ export function createShortcutHandlersMap(actions: Actions, actionsContext: Acti
     .forEach((action) => {
       const actionHandler = (event: KeyboardEvent) => {
         event.preventDefault();
-        action.run({ actionsContext });
+        action.run({ actionId: action.id, actionsContext });
       };
 
       shortcutMap[action.shortcut] = actionHandler;
