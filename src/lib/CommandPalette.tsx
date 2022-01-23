@@ -11,6 +11,7 @@ import {
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
+import { KbdShortcut } from './KbdShortcut/KbdShortcut';
 import { createSearchResultList } from './createActionList';
 import { StoreStateWrapped } from './types';
 import utilStyles from './utils.module.css';
@@ -180,7 +181,7 @@ export const CommandPaletteInternal: Component = () => {
                     </div>
                     <div>
                       <Show when={action.shortcut}>
-                        <kbd class={styles.actionShortcut}>{action.shortcut}</kbd>
+                        <KbdShortcut shortcut={action.shortcut} />
                       </Show>
                     </div>
                   </li>

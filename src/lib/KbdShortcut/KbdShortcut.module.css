@@ -1,0 +1,9 @@
+.kbdShortcut {
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  font-family: sans-serif;
+  font-size: 12px;
+  word-spacing: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
