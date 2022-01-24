@@ -103,7 +103,6 @@ export const CommandPaletteInternal: Component = () => {
 
     tinykeys(wrapperElem, {
       Escape: () => {
-        console.log('escape press');
         closePalette();
       },
       Enter: handleKbdEnter,

@@ -1,16 +1,20 @@
 {
   "name": "solid-command-palette",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Add a command palette to your SolidJS App",
+  "main": "./pkg-dist/solid-command-palette.cjs.js",
+  "module": "./pkg-dist/solid-command-palette.es.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "pkg": "vite build -c vite-pkg.config.ts"
+    "pkg": "vite build -c vite-pkg.config.ts",
+    "prepublishOnly": "npm run pkg"
   },
   "license": "MIT",
   "devDependencies": {
     "fuse.js": "^6.5.3",
+    "solid-js": "^1.3.2",
     "tinykeys": "^1.3.0",
     "typescript": "^4.5.4",
     "vite": "^2.7.10",
@@ -18,9 +22,29 @@
   },
   "peerDependencies": {
     "fuse.js": "^6.5.3",
+    "solid-js": "^1.3.2",
     "tinykeys": "^1.3.0"
   },
-  "dependencies": {
-    "solid-js": "^1.3.2"
-  }
+  "files": [
+    "pkg-dist"
+  ],
+  "homepage": "https://solid-command-palette.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "github:itaditya/solid-command-palette"
+  },
+  "bugs": "https://github.com/itaditya/solid-command-palette/issues",
+  "author": {
+    "name": "Aditya Agarwal",
+    "email": "adityaa803@gmail.com",
+    "url": "https://devadi.netlify.app"
+  },
+  "keywords": [
+    "palette",
+    "actions",
+    "command",
+    "CMD+K",
+    "quick menu",
+    "search bar"
+  ]
 }

@@ -15,7 +15,6 @@ export function createKbdShortcuts() {
 
     const commandPaletteHandler = (event: KeyboardEvent) => {
       event.preventDefault();
-      console.log('ran from kbd');
       togglePalette();
     };
 
