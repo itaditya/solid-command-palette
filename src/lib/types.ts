@@ -16,6 +16,10 @@ export type Action = {
    * Keyboard Shortcut like `$mod+e`, `Shift+p`.
    */
   shortcut: string | null;
+  /**
+   * Enable the action conditionally.
+   */
+  cond?: (args: RunArgs) => boolean;
   run: (args: RunArgs) => void;
 };
 

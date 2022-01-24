@@ -2,6 +2,7 @@ import { createMemo, createEffect } from 'solid-js';
 import Fuse from 'fuse.js';
 
 import { useStore } from './StoreContext';
+import { Action } from './types';
 
 export function createActionList() {
   const [state] = useStore();
@@ -13,11 +14,32 @@ export function createActionList() {
   return actionsList;
 }
 
-export function createSearchResultList() {
+export function createConditionalActionList() {
   const [state] = useStore();
   const actionsList = createActionList();
 
-  const fuse = new Fuse(actionsList(), {
+  const conditionalActionList = createMemo(() => {
+    function checkActionAllowed(action: Action) {
+      if (!action.cond) {
+        return true;
+      }
+      
+      const isAllowed = action.cond({ actionId: action.id, actionsContext: state.actionsContext });
+      return isAllowed;
+    }
+
+    const conditionalActionList = actionsList().filter(checkActionAllowed);
+    return conditionalActionList;
+  });
+
+  return conditionalActionList;
+}
+
+export function createSearchResultList() {
+  const [state] = useStore();
+  const conditionalActionList = createConditionalActionList();
+
+  const fuse = new Fuse(conditionalActionList(), {
     keys: [
       {
         name: 'title',
@@ -36,7 +58,7 @@ export function createSearchResultList() {
 
   const resultsList = createMemo(() => {
     if (state.searchText.length === 0) {
-      return actionsList();
+      return conditionalActionList();
     }
 
     const searchResults = fuse.search(state.searchText);
@@ -46,7 +68,7 @@ export function createSearchResultList() {
   });
 
   createEffect(() => {
-    fuse.setCollection(actionsList());
+    fuse.setCollection(conditionalActionList());
   });
 
   return resultsList;

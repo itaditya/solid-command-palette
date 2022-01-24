@@ -20,6 +20,7 @@ export const defineAction = (partialAction: PartialAction): Action => {
     subtitle,
     keywords,
     shortcut,
+    cond: partialAction.cond,
     run,
   };
 
