@@ -1,6 +1,7 @@
 import { Component, createSignal } from 'solid-js';
 import { Root, CommandPalette } from '../lib';
 import { actions } from './actions';
+import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
 
 const App: Component = () => {
   const [count, setCount] = createSignal(0);
@@ -56,6 +57,7 @@ const App: Component = () => {
           </select>
           <p>**Fourth Action will only appear in Work profile</p>
         </section>
+        <DynamicActionContextDemo />
       </div>
     </Root>
   );

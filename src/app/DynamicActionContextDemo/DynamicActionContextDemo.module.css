@@ -1,0 +1,33 @@
+.contactsWrapper {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.contactList {
+  margin: 0;
+  padding: 0;
+}
+
+.contactItem {
+  position: relative;
+  background-color: lightpink;
+}
+
+.contactItem.active {
+  background-color: hotpink;
+}
+
+.contactLabel {
+  display: block;
+  padding: 20px 40px;
+  cursor: pointer;
+}
+
+.contactInput {
+  opacity: 0;
+  position: absolute;
+}
+
+.contactDetails {
+  padding: 10px 20px;
+}
