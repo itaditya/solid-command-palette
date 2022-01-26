@@ -34,6 +34,9 @@ export const Root: Component<RootProps> = (p) => {
     setSearchText(newValue) {
       setState('searchText', newValue);
     },
+    setActionsContext(newData) {
+      setState('actionsContext', 'dynamicContext', newData);
+    },
   };
 
   const store: StoreContext = [state, storeMethods];

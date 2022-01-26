@@ -1,4 +1,5 @@
-import { Component, createSignal, createUniqueId, For } from 'solid-js';
+import { Component, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js';
+import { createSyncActionsContext } from '../../lib';
 import styles from './DynamicActionContextDemo.module.css';
 
 const contacts = {
@@ -16,7 +17,9 @@ const contacts = {
   },
 };
 
-function ContactItem(p) {
+const ownContactId = 'contact-1';
+
+const ContactItem: Component = (p) => {
   const inputId = createUniqueId();
 
   return (
@@ -40,10 +43,32 @@ function ContactItem(p) {
       />
     </li>
   );
-}
+};
+
+const ReceiverContactDetails: Component = (p) => {
+  createSyncActionsContext(() => {
+    return {
+      receiverContactId: p.contactId(),
+    };
+  });
+
+  return (
+    <div>
+      <h2>Receiver Contact Details</h2>
+      <p>{p.contactData().details}</p>
+    </div>
+  );
+};
 
 export const DynamicActionContextDemo: Component = () => {
-  const [activeContactId, setActiveContactId] = createSignal('contact-1');
+  const [activeContactId, setActiveContactId] = createSignal(ownContactId);
+
+  const activeContactData = createMemo(() => {
+    const activeContactIdValue = activeContactId();
+    const activeContactData = contacts[activeContactIdValue];
+
+    return activeContactData;
+  });
 
   const handleInput = (event) => {
     const newValue = event.currentTarget.value;
@@ -73,7 +98,14 @@ export const DynamicActionContextDemo: Component = () => {
             </For>
           </ul>
         </aside>
-        <main class={styles.contactDetails}>{contacts[activeContactId()].details}</main>
+        <main class={styles.contactDetails}>
+          <Show
+            when={activeContactId() !== ownContactId}
+            fallback={<p>{activeContactData().details}</p>}
+          >
+            <ReceiverContactDetails contactId={activeContactId} contactData={activeContactData} />
+          </Show>
+        </main>
       </div>
     </section>
   );

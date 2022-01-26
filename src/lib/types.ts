@@ -50,6 +50,7 @@ export type StoreMethods = {
   closePalette: () => void;
   togglePalette: () => void;
   setSearchText: (newValue: string) => void;
+  setActionsContext: (newData: ActionsContext) => void;
 };
 
 export type StoreContext = [StoreStateWrapped, StoreMethods];

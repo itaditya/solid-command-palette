@@ -56,7 +56,15 @@ const contactAction = defineAction({
   subtitle: `It'll not ask for Id if you're on a receiver's profile.`,
   shortcut: 'm',
   run: ({ actionsContext }) => {
-    console.log('run contact action', actionsContext.receiverContactId);
+    // @ts-expect-error Need better typing for actionsContext.
+    let receiverContactId = actionsContext.dynamicContext?.receiverContactId;
+
+    if (!receiverContactId) {
+      receiverContactId = prompt('Provide Contact Id');
+    }
+
+    const message = prompt(`Type the message for ${receiverContactId}`, '');
+    alert(`${receiverContactId} has been sent the following message:\n${message}`);
   },
 });
 

@@ -1,3 +1,4 @@
 export * from './CommandPalette';
 export * from './Root';
+export * from './createSyncActionsContext';
 export * from './defineAction';
