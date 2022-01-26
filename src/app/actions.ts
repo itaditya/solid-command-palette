@@ -12,12 +12,12 @@ const incrementCounterAction = defineAction({
   },
 });
 
-const secondAction = defineAction({
-  id: 'second',
-  title: 'Second Action',
-  keywords: ['2nd', 'two'],
+const loggerAction = defineAction({
+  id: 'logger',
+  title: 'Log a message in the console',
+  keywords: ['logger', 'print'],
   run: () => {
-    console.log('run second');
+    console.log('run logger action');
   },
 });
 
@@ -32,10 +32,11 @@ const toggleProfileAction = defineAction({
   },
 });
 
-const fourthAction = defineAction({
-  id: 'fourth',
-  title: 'Fourth Action',
-  subtitle: 'Do something random with this action',
+const workMeetingAction = defineAction({
+  id: 'work-meeting',
+  title: 'Join the Standup Meeting',
+  subtitle: 'Only shown in Work profile',
+  shortcut: '$mod+j',
   cond: ({ actionsContext }) => {
     if (typeof actionsContext.profile !== 'function') {
       return false;
@@ -45,34 +46,39 @@ const fourthAction = defineAction({
     return activeProfile === 'work';
   },
   run: () => {
-    console.log('run fourth');
+    alert('Launching meeting app!!!!');
   },
 });
 
-const fifthAction = defineAction({
-  id: 'fifth',
-  title: 'Fifth Action',
-  subtitle: 'You will get another console log by clicking this',
-  shortcut: 'l',
-  run: () => {
-    console.log('run fifth');
+const contactAction = defineAction({
+  id: 'contact',
+  title: 'Send Message to Contact',
+  subtitle: `It'll not ask for Id if you're on a receiver's profile.`,
+  shortcut: 'm',
+  run: ({ actionsContext }) => {
+    console.log('run contact action', actionsContext.receiverContactId);
   },
 });
 
-const sixthAction = defineAction({
-  id: 'sixth',
-  title: 'Sixth Action',
-  shortcut: 'g p',
+const navigationAction = defineAction({
+  id: 'navigate-github',
+  title: 'Go to GitHub repo',
+  shortcut: 'g h',
   run: () => {
-    console.log('run sixth');
+    console.log('go to github');
+    window.open(
+      'https://github.com/itaditya/solid-command-palette',
+      '_blank',
+      'noopener noreferrer',
+    );
   },
 });
 
 export const actions = {
   [incrementCounterAction.id]: incrementCounterAction,
-  [secondAction.id]: secondAction,
+  [loggerAction.id]: loggerAction,
   [toggleProfileAction.id]: toggleProfileAction,
-  [fourthAction.id]: fourthAction,
-  [fifthAction.id]: fifthAction,
-  [sixthAction.id]: sixthAction,
+  [workMeetingAction.id]: workMeetingAction,
+  [contactAction.id]: contactAction,
+  [navigationAction.id]: navigationAction,
 };

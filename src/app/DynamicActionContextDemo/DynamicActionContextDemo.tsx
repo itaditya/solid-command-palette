@@ -26,7 +26,9 @@ function ContactItem(p) {
         [styles.active]: p.isActive,
       }}
     >
-      <label class={styles.contactLabel} htmlFor={inputId}>{p.label}</label>
+      <label class={styles.contactLabel} htmlFor={inputId}>
+        {p.label}
+      </label>
       <input
         id={inputId}
         class={styles.contactInput}
@@ -52,8 +54,8 @@ export const DynamicActionContextDemo: Component = () => {
     <section>
       <h3>Trigger message action by pressing letter `M`</h3>
       <p>
-        If you have Andrew's or Tobey's profile already opened, it will take that contact's email
-        directly.
+        If you have Andrew's or Tobey's profile already opened, it will take that contact's id
+        automatically.
       </p>
       <div class={styles.contactsWrapper}>
         <aside>

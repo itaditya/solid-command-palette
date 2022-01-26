@@ -1,5 +1,14 @@
 import { KeyBindingMap } from 'tinykeys';
-import { ActionsList, ActionsContext } from './types';
+import { Action, ActionsList, ActionsContext } from './types';
+
+function checkActionAllowed(action: Action, actionsContext: ActionsContext) {
+  if (!action.cond) {
+    return true;
+  }
+
+  const isAllowed = action.cond({ actionId: action.id, actionsContext });
+  return isAllowed;
+}
 
 export function createShortcutHandlersMap(
   actionsList: ActionsList,
@@ -15,6 +24,12 @@ export function createShortcutHandlersMap(
         const shortcutsAttr = targetElem.dataset.cpKbdShortcuts;
 
         if (shortcutsAttr === 'disabled') {
+          return;
+        }
+
+        const isAllowed = checkActionAllowed(action, actionsContext);
+
+        if (!isAllowed) {
           return;
         }
 
