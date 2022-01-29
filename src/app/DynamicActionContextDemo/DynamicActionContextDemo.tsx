@@ -1,8 +1,15 @@
 import { Component, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js';
 import { createSyncActionsContext } from '../../lib';
+import {
+  ContactId,
+  ContactsMap,
+  InputEventHandler,
+  ContactItemProps,
+  ReceiverContactDetailsProps,
+} from './types';
 import styles from './DynamicActionContextDemo.module.css';
 
-const contacts = {
+const contacts: ContactsMap = {
   'contact-1': {
     label: 'Your details',
     details: 'My details',
@@ -17,9 +24,9 @@ const contacts = {
   },
 };
 
-const ownContactId = 'contact-1';
+const ownContactId: ContactId = 'contact-1';
 
-const ContactItem: Component = (p) => {
+const ContactItem: Component<ContactItemProps> = (p) => {
   const inputId = createUniqueId();
 
   return (
@@ -30,7 +37,7 @@ const ContactItem: Component = (p) => {
       }}
     >
       <label class={styles.contactLabel} htmlFor={inputId}>
-        {p.label}
+        {p.contactData.label}
       </label>
       <input
         id={inputId}
@@ -45,7 +52,7 @@ const ContactItem: Component = (p) => {
   );
 };
 
-const ReceiverContactDetails: Component = (p) => {
+const ReceiverContactDetails: Component<ReceiverContactDetailsProps> = (p) => {
   createSyncActionsContext(() => {
     return {
       receiverContactId: p.contactId(),
@@ -70,7 +77,7 @@ export const DynamicActionContextDemo: Component = () => {
     return activeContactData;
   });
 
-  const handleInput = (event) => {
+  const handleInput: InputEventHandler = (event) => {
     const newValue = event.currentTarget.value;
     setActiveContactId(newValue);
   };
@@ -90,8 +97,7 @@ export const DynamicActionContextDemo: Component = () => {
                 <ContactItem
                   contactId={contactId}
                   isActive={contactId === activeContactId()}
-                  label={contact.label}
-                  activeContactId={activeContactId}
+                  contactData={contact}
                   onInput={handleInput}
                 />
               )}
