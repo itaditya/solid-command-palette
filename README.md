@@ -43,8 +43,8 @@ const incrementCounterAction = defineAction({
   title: 'Increment Counter by 1',
   subtitle: 'Press CMD + E to trigger this.',
   shortcut: '$mod+e', // $mod = Command on Mac & Control on Windows.
-  run: ({ actionsContext }) => {
-    actionsContext.increment();
+  run: ({ rootContext }) => {
+    rootContext.increment();
   },
 });
 
