@@ -1,30 +1,8 @@
 import { Component, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js';
 import { createSyncActionsContext } from '../../lib';
-import {
-  ContactId,
-  ContactsMap,
-  InputEventHandler,
-  ContactItemProps,
-  ReceiverContactDetailsProps,
-} from './types';
+import { ownContactId, contacts, contactActionId } from './data';
+import { InputEventHandler, ContactItemProps, ReceiverContactDetailsProps } from './types';
 import styles from './DynamicActionContextDemo.module.css';
-
-const contacts: ContactsMap = {
-  'contact-1': {
-    label: 'Your details',
-    details: 'My details',
-  },
-  'contact-2': {
-    label: "Andrew's details",
-    details: 'Andrew details',
-  },
-  'contact-3': {
-    label: "Tobey's details",
-    details: 'Tobey details',
-  },
-};
-
-const ownContactId: ContactId = 'contact-1';
 
 const ContactItem: Component<ContactItemProps> = (p) => {
   const inputId = createUniqueId();
@@ -53,7 +31,7 @@ const ContactItem: Component<ContactItemProps> = (p) => {
 };
 
 const ReceiverContactDetails: Component<ReceiverContactDetailsProps> = (p) => {
-  createSyncActionsContext('contact', () => {
+  createSyncActionsContext(contactActionId, () => {
     return {
       receiverContactId: p.contactId(),
     };

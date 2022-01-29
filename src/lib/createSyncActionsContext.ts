@@ -1,7 +1,8 @@
 import { createEffect, onCleanup } from 'solid-js';
 import { useStore } from './StoreContext';
+import { CreateSyncActionsContext } from './types';
 
-export function createSyncActionsContext(actionId: string, callback) {
+export const createSyncActionsContext: CreateSyncActionsContext = (actionId, callback) => {
   const [_state, { setActionsContext }] = useStore();
 
   createEffect(() => {
@@ -12,4 +13,4 @@ export function createSyncActionsContext(actionId: string, callback) {
   onCleanup(() => {
     setActionsContext(actionId, undefined);
   });
-}
+};
