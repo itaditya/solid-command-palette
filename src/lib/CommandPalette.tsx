@@ -169,6 +169,10 @@ export const CommandPaletteInternal: Component = () => {
                     aria-selected={action.id === activeItemId()}
                     onClick={[handleActionItemSelect, action]}
                     onMouseEnter={[handleActionItemHover, action]}
+                    onMouseDown={(event) => {
+                      // don't take focus away from search field when item is clicked.
+                      event.preventDefault();
+                    }}
                   >
                     <div>
                       <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>
