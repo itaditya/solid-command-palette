@@ -1,15 +1,15 @@
 import { createEffect, onCleanup } from 'solid-js';
 import { useStore } from './StoreContext';
 
-export function createSyncActionsContext(callback) {
+export function createSyncActionsContext(actionId: string, callback) {
   const [_state, { setActionsContext }] = useStore();
 
   createEffect(() => {
     const data = callback();
-    setActionsContext(data);
+    setActionsContext(actionId, data);
   });
 
   onCleanup(() => {
-    setActionsContext(undefined);
+    setActionsContext(actionId, undefined);
   });
 }

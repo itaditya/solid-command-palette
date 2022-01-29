@@ -5,9 +5,9 @@ const incrementCounterAction = defineAction({
   title: 'Increment Counter by 1',
   subtitle: 'Press CMD + E to trigger this.',
   shortcut: '$mod+e',
-  run: ({ actionsContext }) => {
-    if (typeof actionsContext.increment === 'function') {
-      actionsContext.increment();
+  run: ({ rootContext }) => {
+    if (typeof rootContext.increment === 'function') {
+      rootContext.increment();
     }
   },
 });
@@ -25,9 +25,9 @@ const toggleProfileAction = defineAction({
   id: 'toggle-profile',
   title: 'Toggle profile',
   shortcut: '$mod+Shift+p',
-  run: ({ actionsContext }) => {
-    if (typeof actionsContext.toggleProfile === 'function') {
-      actionsContext.toggleProfile();
+  run: ({ rootContext }) => {
+    if (typeof rootContext.toggleProfile === 'function') {
+      rootContext.toggleProfile();
     }
   },
 });
@@ -37,12 +37,12 @@ const workMeetingAction = defineAction({
   title: 'Join the Standup Meeting',
   subtitle: 'Only shown in Work profile',
   shortcut: '$mod+j',
-  cond: ({ actionsContext }) => {
-    if (typeof actionsContext.profile !== 'function') {
+  cond: ({ rootContext }) => {
+    if (typeof rootContext.profile !== 'function') {
       return false;
     }
 
-    const activeProfile = actionsContext.profile();
+    const activeProfile = rootContext.profile();
     return activeProfile === 'work';
   },
   run: () => {
@@ -55,9 +55,8 @@ const contactAction = defineAction({
   title: 'Send Message to Contact',
   subtitle: `It'll not ask for Id if you're on a receiver's profile.`,
   shortcut: 'm',
-  run: ({ actionsContext }) => {
-    // @ts-expect-error Need better typing for actionsContext.
-    let receiverContactId = actionsContext.dynamicContext?.receiverContactId;
+  run: ({ dynamicContext }) => {
+    let receiverContactId = dynamicContext.receiverContactId;
 
     if (!receiverContactId) {
       receiverContactId = prompt('Provide Contact Id');

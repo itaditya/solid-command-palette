@@ -23,8 +23,11 @@ export function createConditionalActionList() {
       if (!action.cond) {
         return true;
       }
-      
-      const isAllowed = action.cond({ actionId: action.id, actionsContext: state.actionsContext });
+
+      const rootContext = state.actionsContext.root;
+      const dynamicContext = state.actionsContext.dynamic[action.id] || {};
+      const isAllowed = action.cond({ actionId: action.id, rootContext, dynamicContext });
+
       return isAllowed;
     }
 

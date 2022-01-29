@@ -32,7 +32,9 @@ export const CommandPaletteInternal: Component = () => {
   let searchInputElem: HTMLInputElement;
 
   function triggerRun(action: WrappedAction) {
-    action.run({ actionId: action.id, actionsContext: state.actionsContext });
+    const rootContext = state.actionsContext.root;
+    const dynamicContext = state.actionsContext.dynamic[action.id] || {};
+    action.run({ actionId: action.id, rootContext, dynamicContext });
     // closePalette(); // commented for easy dev.
   }
 

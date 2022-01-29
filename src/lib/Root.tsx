@@ -18,7 +18,10 @@ export const Root: Component<RootProps> = (p) => {
     visibility: 'closed',
     searchText: '',
     actions: initialActions,
-    actionsContext: initialActionsContext,
+    actionsContext: {
+      root: initialActionsContext,
+      dynamic: {},
+    },
   });
 
   const storeMethods: StoreMethods = {
@@ -34,8 +37,8 @@ export const Root: Component<RootProps> = (p) => {
     setSearchText(newValue) {
       setState('searchText', newValue);
     },
-    setActionsContext(newData) {
-      setState('actionsContext', 'dynamicContext', newData);
+    setActionsContext(actionId, newData) {
+      setState('actionsContext', 'dynamic', actionId, newData);
     },
   };
 

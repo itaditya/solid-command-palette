@@ -53,7 +53,7 @@ const ContactItem: Component<ContactItemProps> = (p) => {
 };
 
 const ReceiverContactDetails: Component<ReceiverContactDetailsProps> = (p) => {
-  createSyncActionsContext(() => {
+  createSyncActionsContext('contact', () => {
     return {
       receiverContactId: p.contactId(),
     };

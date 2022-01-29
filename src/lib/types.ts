@@ -1,10 +1,18 @@
 import { Store } from 'solid-js/store';
 
-export type ActionsContext = Record<string, unknown>;
+export type ActionContext = Record<string, unknown>;
+
+type DynamicContextMap = Record<string, ActionContext>;
+
+export type ActionsContext = {
+  root: ActionContext;
+  dynamic: DynamicContextMap;
+};
 
 export type RunArgs = {
   actionId: Action['id'];
-  actionsContext: ActionsContext;
+  rootContext: ActionContext;
+  dynamicContext: ActionContext;
 };
 
 export type Action = {
@@ -33,7 +41,7 @@ export type ActionsList = Array<Action>;
 
 export type RootProps = {
   actions: Actions;
-  actionsContext: ActionsContext;
+  actionsContext: ActionContext;
 };
 
 export type StoreState = {
@@ -50,7 +58,7 @@ export type StoreMethods = {
   closePalette: () => void;
   togglePalette: () => void;
   setSearchText: (newValue: string) => void;
-  setActionsContext: (newData: ActionsContext) => void;
+  setActionsContext: (actionId: Action['id'], newData: ActionContext) => void;
 };
 
 export type StoreContext = [StoreStateWrapped, StoreMethods];

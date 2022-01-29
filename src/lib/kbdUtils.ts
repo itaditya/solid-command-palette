@@ -1,12 +1,16 @@
 import { KeyBindingMap } from 'tinykeys';
-import { Action, ActionsList, ActionsContext } from './types';
+import { Action, ActionsList, ActionContext, ActionsContext } from './types';
 
-function checkActionAllowed(action: Action, actionsContext: ActionsContext) {
+function checkActionAllowed(
+  action: Action,
+  rootContext: ActionContext,
+  dynamicContext: ActionContext,
+) {
   if (!action.cond) {
     return true;
   }
 
-  const isAllowed = action.cond({ actionId: action.id, actionsContext });
+  const isAllowed = action.cond({ actionId: action.id, rootContext, dynamicContext });
   return isAllowed;
 }
 
@@ -27,14 +31,17 @@ export function createShortcutHandlersMap(
           return;
         }
 
-        const isAllowed = checkActionAllowed(action, actionsContext);
+        const rootContext = actionsContext.root;
+        const dynamicContext = actionsContext.dynamic[action.id] || {};
+
+        const isAllowed = checkActionAllowed(action, rootContext, dynamicContext);
 
         if (!isAllowed) {
           return;
         }
 
         event.preventDefault();
-        action.run({ actionId: action.id, actionsContext });
+        action.run({ actionId: action.id, rootContext, dynamicContext });
       };
 
       shortcutMap[action.shortcut] = actionHandler;
