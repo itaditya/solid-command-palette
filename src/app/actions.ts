@@ -60,7 +60,7 @@ const navigationAction = defineAction({
     window.open(
       'https://github.com/itaditya/solid-command-palette',
       '_blank',
-      'noopener noreferrer',
+      'noopener noreferrer'
     );
   },
 });

@@ -22,8 +22,8 @@ Try the demo on [our documentation site](https://solid-command-palette.vercel.ap
 npm install solid-command-palette tinykeys fuse.js
 ```
 
-* [tinykeys](https://github.com/jamiebuilds/tinykeys) (400B) provides keyboard shortcut support. You'll find it useful in other places of your app as well.
-* [fuse.js](https://github.com/krisk/fuse) (5KB) provides fuzzy search support.
+- [tinykeys](https://github.com/jamiebuilds/tinykeys) (400B) provides keyboard shortcut support. You'll find it useful in other places of your app as well.
+- [fuse.js](https://github.com/krisk/fuse) (5KB) provides fuzzy search support.
 
 #### Integrate with app
 
@@ -58,18 +58,22 @@ export const actions = {
 // render inside top level Solid component
 
 import { Root, CommandPalette } from 'solid-command-palette';
-import { actions} from './actions';
+import { actions } from './actions';
 import 'solid-command-palette/pkg-dist/style.css';
 
-const actionsContext = {
-  increment() {
-    console.log('increment count state by 1');
-  }
-};
+const App = () => {
+  const actionsContext = {
+    increment() {
+      console.log('increment count state by 1');
+    },
+  };
 
-<div class="my-app">
-  <Root actions={actions} actionsContext={actionsContext}>
-    <CommandPalette />
-  </Root>
-</div>
+  return (
+    <div class="my-app">
+      <Root actions={actions} actionsContext={actionsContext}>
+        <CommandPalette />
+      </Root>
+    </div>
+  );
+};
 ```

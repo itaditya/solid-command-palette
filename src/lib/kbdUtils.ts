@@ -4,7 +4,7 @@ import { Action, ActionsList, ActionContext, ActionsContext } from './types';
 function checkActionAllowed(
   action: Action,
   rootContext: ActionContext,
-  dynamicContext: ActionContext,
+  dynamicContext: ActionContext
 ) {
   if (!action.cond) {
     return true;
@@ -16,7 +16,7 @@ function checkActionAllowed(
 
 export function createShortcutHandlersMap(
   actionsList: ActionsList,
-  actionsContext: ActionsContext,
+  actionsContext: ActionsContext
 ) {
   const shortcutMap: KeyBindingMap = {};
 

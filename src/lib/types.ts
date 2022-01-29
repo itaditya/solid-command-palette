@@ -69,5 +69,5 @@ type CreateSyncActionsContextCallback = () => ActionContext;
 
 export type CreateSyncActionsContext = (
   actionId: ActionId,
-  callback: CreateSyncActionsContextCallback,
+  callback: CreateSyncActionsContextCallback
 ) => void;
