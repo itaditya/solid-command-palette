@@ -1,4 +1,4 @@
-import { defineAction } from '../lib';
+import { defineAction } from '../../../lib';
 import { contactAction } from './DynamicActionContextDemo/dynamicContextActions';
 
 const incrementCounterAction = defineAction({

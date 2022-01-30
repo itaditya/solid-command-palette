@@ -1,5 +1,5 @@
 import { Component, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js';
-import { createSyncActionsContext } from '../../lib';
+import { createSyncActionsContext } from '../../../../lib';
 import { ownContactId, contacts, contactActionId } from './data';
 import { InputEventHandler, ContactItemProps, ReceiverContactDetailsProps } from './types';
 import styles from './DynamicActionContextDemo.module.css';

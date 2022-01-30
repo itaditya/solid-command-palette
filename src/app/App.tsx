@@ -1,65 +1,49 @@
-import { Component, createSignal } from 'solid-js';
-import { Root, CommandPalette } from '../lib';
-import { actions } from './actions';
-import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
+import { Component, lazy } from 'solid-js';
+import { useRoutes, Link } from 'solid-app-router';
+
+const routes = [
+  {
+    path: '/docs',
+    component: lazy(() => import('./views/docs/DocsShell.view')),
+    children: [
+      {
+        path: '/',
+        component: lazy(() => import('./views/docs/Docs.view')),
+      },
+      {
+        path: '/overview',
+        component: lazy(() => import('./views/docs/introduction/Overview.view')),
+      },
+      {
+        path: '/installation',
+        component: lazy(() => import('./views/docs/introduction/Installation.view')),
+      },
+      { path: '/api', component: lazy(() => import('./views/docs/Api.view')) },
+    ],
+  },
+  {
+    path: '/demo',
+    component: lazy(() => import('./views/demo/Demo.view')),
+  },
+  {
+    path: '/',
+    component: lazy(() => import('./views/Home.view')),
+  },
+];
 
 const App: Component = () => {
-  const [count, setCount] = createSignal(0);
-  const [profile, setProfile] = createSignal('personal');
-
-  const increment = () => {
-    setCount((prev) => (prev += 1));
-  };
-
-  const toggleProfile = () => {
-    setProfile((prev) => {
-      if (prev === 'work') {
-        return 'personal';
-      }
-
-      return 'work';
-    });
-  };
-
-  const handleProfileChange = (event: Event) => {
-    const targetElem = event.currentTarget as HTMLSelectElement;
-
-    const newProfile = targetElem.value;
-    setProfile(newProfile);
-  };
-
-  const actionsContext = {
-    increment,
-    profile,
-    toggleProfile,
-  };
+  const Routes = useRoutes(routes);
 
   return (
-    <Root actions={actions} actionsContext={actionsContext}>
-      <div>
-        <CommandPalette />
-        <h1>Try the command palette by pressing CMD + K on Mac or Control + K on Windows</h1>
-        <section>
-          <h3>Trigger First Action increases the count.</h3>
-          <p>
-            Count is <strong>{count()}</strong>
-          </p>
-          <button onClick={increment}>Increase Count</button>
-        </section>
-        <section>
-          <h3>Trigger Third Action to toggle profile</h3>
-          <p>
-            Active profile is <strong>{profile()}</strong>
-          </p>
-          <select value={profile()} onChange={handleProfileChange}>
-            <option value="personal">Personal</option>
-            <option value="work">Work</option>
-          </select>
-          <p>**Fourth Action will only appear in Work profile</p>
-        </section>
-        <DynamicActionContextDemo />
-      </div>
-    </Root>
+    <div>
+      <Link href="/">Home</Link>
+      <Link href="/demo">Demo</Link>
+      <Link href="/docs">Docs</Link>
+      <Link href="/docs/overview">Overview</Link>
+      <Link href="/docs/installation">Installation</Link>
+      <Link href="/docs/api">API</Link>
+      <Routes />
+    </div>
   );
 };
 
