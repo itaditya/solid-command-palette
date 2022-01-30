@@ -42,11 +42,7 @@ const routes = [
 const App: Component = () => {
   const Routes = useRoutes(routes);
 
-  return (
-    <div>
-      <Routes />
-    </div>
-  );
+  return <Routes />;
 };
 
 export default App;

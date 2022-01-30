@@ -1,0 +1,77 @@
+:global html {
+  height: 100%;
+}
+
+:global body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+:global #root {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 0 30px;
+  background-color: #4e85c2;
+}
+
+.heading {
+  margin: 0;
+  color: #fff;
+}
+
+.navList {
+  margin: 0;
+  list-style: none;
+  display: flex;
+}
+
+.navLink {
+  display: block;
+  padding: 20px 30px;
+  color: #fff;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.activeNavLink {
+  background-color: #fff;
+  color: #4e85c2;
+}
+
+.main {
+  flex: 1;
+  padding: 0 30px;
+}
+
+.demoAction {
+  display: inline-block;
+  background-color: #4e85c2;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.creditLink {
+  margin-left: 5px;
+}

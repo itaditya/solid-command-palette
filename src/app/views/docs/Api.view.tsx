@@ -1,6 +1,6 @@
 import { Component } from 'solid-js';
 
-const View: Component = () => {
+const ApiView: Component = () => {
   return (
     <div>
       <h2>API World</h2>
@@ -8,4 +8,4 @@ const View: Component = () => {
   );
 };
 
-export default View;
+export default ApiView;

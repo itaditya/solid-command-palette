@@ -3,7 +3,7 @@ import { Root, CommandPalette } from '../../../lib';
 import { actions } from './actions';
 import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
 
-const View: Component = () => {
+const DemoView: Component = () => {
   const [count, setCount] = createSignal(0);
   const [profile, setProfile] = createSignal('personal');
 
@@ -64,4 +64,4 @@ const View: Component = () => {
   );
 };
 
-export default View;
+export default DemoView;

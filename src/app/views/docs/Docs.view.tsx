@@ -1,6 +1,6 @@
 import { Component } from 'solid-js';
 
-const View: Component = () => {
+const DocsView: Component = () => {
   return (
     <div>
       <h2>Docs World</h2>
@@ -8,4 +8,4 @@ const View: Component = () => {
   );
 };
 
-export default View;
+export default DocsView;
