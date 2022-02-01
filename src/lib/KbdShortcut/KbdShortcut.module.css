@@ -1,9 +1,16 @@
 .kbdShortcut {
+  display: block;
   background-color: #f1f5f9;
   border: 1px solid #cbd5e1;
+  color: #1e293b;
   font-family: sans-serif;
-  font-size: 12px;
+  font-size: 0.75rem;
   word-spacing: 10px;
   padding: 5px 10px;
   border-radius: 5px;
+}
+
+.kbdShortcut[data-size="large"] {
+  font-size: 0.95rem;
+  color: #64748b;
 }

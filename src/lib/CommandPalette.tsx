@@ -30,6 +30,7 @@ export const CommandPaletteInternal: Component = () => {
   let wrapperElem: HTMLDivElement;
   let paletteElem: HTMLDivElement;
   let searchInputElem: HTMLInputElement;
+  let closeBtnElem: HTMLButtonElement;
 
   function triggerRun(action: WrappedAction) {
     const rootContext = state.actionsContext.root;
@@ -56,6 +57,12 @@ export const CommandPaletteInternal: Component = () => {
   }
 
   function handleKbdEnter(event: KeyboardEvent) {
+    const targetElem = event.target as HTMLElement;
+
+    if (closeBtnElem.contains(targetElem)) {
+      return;
+    }
+
     event.preventDefault();
 
     const activeActionId = activeItemId();
@@ -137,7 +144,8 @@ export const CommandPaletteInternal: Component = () => {
     searchInputElem.select();
 
     tinykeys(wrapperElem, {
-      Escape: () => {
+      Escape: (event) => {
+        event.preventDefault();
         closePalette();
       },
       Enter: handleKbdEnter,
@@ -162,7 +170,15 @@ export const CommandPaletteInternal: Component = () => {
   return (
     <div class={styles.wrapper} ref={wrapperElem} onClick={handleWrapperClick}>
       <div class={styles.palette} ref={paletteElem} onClick={handlePaletteClick}>
-        <div>
+        <form
+          role="search"
+          class={styles.searchForm}
+          aria-label="Command Palette Search"
+          noValidate
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
           <label htmlFor={searchInputId} id={searchLabelId} class={utilStyles.visuallyHidden}>
             Search for an action and then select one of the option.
           </label>
@@ -176,7 +192,17 @@ export const CommandPaletteInternal: Component = () => {
             value={state.searchText}
             onInput={handleSearchInput}
           />
-        </div>
+          <button
+            type="button"
+            class={styles.closeBtn}
+            ref={closeBtnElem}
+            onClick={() => {
+              closePalette();
+            }}
+          >
+            <KbdShortcut size="large" shortcut="Esc" />
+          </button>
+        </form>
         <div class={styles.resultWrapper}>
           <ul
             role="listbox"
