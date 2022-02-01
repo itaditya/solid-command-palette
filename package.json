@@ -14,7 +14,7 @@
     "lint:types:watch": "npm run lint:types -- --watch",
     "lint:syntax": "eslint --ext '.ts,.tsx' 'src/'",
     "lint:syntax:fix": "npm run lint:syntax -- --fix",
-    "lint": "npm run lint:format && npm run lint:types && npm run lint:syntax",
+    "lint": "npm run lint:format && npm run lint:syntax && npm run lint:types",
     "pkg": "vite build -c vite-pkg.config.ts",
     "prepublishOnly": "npm run pkg"
   },

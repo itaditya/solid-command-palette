@@ -76,6 +76,11 @@ export const CommandPaletteInternal: Component = () => {
     const activeActionId = activeItemId();
 
     const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
+
+    if (currentActionIndex < 0) {
+      return;
+    }
+
     const prevActionIndex = (actionsCount + currentActionIndex - 1) % actionsCount;
     const prevActionId = actionsList[prevActionIndex].id;
 
@@ -90,10 +95,38 @@ export const CommandPaletteInternal: Component = () => {
     const activeActionId = activeItemId();
 
     const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
+
+    if (currentActionIndex < 0) {
+      return;
+    }
+
     const nextActionIndex = (currentActionIndex + 1) % actionsCount;
     const nextActionId = actionsList[nextActionIndex].id;
 
     setActiveItemId(nextActionId);
+  }
+
+  function handleKbdFirst(event: KeyboardEvent) {
+    event.preventDefault();
+
+    const actionsList = resultsList();
+    const firstAction = actionsList[0];
+
+    if (firstAction) {
+      setActiveItemId(firstAction.id);
+    }
+  }
+
+  function handleKbdLast(event: KeyboardEvent) {
+    event.preventDefault();
+
+    const actionsList = resultsList();
+    // @ts-expect-error Solid has issues with `.at`
+    const lastAction = actionsList.at(-1);
+
+    if (lastAction) {
+      setActiveItemId(lastAction.id);
+    }
   }
 
   function handleActionItemHover(action: WrappedAction) {
@@ -110,6 +143,8 @@ export const CommandPaletteInternal: Component = () => {
       Enter: handleKbdEnter,
       ArrowUp: handleKbdPrev,
       ArrowDown: handleKbdNext,
+      PageUp: handleKbdFirst,
+      PageDown: handleKbdLast,
     });
   });
 

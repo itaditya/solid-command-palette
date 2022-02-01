@@ -1,3 +1,4 @@
 node_modules
+.vercel
 dist
 pkg-dist
