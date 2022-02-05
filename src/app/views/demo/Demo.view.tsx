@@ -77,9 +77,11 @@ const DemoView: Component = () => {
               We have a <strong>profile</strong> signal and a <strong>toggleProfile</strong>{' '}
               function to toggle between <strong>personal</strong> & <strong>work</strong>.
             </p>
-            <p>You can trigger it by selecting options in the menu.</p>
+            <p>You can trigger it by selecting options in the menu, command palette & keyboard shortcut.</p>
+            <p>We have also bound this profile signal to the command palette's action context.</p>
             <p>
-              The <strong>Join the Standup Meeting</strong> will only appear in Work profile.
+              The <strong>Join the Standup Meeting</strong> action uses the profile value to enable
+              itself only when Work profile is active.
             </p>
           </div>
           <div class={styles.demoInteraction}>
