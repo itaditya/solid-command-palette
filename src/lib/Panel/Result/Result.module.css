@@ -1,0 +1,39 @@
+.resultWrapper {
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.resultList {
+  list-style: none;
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  padding-block: 15px;
+  padding-inline: var(--inline-gutter-space);
+}
+
+.resultItem.activeItem {
+  background-color: #f1f5f9;
+}
+
+.resultTitle {
+  color: #1e293b;
+  font-weight: normal;
+}
+
+.resultSubtitle {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 300;
+  margin-block-start: 7px;
+}
+
+.resultShortcut {
+  font-size: 0.75rem;
+}

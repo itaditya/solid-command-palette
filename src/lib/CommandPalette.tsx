@@ -3,7 +3,6 @@ import {
   createEffect,
   createSignal,
   createUniqueId,
-  For,
   JSX,
   onMount,
   Show,
@@ -12,14 +11,14 @@ import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
 import { KbdShortcut } from './KbdShortcut/KbdShortcut';
+import { PanelResult } from './Panel/Result/Result';
+import { PanelFooter } from './Panel/Footer/Footer';
 import { createSearchResultList } from './createActionList';
-import { StoreStateWrapped } from './types';
+import { WrappedAction } from './types';
 import utilStyles from './utils.module.css';
 import styles from './CommandPalette.module.css';
-import { PanelFooter } from './Panel/Footer/Footer';
 
 type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
-type WrappedAction = StoreStateWrapped['actions'][string];
 
 export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
@@ -55,6 +54,10 @@ export const CommandPaletteInternal: Component = () => {
 
   function handleActionItemSelect(action: WrappedAction) {
     triggerRun(action);
+  }
+
+  function handleActionItemHover(action: WrappedAction) {
+    setActiveItemId(action.id);
   }
 
   function handleKbdEnter(event: KeyboardEvent) {
@@ -137,10 +140,6 @@ export const CommandPaletteInternal: Component = () => {
     }
   }
 
-  function handleActionItemHover(action: WrappedAction) {
-    setActiveItemId(action.id);
-  }
-
   onMount(() => {
     searchInputElem.select();
 
@@ -205,59 +204,13 @@ export const CommandPaletteInternal: Component = () => {
             <KbdShortcut shortcut="Escape" />
           </button>
         </form>
-        <div class={styles.resultWrapper}>
-          <ul
-            role="listbox"
-            aria-labelledby={searchInputId}
-            class={`${styles.resultList} ${utilStyles.stripSpace}`}
-          >
-            <For
-              each={resultsList()}
-              fallback={
-                <div class={styles.resultItem}>
-                  <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>
-                    Couldn't find any matching actions
-                  </h4>
-                </div>
-              }
-            >
-              {(action) => {
-                return (
-                  <li
-                    role="option"
-                    class={`${styles.resultItem} ${utilStyles.boxBorder}`}
-                    classList={{
-                      [styles.activeItem]: action.id === activeItemId(),
-                    }}
-                    aria-selected={action.id === activeItemId()}
-                    onClick={[handleActionItemSelect, action]}
-                    onMouseEnter={[handleActionItemHover, action]}
-                    onMouseDown={(event) => {
-                      // don't take focus away from search field when item is clicked.
-                      event.preventDefault();
-                    }}
-                  >
-                    <div>
-                      <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>
-                        {action.title}
-                      </h4>
-                      <Show when={action.subtitle}>
-                        <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>
-                          {action.subtitle}
-                        </p>
-                      </Show>
-                    </div>
-                    <div>
-                      <Show when={action.shortcut}>
-                        <KbdShortcut class={styles.resultShortcut} shortcut={action.shortcut} />
-                      </Show>
-                    </div>
-                  </li>
-                );
-              }}
-            </For>
-          </ul>
-        </div>
+        <PanelResult
+          activeItemId={activeItemId()}
+          resultsList={resultsList()}
+          searchInputId={searchInputId}
+          onActionItemHover={handleActionItemHover}
+          onActionItemSelect={handleActionItemSelect}
+        />
         <PanelFooter />
       </div>
     </div>

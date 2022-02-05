@@ -1,4 +1,4 @@
-import { Store } from 'solid-js/store';
+import { DeepReadonly, Store } from 'solid-js/store';
 
 export type ActionId = string;
 
@@ -40,6 +40,8 @@ export type PartialAction = Partial<Action> & {
 
 export type Actions = Record<ActionId, Action>;
 export type ActionsList = Array<Action>;
+export type WrappedAction = DeepReadonly<Action>;
+export type WrappedActionList = Array<WrappedAction>;
 
 export type RootProps = {
   actions: Actions;

@@ -1,8 +1,8 @@
 import { KeyBindingMap } from 'tinykeys';
-import { Action, ActionsList, ActionContext, ActionsContext } from './types';
+import { ActionContext, ActionsContext, WrappedAction, WrappedActionList } from './types';
 
 function checkActionAllowed(
-  action: Action,
+  action: WrappedAction,
   rootContext: ActionContext,
   dynamicContext: ActionContext
 ) {
@@ -15,7 +15,7 @@ function checkActionAllowed(
 }
 
 export function createShortcutHandlersMap(
-  actionsList: ActionsList,
+  actionsList: WrappedActionList,
   actionsContext: ActionsContext
 ) {
   const shortcutMap: KeyBindingMap = {};
