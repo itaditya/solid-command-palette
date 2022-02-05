@@ -16,6 +16,7 @@ import { createSearchResultList } from './createActionList';
 import { StoreStateWrapped } from './types';
 import utilStyles from './utils.module.css';
 import styles from './CommandPalette.module.css';
+import { PanelFooter } from './Panel/Footer/Footer';
 
 type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
 type WrappedAction = StoreStateWrapped['actions'][string];
@@ -257,6 +258,7 @@ export const CommandPaletteInternal: Component = () => {
             </For>
           </ul>
         </div>
+        <PanelFooter />
       </div>
     </div>
   );

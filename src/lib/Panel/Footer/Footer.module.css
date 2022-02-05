@@ -1,0 +1,42 @@
+.footer {
+  display: flex;
+  gap: 15px;
+  color: #64748b;
+  font-size: 0.85rem;
+  border: 0.5px solid #e2e8f0;
+  padding-block: 10px;
+  padding-inline: var(--inline-gutter-space);
+}
+
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.shortcut {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  padding: 3px 2px;
+  line-height: 0;
+}
+
+.runShortcut {
+  padding-inline: 5px;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+}
+
+.iconArrow[data-arrow-direction='down'] {
+  transform: rotateX(180deg);
+}
+
+.iconReturn {
+  transform: rotateX(180deg);
+}
