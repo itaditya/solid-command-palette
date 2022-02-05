@@ -12,6 +12,7 @@ import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
 import { KbdShortcut } from './KbdShortcut/KbdShortcut';
+import { ScrollAssist } from './ScrollAssist/ScrollAssist';
 import { PanelResult } from './Panel/Result/Result';
 import { PanelFooter } from './Panel/Footer/Footer';
 import { createSearchResultList } from './createActionList';
@@ -29,7 +30,6 @@ export const CommandPaletteInternal: Component = () => {
   const searchInputId = createUniqueId();
 
   let wrapperElem: HTMLDivElement;
-  let paletteElem: HTMLDivElement;
   let searchInputElem: HTMLInputElement;
   let closeBtnElem: HTMLButtonElement;
   let lastFocusedElem: HTMLElement;
@@ -41,11 +41,45 @@ export const CommandPaletteInternal: Component = () => {
     closePalette(); // commented for easy dev.
   }
 
+  function activatePrevItem() {
+    const actionsList = resultsList();
+    const actionsCount = actionsList.length;
+    const activeActionId = activeItemId();
+
+    const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
+
+    if (currentActionIndex < 0) {
+      return;
+    }
+
+    const prevActionIndex = (actionsCount + currentActionIndex - 1) % actionsCount;
+    const prevActionId = actionsList[prevActionIndex].id;
+
+    setActiveItemId(prevActionId);
+  }
+
+  function activateNextItem() {
+    const actionsList = resultsList();
+    const actionsCount = actionsList.length;
+    const activeActionId = activeItemId();
+
+    const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
+
+    if (currentActionIndex < 0) {
+      return;
+    }
+
+    const nextActionIndex = (currentActionIndex + 1) % actionsCount;
+    const nextActionId = actionsList[nextActionIndex].id;
+
+    setActiveItemId(nextActionId);
+  }
+
   function handleWrapperClick() {
     closePalette();
   }
 
-  function handlePaletteClick(event: MouseEvent) {
+  function handlePanelClick(event: MouseEvent) {
     event.stopPropagation();
   }
 
@@ -84,39 +118,13 @@ export const CommandPaletteInternal: Component = () => {
   function handleKbdPrev(event: KeyboardEvent) {
     event.preventDefault();
 
-    const actionsList = resultsList();
-    const actionsCount = actionsList.length;
-    const activeActionId = activeItemId();
-
-    const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
-
-    if (currentActionIndex < 0) {
-      return;
-    }
-
-    const prevActionIndex = (actionsCount + currentActionIndex - 1) % actionsCount;
-    const prevActionId = actionsList[prevActionIndex].id;
-
-    setActiveItemId(prevActionId);
+    activatePrevItem();
   }
 
   function handleKbdNext(event: KeyboardEvent) {
     event.preventDefault();
 
-    const actionsList = resultsList();
-    const actionsCount = actionsList.length;
-    const activeActionId = activeItemId();
-
-    const currentActionIndex = actionsList.findIndex((action) => action.id === activeActionId);
-
-    if (currentActionIndex < 0) {
-      return;
-    }
-
-    const nextActionIndex = (currentActionIndex + 1) % actionsCount;
-    const nextActionId = actionsList[nextActionIndex].id;
-
-    setActiveItemId(nextActionId);
+    activateNextItem();
   }
 
   function handleKbdFirst(event: KeyboardEvent) {
@@ -140,6 +148,14 @@ export const CommandPaletteInternal: Component = () => {
     if (lastAction) {
       setActiveItemId(lastAction.id);
     }
+  }
+
+  function handleScrollAssistPrev() {
+    activatePrevItem();
+  }
+
+  function handleScrollAssistNext() {
+    activateNextItem();
   }
 
   onMount(() => {
@@ -180,49 +196,53 @@ export const CommandPaletteInternal: Component = () => {
 
   return (
     <div class={styles.wrapper} ref={wrapperElem} onClick={handleWrapperClick}>
-      <div class={styles.palette} ref={paletteElem} onClick={handlePaletteClick}>
-        <form
-          role="search"
-          class={styles.searchForm}
-          aria-label="Command Palette Search"
-          noValidate
-          onSubmit={(event) => {
-            event.preventDefault();
-          }}
-        >
-          <label htmlFor={searchInputId} id={searchLabelId} class={utilStyles.visuallyHidden}>
-            Search for an action and then select one of the option.
-          </label>
-          <input
-            type="search"
-            id={searchInputId}
-            class={`${styles.searchInput} ${utilStyles.boxBorder}`}
-            autocomplete="off"
-            placeholder="Type a command or search..."
-            data-cp-kbd-shortcuts="disabled"
-            ref={searchInputElem}
-            value={state.searchText}
-            onInput={handleSearchInput}
-          />
-          <button
-            type="button"
-            class={styles.closeBtn}
-            ref={closeBtnElem}
-            onClick={() => {
-              closePalette();
+      <div class={styles.palette}>
+        <ScrollAssist direction="up" onScroll={handleScrollAssistPrev} />
+        <ScrollAssist direction="down" onScroll={handleScrollAssistNext} />
+        <div class={styles.panel} onClick={handlePanelClick}>
+          <form
+            role="search"
+            class={styles.searchForm}
+            aria-label="Command Palette Search"
+            noValidate
+            onSubmit={(event) => {
+              event.preventDefault();
             }}
           >
-            <KbdShortcut shortcut="Escape" />
-          </button>
-        </form>
-        <PanelResult
-          activeItemId={activeItemId()}
-          resultsList={resultsList()}
-          searchInputId={searchInputId}
-          onActionItemHover={handleActionItemHover}
-          onActionItemSelect={handleActionItemSelect}
-        />
-        <PanelFooter />
+            <label htmlFor={searchInputId} id={searchLabelId} class={utilStyles.visuallyHidden}>
+              Search for an action and then select one of the option.
+            </label>
+            <input
+              type="search"
+              id={searchInputId}
+              class={`${styles.searchInput} ${utilStyles.boxBorder}`}
+              autocomplete="off"
+              placeholder="Type a command or search..."
+              data-cp-kbd-shortcuts="disabled"
+              ref={searchInputElem}
+              value={state.searchText}
+              onInput={handleSearchInput}
+            />
+            <button
+              type="button"
+              class={styles.closeBtn}
+              ref={closeBtnElem}
+              onClick={() => {
+                closePalette();
+              }}
+            >
+              <KbdShortcut shortcut="Escape" />
+            </button>
+          </form>
+          <PanelResult
+            activeItemId={activeItemId()}
+            resultsList={resultsList()}
+            searchInputId={searchInputId}
+            onActionItemHover={handleActionItemHover}
+            onActionItemSelect={handleActionItemSelect}
+          />
+          <PanelFooter />
+        </div>
       </div>
     </div>
   );

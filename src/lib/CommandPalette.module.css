@@ -6,6 +6,12 @@
 }
 
 .palette {
+  position: relative;
+  margin-block-start: 100px;
+  height: max-content;
+}
+
+.panel {
   --scp-gutter-space-inline: 20px;
 
   display: flex;
@@ -14,7 +20,6 @@
   width: 600px;
   height: max-content;
   max-height: 350px;
-  margin-block-start: 100px;
   border: 0.5px solid #e2e8f0;
   border-radius: 8px;
   box-shadow: 0 0 50px -12px rgb(0 0 0 / 0.25);

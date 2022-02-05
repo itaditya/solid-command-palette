@@ -1,0 +1,17 @@
+.scrollShape {
+  --scp-scroll-shape-height: 30px;
+
+  width: 35%;
+  height: var(--scp-scroll-shape-height);
+  position: absolute;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+.scrollShape[data-direction='up'] {
+  inset-block-start: calc(-1 * var(--scp-scroll-shape-height));
+}
+
+.scrollShape[data-direction='down'] {
+  inset-block-start: 100%;
+}
