@@ -30,7 +30,11 @@
 
 .heading {
   margin: 0;
+}
+
+.headingLink {
   color: #fff;
+  text-decoration: none;
 }
 
 .navList {

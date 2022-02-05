@@ -25,7 +25,11 @@ const AppShellView: Component = () => {
     <section class={styles.wrapper}>
       <header class={styles.header}>
         <div>
-          <h3 class={styles.heading}>Solid Command Palette</h3>
+          <h3 class={styles.heading}>
+            <Link class={styles.headingLink} href="/">
+              Solid Command Palette
+            </Link>
+          </h3>
         </div>
         <nav>
           <ul class={styles.navList}>
