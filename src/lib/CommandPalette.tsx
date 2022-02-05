@@ -36,7 +36,7 @@ export const CommandPaletteInternal: Component = () => {
     const rootContext = state.actionsContext.root;
     const dynamicContext = state.actionsContext.dynamic[action.id] || {};
     action.run({ actionId: action.id, rootContext, dynamicContext });
-    // closePalette(); // commented for easy dev.
+    closePalette(); // commented for easy dev.
   }
 
   function handleWrapperClick() {
