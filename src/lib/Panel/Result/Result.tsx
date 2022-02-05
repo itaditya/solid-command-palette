@@ -1,21 +1,40 @@
 import { Component, For, Show, createEffect } from 'solid-js';
 import { KbdShortcut } from '../..';
-import { ActionId, Action, WrappedAction, WrappedActionList } from '../../types';
+import { ActionId, WrappedAction, WrappedActionList } from '../../types';
 import utilStyles from '../../utils.module.css';
 import styles from './Result.module.css';
 
 interface ResultItemProps {
   action: WrappedAction;
   activeItemId: ActionId;
-  onActionItemSelect: (action: Action) => void;
-  onActionItemHover: (action: Action) => void;
+  onActionItemSelect: (action: WrappedAction) => void;
+  onActionItemHover: (action: WrappedAction) => void;
 }
 
 const ResultItem: Component<ResultItemProps> = (p) => {
   let resultItemElem: HTMLLIElement;
+  let isMoving = false;
 
   function isActive() {
     return p.action.id === p.activeItemId;
+  }
+
+  function handleMouseMove(action: WrappedAction) {
+    if (isMoving) {
+      return;
+    }
+
+    isMoving = true;
+    p.onActionItemHover(action);
+  }
+
+  function handleMouseLeave() {
+    isMoving = false;
+  }
+
+  function handleMouseDown(event: MouseEvent) {
+    // don't take focus away from search field when item is clicked.
+    event.preventDefault();
   }
 
   createEffect(() => {
@@ -37,11 +56,9 @@ const ResultItem: Component<ResultItemProps> = (p) => {
       }}
       aria-selected={isActive()}
       onClick={[p.onActionItemSelect, p.action]}
-      onMouseEnter={[p.onActionItemHover, p.action]}
-      onMouseDown={(event) => {
-        // don't take focus away from search field when item is clicked.
-        event.preventDefault();
-      }}
+      onMouseMove={[handleMouseMove, p.action]}
+      onMouseLeave={handleMouseLeave}
+      onMouseDown={handleMouseDown}
     >
       <div>
         <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>{p.action.title}</h4>
@@ -62,8 +79,8 @@ export interface PanelResultProps {
   activeItemId: ActionId;
   resultsList: WrappedActionList;
   searchInputId: string;
-  onActionItemSelect: (action: Action) => void;
-  onActionItemHover: (action: Action) => void;
+  onActionItemSelect: (action: WrappedAction) => void;
+  onActionItemHover: (action: WrappedAction) => void;
 }
 
 export const PanelResult: Component<PanelResultProps> = (p) => {
