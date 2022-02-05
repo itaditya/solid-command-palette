@@ -33,6 +33,7 @@
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
+  border-bottom: 0.5px solid #e2e8f0;
 }
 
 .searchInput {

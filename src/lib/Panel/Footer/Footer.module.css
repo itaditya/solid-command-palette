@@ -3,7 +3,7 @@
   gap: 15px;
   color: #64748b;
   font-size: 0.85rem;
-  border: 0.5px solid #e2e8f0;
+  border-top: 0.5px solid #e2e8f0;
   padding-block: 10px;
   padding-inline: var(--inline-gutter-space);
 }
