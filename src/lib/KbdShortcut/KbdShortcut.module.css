@@ -1,16 +1,25 @@
 .kbdShortcut {
-  display: block;
-  background-color: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  color: #1e293b;
-  font-family: sans-serif;
-  font-size: 0.75rem;
-  word-spacing: 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
+  display: flex;
+  gap: 15px;
 }
 
-.kbdShortcut[data-size="large"] {
+.kbdGroup {
+  display: flex;
+  gap: 5px;
+}
+
+.kbdKey {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  padding: 5px 8px;
+}
+
+.kbdKey[data-size="large"] {
   font-size: 0.95rem;
   color: #64748b;
 }

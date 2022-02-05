@@ -1,4 +1,5 @@
-import { Component } from 'solid-js';
+import { Component, For } from 'solid-js';
+import { parseKeybinding } from 'tinykeys';
 import { Action } from '../types';
 import styles from './KbdShortcut.module.css';
 
@@ -7,10 +8,54 @@ export type Props = {
   shortcut: Action['shortcut'];
 };
 
-const modifierKey = /Mac|iPod|iPhone|iPad/.test(navigator.platform) ? 'cmd' : 'control';
+type KeyBindingPress = ReturnType<typeof parseKeybinding>;
+
+function getFormattedKey(key: string) {
+  if (key === 'Meta') {
+    return '⌘';
+  }
+
+  if (key === 'Control') {
+    return 'Ctrl';
+  }
+
+  if (key === 'Escape') {
+    return 'Esc';
+  }
+
+  return key;
+}
+
+function getFormattedShortcut(parsedShortcut: KeyBindingPress) {
+  const formattedShortcut = parsedShortcut.map((group) => {
+    const flatGroup = group.flat();
+    const formattedGroup = flatGroup.map(getFormattedKey);
+    return formattedGroup;
+  });
+
+  return formattedShortcut;
+}
 
 export const KbdShortcut: Component<Props> = (p) => {
   const size = p.size || 'normal';
-  const shortcut = p.shortcut.replaceAll('$mod', modifierKey);
-  return <kbd class={styles.kbdShortcut} data-size={size}>{shortcut}</kbd>;
+  const parsedShortcut = parseKeybinding(p.shortcut);
+  const formattedShortcut = getFormattedShortcut(parsedShortcut);
+
+  return (
+    <kbd class={styles.kbdShortcut}>
+      <For each={formattedShortcut}>
+        {(group) => (
+          <kbd class={styles.kbdGroup}>
+            <For each={group}>
+              {(key) => (
+                <kbd class={styles.kbdKey} data-size={size}>
+                  {key}
+                </kbd>
+              )}
+            </For>
+          </kbd>
+        )}
+      </For>
+    </kbd>
+  );
 };

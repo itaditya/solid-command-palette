@@ -200,7 +200,7 @@ export const CommandPaletteInternal: Component = () => {
               closePalette();
             }}
           >
-            <KbdShortcut size="large" shortcut="Esc" />
+            <KbdShortcut size="large" shortcut="Escape" />
           </button>
         </form>
         <div class={styles.resultWrapper}>

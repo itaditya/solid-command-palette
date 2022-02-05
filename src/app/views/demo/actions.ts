@@ -4,7 +4,7 @@ import { contactAction } from './DynamicActionContextDemo/dynamicContextActions'
 const incrementCounterAction = defineAction({
   id: 'increment-counter',
   title: 'Increment Counter by 1',
-  subtitle: 'Press CMD + E to trigger this.',
+  subtitle: 'Hold the Command and E keys on Mac together to trigger this.',
   shortcut: '$mod+e',
   run: ({ rootContext }) => {
     if (typeof rootContext.increment === 'function') {
@@ -54,6 +54,7 @@ const workMeetingAction = defineAction({
 const navigationAction = defineAction({
   id: 'navigate-github',
   title: 'Go to GitHub repo',
+  subtitle: 'First press G then press H. No need to hold them together',
   shortcut: 'g h',
   run: () => {
     console.log('go to github');
