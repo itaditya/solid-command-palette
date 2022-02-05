@@ -5,6 +5,7 @@ import {
   createUniqueId,
   JSX,
   onMount,
+  onCleanup,
   Show,
 } from 'solid-js';
 import tinykeys from 'tinykeys';
@@ -31,6 +32,7 @@ export const CommandPaletteInternal: Component = () => {
   let paletteElem: HTMLDivElement;
   let searchInputElem: HTMLInputElement;
   let closeBtnElem: HTMLButtonElement;
+  let lastFocusedElem: HTMLElement;
 
   function triggerRun(action: WrappedAction) {
     const rootContext = state.actionsContext.root;
@@ -141,6 +143,7 @@ export const CommandPaletteInternal: Component = () => {
   }
 
   onMount(() => {
+    lastFocusedElem = document.activeElement as HTMLElement;
     searchInputElem.select();
 
     tinykeys(wrapperElem, {
@@ -154,6 +157,14 @@ export const CommandPaletteInternal: Component = () => {
       PageUp: handleKbdFirst,
       PageDown: handleKbdLast,
     });
+  });
+
+  onCleanup(() => {
+    if (lastFocusedElem) {
+      lastFocusedElem.focus();
+    }
+
+    lastFocusedElem = null;
   });
 
   createEffect(() => {
