@@ -1,10 +1,64 @@
-import { Component, For, Show } from 'solid-js';
+import { Component, For, Show, createEffect } from 'solid-js';
 import { KbdShortcut } from '../..';
-import { ActionId, Action, WrappedActionList } from '../../types';
+import { ActionId, Action, WrappedAction, WrappedActionList } from '../../types';
 import utilStyles from '../../utils.module.css';
 import styles from './Result.module.css';
 
-export interface Props {
+interface ResultItemProps {
+  action: WrappedAction;
+  activeItemId: ActionId;
+  onActionItemSelect: (action: Action) => void;
+  onActionItemHover: (action: Action) => void;
+}
+
+const ResultItem: Component<ResultItemProps> = (p) => {
+  let resultItemElem: HTMLLIElement;
+
+  function isActive() {
+    return p.action.id === p.activeItemId;
+  }
+
+  createEffect(() => {
+    if (isActive()) {
+      resultItemElem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  });
+
+  return (
+    <li
+      role="option"
+      ref={resultItemElem}
+      class={`${styles.resultItem} ${utilStyles.boxBorder}`}
+      classList={{
+        [styles.activeItem]: isActive(),
+      }}
+      aria-selected={isActive()}
+      onClick={[p.onActionItemSelect, p.action]}
+      onMouseEnter={[p.onActionItemHover, p.action]}
+      onMouseDown={(event) => {
+        // don't take focus away from search field when item is clicked.
+        event.preventDefault();
+      }}
+    >
+      <div>
+        <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>{p.action.title}</h4>
+        <Show when={p.action.subtitle}>
+          <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>{p.action.subtitle}</p>
+        </Show>
+      </div>
+      <div>
+        <Show when={p.action.shortcut}>
+          <KbdShortcut class={styles.resultShortcut} shortcut={p.action.shortcut} />
+        </Show>
+      </div>
+    </li>
+  );
+};
+
+export interface PanelResultProps {
   activeItemId: ActionId;
   resultsList: WrappedActionList;
   searchInputId: string;
@@ -12,7 +66,7 @@ export interface Props {
   onActionItemHover: (action: Action) => void;
 }
 
-export const PanelResult: Component<Props> = (p) => {
+export const PanelResult: Component<PanelResultProps> = (p) => {
   return (
     <div class={styles.resultWrapper}>
       <ul
@@ -30,38 +84,14 @@ export const PanelResult: Component<Props> = (p) => {
             </div>
           }
         >
-          {(action) => {
-            return (
-              <li
-                role="option"
-                class={`${styles.resultItem} ${utilStyles.boxBorder}`}
-                classList={{
-                  [styles.activeItem]: action.id === p.activeItemId,
-                }}
-                aria-selected={action.id === p.activeItemId}
-                onClick={[p.onActionItemSelect, action]}
-                onMouseEnter={[p.onActionItemHover, action]}
-                onMouseDown={(event) => {
-                  // don't take focus away from search field when item is clicked.
-                  event.preventDefault();
-                }}
-              >
-                <div>
-                  <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>{action.title}</h4>
-                  <Show when={action.subtitle}>
-                    <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>
-                      {action.subtitle}
-                    </p>
-                  </Show>
-                </div>
-                <div>
-                  <Show when={action.shortcut}>
-                    <KbdShortcut class={styles.resultShortcut} shortcut={action.shortcut} />
-                  </Show>
-                </div>
-              </li>
-            );
-          }}
+          {(action) => (
+            <ResultItem
+              action={action}
+              activeItemId={p.activeItemId}
+              onActionItemHover={p.onActionItemHover}
+              onActionItemSelect={p.onActionItemSelect}
+            />
+          )}
         </For>
       </ul>
     </div>
