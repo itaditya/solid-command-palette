@@ -3,7 +3,7 @@ import { Link, NavLink, NavLinkProps, Outlet, useMatch } from 'solid-app-router'
 import styles from './AppShell.module.css';
 
 const HeaderNavLink: Component<NavLinkProps> = (p) => {
-  return <NavLink class={styles.navLink} activeClass={styles.activeNavLink} end={true} {...p} />;
+  return <NavLink class={styles.navLink} activeClass={styles.activeNavLink} {...p} />;
 };
 
 const MaintenanceContent: Component = () => {
@@ -30,19 +30,10 @@ const AppShellView: Component = () => {
         <nav>
           <ul class={styles.navList}>
             <li class={styles.navItem}>
-              <HeaderNavLink href="/">Home</HeaderNavLink>
+              <HeaderNavLink href="/demo">Kitchen Sink Demo</HeaderNavLink>
             </li>
             <li class={styles.navItem}>
-              <HeaderNavLink href="/demo">Demo</HeaderNavLink>
-            </li>
-            <li class={styles.navItem}>
-              <HeaderNavLink href="/docs/overview">Overview</HeaderNavLink>
-            </li>
-            <li class={styles.navItem}>
-              <HeaderNavLink href="/docs/installation">Installation</HeaderNavLink>
-            </li>
-            <li class={styles.navItem}>
-              <HeaderNavLink href="/docs/api">API</HeaderNavLink>
+              <HeaderNavLink href="/docs">Documentation</HeaderNavLink>
             </li>
           </ul>
         </nav>

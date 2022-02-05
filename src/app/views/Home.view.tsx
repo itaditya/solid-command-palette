@@ -3,7 +3,7 @@ import { Component } from 'solid-js';
 const HomeView: Component = () => {
   return (
     <div>
-      <h2>Home World</h2>
+      <h3>This is the Home Page. Although as you can see it's blank.</h3>
     </div>
   );
 };

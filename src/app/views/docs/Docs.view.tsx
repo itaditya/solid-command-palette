@@ -1,11 +1,8 @@
 import { Component } from 'solid-js';
+import { Navigate } from 'solid-app-router';
 
 const DocsView: Component = () => {
-  return (
-    <div>
-      <h2>Docs World</h2>
-    </div>
-  );
+  return <Navigate href="/docs/overview" />;
 };
 
 export default DocsView;

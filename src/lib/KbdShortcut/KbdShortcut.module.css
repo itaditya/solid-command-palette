@@ -19,7 +19,7 @@
   padding: 5px 8px;
 }
 
-.kbdKey[data-size="large"] {
+.kbdKey[data-size='large'] {
   font-size: 0.95rem;
   color: #64748b;
 }

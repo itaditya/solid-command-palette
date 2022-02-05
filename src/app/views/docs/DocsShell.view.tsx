@@ -1,12 +1,29 @@
 import { Component } from 'solid-js';
-import { Outlet } from 'solid-app-router';
+import { NavLink, Outlet } from 'solid-app-router';
 
 const DocsShellView: Component = () => {
   return (
-    <div>
-      <h2>Docs Shell World</h2>
-      <Outlet />
-    </div>
+    <section>
+      <aside>
+        <h2>Documentation</h2>
+        <nav>
+          <ul>
+            <li>
+              <NavLink href="/docs/overview">Overview</NavLink>
+            </li>
+            <li>
+              <NavLink href="/docs/installation">Installation</NavLink>
+            </li>
+            <li>
+              <NavLink href="/docs/api">API</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main>
+        <Outlet />
+      </main>
+    </section>
   );
 };
 
