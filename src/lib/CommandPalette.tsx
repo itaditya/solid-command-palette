@@ -26,6 +26,7 @@ export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal(null);
+  const [scrollAssistInterrupted, setScrollAssistInterrupted] = createSignal(false);
   const searchLabelId = createUniqueId();
   const searchInputId = createUniqueId();
 
@@ -33,6 +34,10 @@ export const CommandPaletteInternal: Component = () => {
   let searchInputElem: HTMLInputElement;
   let closeBtnElem: HTMLButtonElement;
   let lastFocusedElem: HTMLElement;
+
+  function interruptScrollAssist() {
+    setScrollAssistInterrupted(true);
+  }
 
   function triggerRun(action: WrappedAction) {
     const rootContext = state.actionsContext.root;
@@ -85,6 +90,8 @@ export const CommandPaletteInternal: Component = () => {
 
   const handleSearchInput: InputEventHandler = (event) => {
     const newValue = event.currentTarget.value;
+
+    interruptScrollAssist();
     setSearchText(newValue);
   };
 
@@ -93,6 +100,7 @@ export const CommandPaletteInternal: Component = () => {
   }
 
   function handleActionItemHover(action: WrappedAction) {
+    interruptScrollAssist();
     setActiveItemId(action.id);
   }
 
@@ -118,12 +126,14 @@ export const CommandPaletteInternal: Component = () => {
   function handleKbdPrev(event: KeyboardEvent) {
     event.preventDefault();
 
+    interruptScrollAssist();
     activatePrevItem();
   }
 
   function handleKbdNext(event: KeyboardEvent) {
     event.preventDefault();
 
+    interruptScrollAssist();
     activateNextItem();
   }
 
@@ -132,6 +142,8 @@ export const CommandPaletteInternal: Component = () => {
 
     const actionsList = resultsList();
     const firstAction = actionsList[0];
+
+    interruptScrollAssist();
 
     if (firstAction) {
       setActiveItemId(firstAction.id);
@@ -145,6 +157,8 @@ export const CommandPaletteInternal: Component = () => {
     // @ts-expect-error Solid has issues with `.at`
     const lastAction = actionsList.at(-1);
 
+    interruptScrollAssist();
+
     if (lastAction) {
       setActiveItemId(lastAction.id);
     }
@@ -156,6 +170,10 @@ export const CommandPaletteInternal: Component = () => {
 
   function handleScrollAssistNext() {
     activateNextItem();
+  }
+
+  function handleScrollAssistResume() {
+    setScrollAssistInterrupted(false);
   }
 
   onMount(() => {
@@ -197,8 +215,18 @@ export const CommandPaletteInternal: Component = () => {
   return (
     <div class={styles.wrapper} ref={wrapperElem} onClick={handleWrapperClick}>
       <div class={styles.palette}>
-        <ScrollAssist direction="up" onScroll={handleScrollAssistPrev} />
-        <ScrollAssist direction="down" onScroll={handleScrollAssistNext} />
+        <ScrollAssist
+          direction="up"
+          interrupted={scrollAssistInterrupted()}
+          onScroll={handleScrollAssistPrev}
+          onResume={handleScrollAssistResume}
+        />
+        <ScrollAssist
+          direction="down"
+          interrupted={scrollAssistInterrupted()}
+          onScroll={handleScrollAssistNext}
+          onResume={handleScrollAssistResume}
+        />
         <div class={styles.panel} onClick={handlePanelClick}>
           <form
             role="search"

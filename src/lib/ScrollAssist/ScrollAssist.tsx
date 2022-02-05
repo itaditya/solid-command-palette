@@ -1,9 +1,11 @@
-import { Component } from 'solid-js';
+import { Component, createEffect } from 'solid-js';
 import styles from './ScrollAssist.module.css';
 
 type ScrollAssistProps = {
   direction: 'up' | 'down';
+  interrupted: boolean;
   onScroll: () => void;
+  onResume: () => void;
 };
 
 export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
@@ -12,6 +14,11 @@ export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
 
   function startSelecting() {
     isRunning = true;
+
+    if (p.interrupted) {
+      p.onResume();
+    }
+
     intervalId = setInterval(() => {
       p.onScroll();
     }, 500);
@@ -57,6 +64,12 @@ export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
   function handleMouseLeave() {
     stopSelecting();
   }
+
+  createEffect(() => {
+    if (p.interrupted) {
+      stopSelecting();
+    }
+  });
 
   return (
     <div
