@@ -6,7 +6,7 @@
 }
 
 .palette {
-  --inline-gutter-space: 20px;
+  --scp-gutter-space-inline: 20px;
 
   display: flex;
   flex-direction: column;
@@ -33,7 +33,7 @@
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  border-bottom: 0.5px solid #e2e8f0;
+  border-block-end: 0.5px solid #e2e8f0;
 }
 
 .searchInput {
@@ -43,7 +43,7 @@
   width: 100%;
   border: none;
   padding-block: 20px;
-  padding-inline-start: var(--inline-gutter-space);
+  padding-inline-start: var(--scp-gutter-space-inline);
   padding-inline-end: 80px;
   font-size: 20px;
   font-family: inherit;
@@ -65,7 +65,7 @@
   border: none;
   border-radius: 5px;
   padding: 0;
-  margin-inline-end: var(--inline-gutter-space);
+  margin-inline-end: var(--scp-gutter-space-inline);
 }
 
 .closeBtn:focus {

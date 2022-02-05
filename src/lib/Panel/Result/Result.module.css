@@ -15,7 +15,7 @@
   cursor: pointer;
   user-select: none;
   padding-block: 15px;
-  padding-inline: var(--inline-gutter-space);
+  padding-inline: var(--scp-gutter-space-inline);
 }
 
 .resultItem.activeItem {
