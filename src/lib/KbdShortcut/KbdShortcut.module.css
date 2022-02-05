@@ -14,12 +14,7 @@
   border: 1px solid #cbd5e1;
   border-radius: 5px;
   font-family: sans-serif;
-  font-size: 0.75rem;
+  font-size: inherit;
   text-transform: capitalize;
   padding: 5px 8px;
-}
-
-.kbdKey[data-size='large'] {
-  font-size: 0.95rem;
-  color: #64748b;
 }

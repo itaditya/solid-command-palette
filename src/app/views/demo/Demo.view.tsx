@@ -1,7 +1,8 @@
 import { Component, createSignal } from 'solid-js';
-import { Root, CommandPalette } from '../../../lib';
+import { Root, CommandPalette, KbdShortcut } from '../../../lib';
 import { actions } from './actions';
 import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
+import styles from './Demo.module.css';
 
 const DemoView: Component = () => {
   const [count, setCount] = createSignal(0);
@@ -38,8 +39,12 @@ const DemoView: Component = () => {
     <Root actions={actions} actionsContext={actionsContext}>
       <div>
         <CommandPalette />
-
-        <h1>Try the command palette by pressing CMD + K on Mac or Control + K on Windows</h1>
+        <section class={styles.introSection}>
+          <h1 class={styles.introHeading}>
+            <span>Bring it up by pressing</span>
+            <KbdShortcut class={styles.introShortcutKey} shortcut="$mod+k" />
+          </h1>
+        </section>
         <section>
           <h3>Trigger First Action increases the count.</h3>
           <p>

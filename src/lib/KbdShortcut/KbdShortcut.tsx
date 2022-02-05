@@ -1,12 +1,11 @@
-import { Component, For } from 'solid-js';
+import { JSX, Component, For, splitProps } from 'solid-js';
 import { parseKeybinding } from 'tinykeys';
 import { Action } from '../types';
 import styles from './KbdShortcut.module.css';
 
-export type Props = {
-  size?: 'normal' | 'large';
+export interface Props extends JSX.HTMLAttributes<HTMLElement> {
   shortcut: Action['shortcut'];
-};
+}
 
 type KeyBindingPress = ReturnType<typeof parseKeybinding>;
 
@@ -37,22 +36,19 @@ function getFormattedShortcut(parsedShortcut: KeyBindingPress) {
 }
 
 export const KbdShortcut: Component<Props> = (p) => {
-  const size = p.size || 'normal';
-  const parsedShortcut = parseKeybinding(p.shortcut);
+  const [l, others] = splitProps(p, ['shortcut', 'class']);
+
+  const parsedShortcut = parseKeybinding(l.shortcut);
   const formattedShortcut = getFormattedShortcut(parsedShortcut);
 
+  const keyClasses = [styles.kbdKey, l.class].join(' ');
+
   return (
-    <kbd class={styles.kbdShortcut}>
+    <kbd {...others} class={styles.kbdShortcut}>
       <For each={formattedShortcut}>
         {(group) => (
           <kbd class={styles.kbdGroup}>
-            <For each={group}>
-              {(key) => (
-                <kbd class={styles.kbdKey} data-size={size}>
-                  {key}
-                </kbd>
-              )}
-            </For>
+            <For each={group}>{(key) => <kbd class={keyClasses}>{key}</kbd>}</For>
           </kbd>
         )}
       </For>

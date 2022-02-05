@@ -108,3 +108,7 @@
   font-weight: 300;
   margin-block-start: 7px;
 }
+
+.resultShortcut {
+  font-size: 0.75rem;
+}

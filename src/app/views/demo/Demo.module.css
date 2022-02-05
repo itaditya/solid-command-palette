@@ -1,0 +1,22 @@
+.introSection {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.introHeading {
+  display: contents;
+  font-size: 3rem;
+  text-align: center;
+  color: #1e293b;
+}
+
+.introShortcutKey {
+  min-width: 50px;
+  border: none;
+  background-color: #4e85c2;
+  color: #fff;
+}

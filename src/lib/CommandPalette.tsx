@@ -200,7 +200,7 @@ export const CommandPaletteInternal: Component = () => {
               closePalette();
             }}
           >
-            <KbdShortcut size="large" shortcut="Escape" />
+            <KbdShortcut shortcut="Escape" />
           </button>
         </form>
         <div class={styles.resultWrapper}>
@@ -247,7 +247,7 @@ export const CommandPaletteInternal: Component = () => {
                     </div>
                     <div>
                       <Show when={action.shortcut}>
-                        <KbdShortcut shortcut={action.shortcut} />
+                        <KbdShortcut class={styles.resultShortcut} shortcut={action.shortcut} />
                       </Show>
                     </div>
                   </li>
