@@ -1,7 +1,8 @@
 import { Component, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js';
-import { createSyncActionsContext } from '../../../../lib';
+import { KbdShortcut, createSyncActionsContext } from '../../../../lib';
 import { ownContactId, contacts, contactActionId } from './data';
 import { InputEventHandler, ContactItemProps, ReceiverContactDetailsProps } from './types';
+import demoStyles from '../demoUtils.module.css';
 import styles from './DynamicActionContextDemo.module.css';
 
 const ContactItem: Component<ContactItemProps> = (p) => {
@@ -39,7 +40,7 @@ const ReceiverContactDetails: Component<ReceiverContactDetailsProps> = (p) => {
 
   return (
     <div>
-      <h2>Receiver Contact Details</h2>
+      <h2>Receiver Details</h2>
       <p>{p.contactData().details}</p>
     </div>
   );
@@ -61,35 +62,52 @@ export const DynamicActionContextDemo: Component = () => {
   };
 
   return (
-    <section>
-      <h3>Trigger message action by pressing letter `M`</h3>
-      <p>
-        If you have Andrew's or Tobey's profile already opened, it will take that contact's id
-        automatically.
-      </p>
-      <div class={styles.contactsWrapper}>
-        <aside>
-          <ul class={styles.contactList}>
-            <For each={Object.entries(contacts)}>
-              {([contactId, contact]) => (
-                <ContactItem
-                  contactId={contactId}
-                  isActive={contactId === activeContactId()}
-                  contactData={contact}
-                  onInput={handleInput}
-                />
-              )}
-            </For>
-          </ul>
-        </aside>
-        <main class={styles.contactDetails}>
-          <Show
-            when={activeContactId() !== ownContactId}
-            fallback={<p>{activeContactData().details}</p>}
-          >
-            <ReceiverContactDetails contactId={activeContactId} contactData={activeContactData} />
-          </Show>
-        </main>
+    <section class={demoStyles.demoSection}>
+      <div>
+        <h3>Dynamically set action context</h3>
+        <p>
+          When you select Andrew or Tobey, the <strong>ReceiverContactDetails</strong> is rendered.
+        </p>
+        <p>
+          While this component is rendered, the profile details are shared using dynamic action
+          context.
+        </p>
+        <p>
+          Try the <strong>Send Message to Contact</strong> action once after selecting each profile.
+        </p>
+        <p>
+          If you have Andrew's or Tobey's profile already opened, their contact id will already be
+          taken and you'll skip one step.
+        </p>
+      </div>
+      <div class={demoStyles.demoInteraction}>
+        <div class={styles.contactsWrapper}>
+          <aside>
+            <ul class={styles.contactList}>
+              <For each={Object.entries(contacts)}>
+                {([contactId, contact]) => (
+                  <ContactItem
+                    contactId={contactId}
+                    isActive={contactId === activeContactId()}
+                    contactData={contact}
+                    onInput={handleInput}
+                  />
+                )}
+              </For>
+            </ul>
+          </aside>
+          <main class={styles.contactDetails}>
+            <Show
+              when={activeContactId() !== ownContactId}
+              fallback={<h2>{activeContactData().details}</h2>}
+            >
+              <ReceiverContactDetails contactId={activeContactId} contactData={activeContactData} />
+            </Show>
+          </main>
+        </div>
+        <p class={demoStyles.demoInteractionDesc}>
+          Try pressing <KbdShortcut shortcut="m" />
+        </p>
       </div>
     </section>
   );

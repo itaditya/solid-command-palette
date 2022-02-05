@@ -3,6 +3,7 @@ import { Root, CommandPalette, KbdShortcut } from '../../../lib';
 import { actions } from './actions';
 import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
 import utilStyles from '../../utils.module.css';
+import demoStyles from './demoUtils.module.css';
 import styles from './Demo.module.css';
 
 type Profile = 'personal' | 'work';
@@ -48,7 +49,7 @@ const DemoView: Component = () => {
             <KbdShortcut class={styles.introShortcutKey} shortcut="$mod+k" />
           </h1>
         </section>
-        <section class={styles.demoSection}>
+        <section class={demoStyles.demoSection}>
           <div>
             <h3 class={utilStyles.stripSpace}>Controlling application state</h3>
             <p>
@@ -60,32 +61,35 @@ const DemoView: Component = () => {
               We have also bound this increment function to our first action and a keyboard shortcut
             </p>
           </div>
-          <div class={styles.demoInteraction}>
+          <div class={demoStyles.demoInteraction}>
             <strong class={styles.countValue}>{count()}</strong>
-            <button class={styles.demoBtn} onClick={increment}>
+            <button class={demoStyles.demoBtn} onClick={increment}>
               Increment count by 1
             </button>
-            <p class={styles.demoInteractionDesc}>
+            <p class={demoStyles.demoInteractionDesc}>
               Try holding <KbdShortcut shortcut="$mod+e" />
             </p>
           </div>
         </section>
-        <section class={styles.demoSection}>
+        <section class={demoStyles.demoSection}>
           <div>
             <h3 class={utilStyles.stripSpace}>Conditionally enable actions</h3>
             <p>
               We have a <strong>profile</strong> signal and a <strong>toggleProfile</strong>{' '}
               function to toggle between <strong>personal</strong> & <strong>work</strong>.
             </p>
-            <p>You can trigger it by selecting options in the menu, command palette & keyboard shortcut.</p>
+            <p>
+              You can trigger it by selecting options in the menu, command palette & keyboard
+              shortcut.
+            </p>
             <p>We have also bound this profile signal to the command palette's action context.</p>
             <p>
               The <strong>Join the Standup Meeting</strong> action uses the profile value to enable
               itself only when Work profile is active.
             </p>
           </div>
-          <div class={styles.demoInteraction}>
-            <p class={styles.demoInteractionDesc}>
+          <div class={demoStyles.demoInteraction}>
+            <p class={demoStyles.demoInteractionDesc}>
               Active profile is <strong>{profile()}</strong>
             </p>
             <select
@@ -97,11 +101,11 @@ const DemoView: Component = () => {
               <option value="personal">Personal</option>
               <option value="work">Work</option>
             </select>
-            <p class={styles.demoInteractionDesc}>
+            <p class={demoStyles.demoInteractionDesc}>
               Try pressing <KbdShortcut shortcut="$mod+Shift+p" />
             </p>
             <Show when={profile() === 'work'}>
-              <p class={styles.demoInteractionDesc}>
+              <p class={demoStyles.demoInteractionDesc}>
                 Try pressing <KbdShortcut shortcut="$mod+j" />
               </p>
             </Show>

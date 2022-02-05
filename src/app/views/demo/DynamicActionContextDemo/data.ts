@@ -5,7 +5,7 @@ export const ownContactId: ContactId = 'contact-1';
 export const contacts: ContactsMap = {
   'contact-1': {
     label: 'Your details',
-    details: 'My details',
+    details: 'Personal details',
   },
   'contact-2': {
     label: "Andrew's details",
