@@ -58,5 +58,8 @@
     "CMD+K",
     "quick menu",
     "search bar"
-  ]
+  ],
+  "dependencies": {
+    "solid-transition-group": "^0.0.8"
+  }
 }
