@@ -12,7 +12,7 @@ If you want to increase productivity of your power users, adding a command palet
 
 ## Demo
 
-Try the demo on [our documentation site](https://solid-command-palette.vercel.app/).
+Try the demo on [our documentation site](https://solid-command-palette.vercel.app/demo).
 
 ## Usage
 
