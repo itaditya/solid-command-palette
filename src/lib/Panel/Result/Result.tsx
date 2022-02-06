@@ -50,7 +50,7 @@ const ResultItem: Component<ResultItemProps> = (p) => {
     <li
       role="option"
       ref={resultItemElem}
-      class={`${styles.resultItem} ${utilStyles.boxBorder}`}
+      class={styles.resultItem}
       classList={{
         [styles.activeItem]: isActive(),
       }}

@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+.wrapper * {
+  box-sizing: border-box;
+}
+
 .palette {
   position: relative;
   margin-block-start: 100px;

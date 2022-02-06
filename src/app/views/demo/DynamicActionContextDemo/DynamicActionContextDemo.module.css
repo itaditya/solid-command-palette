@@ -1,6 +1,5 @@
 .contactsWrapper {
   display: flex;
-  box-sizing: border-box;
 }
 
 .contactList {

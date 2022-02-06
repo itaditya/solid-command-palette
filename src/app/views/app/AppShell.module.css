@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :global html {
   height: 100%;
   font-family: sans-serif;

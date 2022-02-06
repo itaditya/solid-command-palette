@@ -257,7 +257,7 @@ export const CommandPaletteInternal: Component = () => {
             <input
               type="search"
               id={searchInputId}
-              class={`${styles.searchInput} ${utilStyles.boxBorder}`}
+              class={styles.searchInput}
               autocomplete="off"
               placeholder="Type a command or search..."
               data-cp-kbd-shortcuts="disabled"

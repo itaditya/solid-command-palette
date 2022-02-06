@@ -11,10 +11,6 @@
   border: 0 !important;
 }
 
-.boxBorder {
-  box-sizing: border-box;
-}
-
 .stripSpace {
   margin: 0;
   padding: 0;
