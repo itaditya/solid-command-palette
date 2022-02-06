@@ -21,10 +21,8 @@
 }
 
 .introShortcutKey {
-  min-width: 50px;
-  border: none;
-  background-color: #4e85c2;
-  color: #fff;
+  min-width: 70px;
+  color: #475569;
 }
 
 .countValue {
