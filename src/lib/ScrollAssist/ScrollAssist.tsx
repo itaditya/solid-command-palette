@@ -3,19 +3,24 @@ import styles from './ScrollAssist.module.css';
 
 type ScrollAssistProps = {
   direction: 'up' | 'down';
-  status: 'running' | 'stopped';
-  onScroll: () => void;
+  status: 'available' | 'running' | 'stopped';
+  onNavigate: () => void;
+  onStop: () => void;
 };
 
 export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
-  let isRunning = false;
   let intervalId = null;
 
-  function startSelecting() {
-    isRunning = true;
+  function triggerNavigation() {
+    p.onNavigate();
+  }
 
+  function startSelecting() {
+    triggerNavigation();
     intervalId = setInterval(() => {
-      p.onScroll();
+      if (p.status === 'running') {
+        triggerNavigation();
+      }
     }, 500);
   }
 
@@ -25,19 +30,16 @@ export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
     }
 
     intervalId = null;
-    isRunning = false;
   }
 
   function handleMouseEnter() {
-    if (isRunning) {
-      return;
+    if (p.status === 'available') {
+      startSelecting();
     }
-
-    startSelecting();
   }
 
   function handleMouseMove(event: MouseEvent) {
-    if (!isRunning) {
+    if (p.status !== 'running') {
       return;
     }
 
@@ -52,12 +54,12 @@ export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
     }
 
     if (shouldStop) {
-      stopSelecting();
+      p.onStop();
     }
   }
 
   function handleMouseLeave() {
-    stopSelecting();
+    p.onStop();
   }
 
   createEffect(() => {

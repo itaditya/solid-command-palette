@@ -174,7 +174,15 @@ export const CommandPaletteInternal: Component = () => {
     activateNextItem();
   }
 
+  function handleScrollAssistStop() {
+    setUserInteraction('idle');
+  }
+
   function getScrollAssistStatus() {
+    if (userInteraction() === 'navigate-mouse') {
+      return 'available';
+    }
+
     if (userInteraction() === 'navigate-scroll-assist') {
       return 'running';
     }
@@ -224,12 +232,14 @@ export const CommandPaletteInternal: Component = () => {
         <ScrollAssist
           direction="up"
           status={getScrollAssistStatus()}
-          onScroll={handleScrollAssistPrev}
+          onNavigate={handleScrollAssistPrev}
+          onStop={handleScrollAssistStop}
         />
         <ScrollAssist
           direction="down"
           status={getScrollAssistStatus()}
-          onScroll={handleScrollAssistNext}
+          onNavigate={handleScrollAssistNext}
+          onStop={handleScrollAssistStop}
         />
         <div class={styles.panel} onClick={handlePanelClick}>
           <form

@@ -1,5 +1,5 @@
 .scrollShape {
-  --scp-scroll-shape-height: 30px;
+  --scp-scroll-shape-height: 60px;
 
   width: 35%;
   height: var(--scp-scroll-shape-height);
