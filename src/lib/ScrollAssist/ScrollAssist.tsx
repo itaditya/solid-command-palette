@@ -72,6 +72,7 @@ export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
     <div
       class={styles.scrollShape}
       data-direction={p.direction}
+      data-status={p.status}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

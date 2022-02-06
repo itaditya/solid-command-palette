@@ -15,3 +15,11 @@
 .scrollShape[data-direction='down'] {
   inset-block-start: 100%;
 }
+
+.scrollShape[data-direction='up'][data-status='running'] {
+  cursor: n-resize;
+}
+
+.scrollShape[data-direction='down'][data-status='running'] {
+  cursor: s-resize;
+}
