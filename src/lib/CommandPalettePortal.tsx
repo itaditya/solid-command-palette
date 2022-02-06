@@ -1,7 +1,6 @@
 import { Component, createRenderEffect, onCleanup } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import { Transition } from 'solid-transition-group';
-import { useStore } from './StoreContext';
 export const CommandPalettePortal: Component = (p) => {
   let portalElem: HTMLDivElement = null;
   createRenderEffect(() => {
