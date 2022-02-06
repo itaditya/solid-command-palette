@@ -1,5 +1,7 @@
 import { Component, Show } from 'solid-js';
 import { Link, NavLink, NavLinkProps, Outlet, useMatch } from 'solid-app-router';
+import { SocialIcon, socialsData } from './SocialIcons';
+import utilStyles from '../../utils.module.css';
 import styles from './AppShell.module.css';
 
 const HeaderNavLink: Component<NavLinkProps> = (p) => {
@@ -31,16 +33,26 @@ const AppShellView: Component = () => {
             </Link>
           </h3>
         </div>
-        <nav>
-          <ul class={styles.navList}>
-            <li class={styles.navItem}>
+        <nav class={styles.navWrapper}>
+          <ul class={`${styles.navList} ${utilStyles.stripSpace}`}>
+            <li>
               <HeaderNavLink href="/demo">Kitchen Sink Demo</HeaderNavLink>
             </li>
-            <li class={styles.navItem}>
+            <li>
               <HeaderNavLink href="/docs">Documentation</HeaderNavLink>
             </li>
           </ul>
         </nav>
+        <div>
+          <ul class={`${styles.socialList} ${utilStyles.stripSpace}`}>
+            <li class={styles.socialItem}>
+              <SocialIcon {...socialsData.twitter} class={styles.socialLink} />
+            </li>
+            <li class={styles.socialItem}>
+              <SocialIcon {...socialsData.github} class={styles.socialLink} />
+            </li>
+          </ul>
+        </div>
       </header>
       <main class={styles.main}>
         <MaintenanceContent />
@@ -48,7 +60,12 @@ const AppShellView: Component = () => {
       </main>
       <footer class={styles.footer}>
         <span>Made by</span>
-        <a class={styles.creditLink} href="https://github.com/itaditya/solid-command-palette">
+        <a
+          class={styles.creditLink}
+          href="https://devadi.netlify.app"
+          rel="noopener"
+          target="_blank"
+        >
           Aditya Agarwal
         </a>
       </footer>

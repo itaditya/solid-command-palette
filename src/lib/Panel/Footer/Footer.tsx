@@ -8,7 +8,6 @@ export interface IconArrowProps {
 const IconArrow: Component<IconArrowProps> = (p) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       class={`${styles.icon} ${styles.iconArrow}`}
       data-arrow-direction={p.direction || 'up'}
       fill="none"
@@ -28,7 +27,6 @@ const IconArrow: Component<IconArrowProps> = (p) => {
 const IconReturn: Component = () => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       class={`${styles.icon} ${styles.iconReturn}`}
       fill="none"
       viewBox="0 0 24 24"
