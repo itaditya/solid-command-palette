@@ -29,12 +29,38 @@
   box-shadow: 0 0 50px -12px rgb(0 0 0 / 0.25);
   overflow: hidden;
   font-family: inherit;
-  animation: anim-fade-in 100ms ease-in;
+  transform-origin: 50%;
 }
 
-@keyframes anim-fade-in {
-  from {
-    opacity: 0;
+.animEnter .panel {
+  opacity: 0;
+  transform: translateY(50px) scaleX(0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animEnter .panel {
+    transform: none;
+  }
+}
+
+.animEnterActive .panel {
+  opacity: 1;
+  transition: opacity, transform 200ms;
+}
+
+.animExit .panel {
+  opacity: 1;
+}
+
+.animExitActive .panel {
+  opacity: 0;
+  transform: translateY(70px) scaleX(0.8);
+  transition: opacity, transform 300ms, 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animExitActive .panel {
+    transform: none;
   }
 }
 

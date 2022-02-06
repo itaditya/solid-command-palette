@@ -19,11 +19,16 @@ Try the demo on [our documentation site](https://solid-command-palette.vercel.ap
 #### Install the library
 
 ```sh
-npm install solid-command-palette tinykeys fuse.js
+# Core Library
+npm install solid-command-palette
+
+# Peer Dependencies
+npm install solid-transition-group tinykeys fuse.js
 ```
 
-- [tinykeys](https://github.com/jamiebuilds/tinykeys) (400B) provides keyboard shortcut support. You'll find it useful in other places of your app as well.
-- [fuse.js](https://github.com/krisk/fuse) (5KB) provides fuzzy search support.
+- [solid-transition-group](https://github.com/solidjs/solid-transition-group) (1.6KB): provides advanced animation support. It's the official recommendation from SolidJS team so you might be using it already.
+- [tinykeys](https://github.com/jamiebuilds/tinykeys) (700B): provides keyboard shortcut support. You can use this in your app for all kinds of keybindings.
+- [fuse.js](https://github.com/krisk/fuse) (5KB): provides fuzzy search support to find relevant actions.
 
 #### Integrate with app
 

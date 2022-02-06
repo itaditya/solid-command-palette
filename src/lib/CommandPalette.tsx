@@ -8,6 +8,7 @@ import {
   onCleanup,
   Show,
 } from 'solid-js';
+import { Transition } from 'solid-transition-group';
 import tinykeys from 'tinykeys';
 import { useStore } from './StoreContext';
 import { CommandPalettePortal } from './CommandPalettePortal';
@@ -285,9 +286,7 @@ export const CommandPaletteInternal: Component = () => {
                 closePalette();
               }}
             >
-              <span class={utilStyles.visuallyHidden}>
-                Close the Command Palette
-              </span>
+              <span class={utilStyles.visuallyHidden}>Close the Command Palette</span>
               <KbdShortcut shortcut="Escape" aria-hidden />
             </button>
           </form>
@@ -311,9 +310,16 @@ export const CommandPalette: Component = () => {
 
   return (
     <CommandPalettePortal>
-      <Show when={state.visibility === 'opened'}>
-        <CommandPaletteInternal />
-      </Show>
+      <Transition
+        enterClass={styles.animEnter}
+        enterActiveClass={styles.animEnterActive}
+        exitClass={styles.animExit}
+        exitActiveClass={styles.animExitActive}
+      >
+        <Show when={state.visibility === 'opened'}>
+          <CommandPaletteInternal />
+        </Show>
+      </Transition>
     </CommandPalettePortal>
   );
 };
