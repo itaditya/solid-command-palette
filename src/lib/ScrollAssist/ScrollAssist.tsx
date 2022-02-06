@@ -3,9 +3,8 @@ import styles from './ScrollAssist.module.css';
 
 type ScrollAssistProps = {
   direction: 'up' | 'down';
-  interrupted: boolean;
+  status: 'running' | 'stopped';
   onScroll: () => void;
-  onResume: () => void;
 };
 
 export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
@@ -14,10 +13,6 @@ export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
 
   function startSelecting() {
     isRunning = true;
-
-    if (p.interrupted) {
-      p.onResume();
-    }
 
     intervalId = setInterval(() => {
       p.onScroll();
@@ -66,7 +61,7 @@ export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
   }
 
   createEffect(() => {
-    if (p.interrupted) {
+    if (p.status === 'stopped') {
       stopSelecting();
     }
   });

@@ -21,12 +21,18 @@ import utilStyles from './utils.module.css';
 import styles from './CommandPalette.module.css';
 
 type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
+type UserInteraction =
+  | 'idle'
+  | 'search'
+  | 'navigate-kbd'
+  | 'navigate-mouse'
+  | 'navigate-scroll-assist';
 
 export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal(null);
-  const [scrollAssistInterrupted, setScrollAssistInterrupted] = createSignal(false);
+  const [userInteraction, setUserInteraction] = createSignal<UserInteraction>('idle');
   const searchLabelId = createUniqueId();
   const searchInputId = createUniqueId();
 
@@ -34,10 +40,6 @@ export const CommandPaletteInternal: Component = () => {
   let searchInputElem: HTMLInputElement;
   let closeBtnElem: HTMLButtonElement;
   let lastFocusedElem: HTMLElement;
-
-  function interruptScrollAssist() {
-    setScrollAssistInterrupted(true);
-  }
 
   function triggerRun(action: WrappedAction) {
     const rootContext = state.actionsContext.root;
@@ -91,7 +93,7 @@ export const CommandPaletteInternal: Component = () => {
   const handleSearchInput: InputEventHandler = (event) => {
     const newValue = event.currentTarget.value;
 
-    interruptScrollAssist();
+    setUserInteraction('search');
     setSearchText(newValue);
   };
 
@@ -100,7 +102,7 @@ export const CommandPaletteInternal: Component = () => {
   }
 
   function handleActionItemHover(action: WrappedAction) {
-    interruptScrollAssist();
+    setUserInteraction('navigate-mouse');
     setActiveItemId(action.id);
   }
 
@@ -126,14 +128,14 @@ export const CommandPaletteInternal: Component = () => {
   function handleKbdPrev(event: KeyboardEvent) {
     event.preventDefault();
 
-    interruptScrollAssist();
+    setUserInteraction('navigate-kbd');
     activatePrevItem();
   }
 
   function handleKbdNext(event: KeyboardEvent) {
     event.preventDefault();
 
-    interruptScrollAssist();
+    setUserInteraction('navigate-kbd');
     activateNextItem();
   }
 
@@ -143,9 +145,8 @@ export const CommandPaletteInternal: Component = () => {
     const actionsList = resultsList();
     const firstAction = actionsList[0];
 
-    interruptScrollAssist();
-
     if (firstAction) {
+      setUserInteraction('navigate-kbd');
       setActiveItemId(firstAction.id);
     }
   }
@@ -157,23 +158,28 @@ export const CommandPaletteInternal: Component = () => {
     // @ts-expect-error Solid has issues with `.at`
     const lastAction = actionsList.at(-1);
 
-    interruptScrollAssist();
-
     if (lastAction) {
+      setUserInteraction('navigate-kbd');
       setActiveItemId(lastAction.id);
     }
   }
 
   function handleScrollAssistPrev() {
+    setUserInteraction('navigate-scroll-assist');
     activatePrevItem();
   }
 
   function handleScrollAssistNext() {
+    setUserInteraction('navigate-scroll-assist');
     activateNextItem();
   }
 
-  function handleScrollAssistResume() {
-    setScrollAssistInterrupted(false);
+  function getScrollAssistStatus() {
+    if (userInteraction() === 'navigate-scroll-assist') {
+      return 'running';
+    }
+
+    return 'stopped';
   }
 
   onMount(() => {
@@ -217,15 +223,13 @@ export const CommandPaletteInternal: Component = () => {
       <div class={styles.palette}>
         <ScrollAssist
           direction="up"
-          interrupted={scrollAssistInterrupted()}
+          status={getScrollAssistStatus()}
           onScroll={handleScrollAssistPrev}
-          onResume={handleScrollAssistResume}
         />
         <ScrollAssist
           direction="down"
-          interrupted={scrollAssistInterrupted()}
+          status={getScrollAssistStatus()}
           onScroll={handleScrollAssistNext}
-          onResume={handleScrollAssistResume}
         />
         <div class={styles.panel} onClick={handlePanelClick}>
           <form
