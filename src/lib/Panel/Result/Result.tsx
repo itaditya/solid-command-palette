@@ -50,6 +50,7 @@ const ResultItem: Component<ResultItemProps> = (p) => {
     <li
       role="option"
       ref={resultItemElem}
+      id={`scp-result-item-${p.action.id}`}
       class={styles.resultItem}
       classList={{
         [styles.activeItem]: isActive(),
@@ -78,7 +79,8 @@ const ResultItem: Component<ResultItemProps> = (p) => {
 export interface PanelResultProps {
   activeItemId: ActionId;
   resultsList: WrappedActionList;
-  searchInputId: string;
+  resultListId: string;
+  searchLabelId: string;
   onActionItemSelect: (action: WrappedAction) => void;
   onActionItemHover: (action: WrappedAction) => void;
 }
@@ -88,7 +90,8 @@ export const PanelResult: Component<PanelResultProps> = (p) => {
     <div class={styles.resultWrapper}>
       <ul
         role="listbox"
-        aria-labelledby={p.searchInputId}
+        id={p.resultListId}
+        aria-labelledby={p.searchLabelId}
         class={`${styles.resultList} ${utilStyles.stripSpace}`}
       >
         <For

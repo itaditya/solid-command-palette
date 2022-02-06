@@ -62,7 +62,10 @@ const DemoView: Component = () => {
             </p>
           </div>
           <div class={demoStyles.demoInteraction}>
-            <strong class={styles.countValue}>{count()}</strong>
+            <p class={utilStyles.stripSpace} aria-live="polite" aria-atomic={true}>
+              <span class={utilStyles.visuallyHidden}>Current count is</span>
+              <strong class={styles.countValue}>{count()}</strong>
+            </p>
             <button class={demoStyles.demoBtn} onClick={increment}>
               Increment count by 1
             </button>

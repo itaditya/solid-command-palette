@@ -35,6 +35,7 @@ export const CommandPaletteInternal: Component = () => {
   const [userInteraction, setUserInteraction] = createSignal<UserInteraction>('idle');
   const searchLabelId = createUniqueId();
   const searchInputId = createUniqueId();
+  const resultListId = createUniqueId();
 
   let wrapperElem: HTMLDivElement;
   let searchInputElem: HTMLInputElement;
@@ -241,11 +242,19 @@ export const CommandPaletteInternal: Component = () => {
           onNavigate={handleScrollAssistNext}
           onStop={handleScrollAssistStop}
         />
-        <div class={styles.panel} onClick={handlePanelClick}>
+        <div
+          role="combobox"
+          aria-expanded={true}
+          aria-haspopup="listbox"
+          aria-controls={resultListId}
+          aria-activedescendant={`scp-result-item-${activeItemId()}`}
+          aria-labelledby={searchLabelId}
+          class={styles.panel}
+          onClick={handlePanelClick}
+        >
           <form
             role="search"
             class={styles.searchForm}
-            aria-label="Command Palette Search"
             noValidate
             onSubmit={(event) => {
               event.preventDefault();
@@ -258,7 +267,10 @@ export const CommandPaletteInternal: Component = () => {
               type="search"
               id={searchInputId}
               class={styles.searchInput}
+              aria-autocomplete="list"
               autocomplete="off"
+              autocapitalize="off"
+              spellcheck={false}
               placeholder="Type a command or search..."
               data-cp-kbd-shortcuts="disabled"
               ref={searchInputElem}
@@ -273,13 +285,17 @@ export const CommandPaletteInternal: Component = () => {
                 closePalette();
               }}
             >
-              <KbdShortcut shortcut="Escape" />
+              <span class={utilStyles.visuallyHidden}>
+                Close the Command Palette
+              </span>
+              <KbdShortcut shortcut="Escape" aria-hidden />
             </button>
           </form>
           <PanelResult
             activeItemId={activeItemId()}
             resultsList={resultsList()}
-            searchInputId={searchInputId}
+            resultListId={resultListId}
+            searchLabelId={searchLabelId}
             onActionItemHover={handleActionItemHover}
             onActionItemSelect={handleActionItemSelect}
           />
