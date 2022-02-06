@@ -13,7 +13,7 @@
   color: #1e293b;
   border: 1px solid #cbd5e1;
   border-radius: 5px;
-  font-family: sans-serif;
+  font-family: var(--scp-kbd-font-family, sans-serif);
   font-size: inherit;
   text-transform: capitalize;
   padding: 5px 8px;

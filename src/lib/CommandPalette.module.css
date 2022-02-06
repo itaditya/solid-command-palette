@@ -24,7 +24,7 @@
   border-radius: 8px;
   box-shadow: 0 0 50px -12px rgb(0 0 0 / 0.25);
   overflow: hidden;
-  font-family: sans-serif;
+  font-family: inherit;
   animation: anim-fade-in 100ms ease-in;
 }
 

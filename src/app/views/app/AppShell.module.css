@@ -1,5 +1,6 @@
 :global html {
   height: 100%;
+  font-family: sans-serif;
 }
 
 :global body {
@@ -16,7 +17,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: sans-serif;
 }
 
 .header {
