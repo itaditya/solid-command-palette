@@ -8,7 +8,8 @@
 </p>
 
 
-<h2 align="center">If you want to increase productivity of your power users,<br /> adding a command palette is a great way to do that.</h2>
+<h3 align="center">If you want to increase productivity of your power users,<br /> adding a command palette is a great way to do that.</h3>
+<br />
 
 ### Some of the features offered by this library-
 
