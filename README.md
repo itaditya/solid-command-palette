@@ -1,6 +1,14 @@
-# Solid Command Palette
+<p align="center">
+  <br />
+  <img src="https://user-images.githubusercontent.com/15871340/153281784-80ec01ce-82bf-4b24-a8db-f799a5a1bc0e.png" width="900" />
+  <br />
+  <br />
+  <br />
+</p>
 
-If you want to increase productivity of your power users, adding a command palette is a great way to do that. Some of the features offered by this library-
+<h2 align="center">If you want to increase productivity of your power users,<br /> adding a command palette is a great way to do that.</h2>
+
+### Some of the features offered by this library-
 
 1. Define actions with a simple config.
 1. Full keyboard support like open with `CMD + K`, navigate between actions using arrow keys.
