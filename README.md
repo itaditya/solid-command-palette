@@ -1,10 +1,12 @@
 <p align="center">
   <br />
-  <img src="https://user-images.githubusercontent.com/15871340/153281784-80ec01ce-82bf-4b24-a8db-f799a5a1bc0e.png" width="900" />
+  <img src="https://user-images.githubusercontent.com/15871340/153281784-80ec01ce-82bf-4b24-a8db-f799a5a1bc0e.png#gh-light-mode-only" width="900" />
+  <img src="https://user-images.githubusercontent.com/15871340/153283847-7fce8ff4-c88f-46a2-8040-b9b59001e49a.png#gh-dark-mode-only" width="900" />
   <br />
   <br />
   <br />
 </p>
+
 
 <h2 align="center">If you want to increase productivity of your power users,<br /> adding a command palette is a great way to do that.</h2>
 
