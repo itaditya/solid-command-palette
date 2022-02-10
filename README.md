@@ -1,7 +1,7 @@
 <p align="center">
   <br />
-  <img src="https://user-images.githubusercontent.com/15871340/153343622-1076854b-ef3e-479d-b6c3-3517d3287083.png#gh-light-mode-only" width="900" />
-  <img src="https://user-images.githubusercontent.com/15871340/153343510-a758943a-40d4-4aaf-8929-df3eab584aec.png#gh-dark-mode-only" width="900" />
+  <img src="https://user-images.githubusercontent.com/15871340/153343622-1076854b-ef3e-479d-b6c3-3517d3287083.png#gh-light-mode-only" width="900" alt="Command Palette for Solid.js" />
+  <img src="https://user-images.githubusercontent.com/15871340/153343510-a758943a-40d4-4aaf-8929-df3eab584aec.png#gh-dark-mode-only" width="900" alt="Command Palette for Solid.js" />
   <br />
   <br />
   <br />
