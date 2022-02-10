@@ -8,15 +8,15 @@
 </p>
 
 
-<h3 align="center">If you want to increase productivity of your power users,<br /> adding a command palette is a great way to do that.</h3>
+<h1 align="center">Make your users 10X more Productive</h1>
 <br />
 
 ### Some of the features offered by this library-
 
 1. Define actions with a simple config.
-1. Full keyboard support like open with `CMD + K`, navigate between actions using arrow keys.
+1. Full keyboard support like open with <kbd>CMD</kbd> + <kbd>K</kbd>, navigate between actions using arrow keys.
 1. Fuzzy search between your actions on title, subtile, keywords.
-1. Bind custom keyboard shortcuts to your actions. They can be single letter, modifier combinations (`Shift+p`) or sequences `g p`.
+1. Bind custom keyboard shortcuts to your actions. They can be single letter, modifier combinations <kbd>Shift</kbd> + <kbd>P</kbd> or sequences <kbd>g</kbd> <kbd>p</kbd>.
 1. Enable actions based on dynamic conditions.
 1. Share your app state and methods to run any kind of functionality from actions.
 1. Full static type safety across the board.
