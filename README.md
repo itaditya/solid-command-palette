@@ -1,12 +1,11 @@
 <p align="center">
   <br />
-  <img src="https://user-images.githubusercontent.com/15871340/153281784-80ec01ce-82bf-4b24-a8db-f799a5a1bc0e.png#gh-light-mode-only" width="900" />
-  <img src="https://user-images.githubusercontent.com/15871340/153283847-7fce8ff4-c88f-46a2-8040-b9b59001e49a.png#gh-dark-mode-only" width="900" />
+  <img src="https://user-images.githubusercontent.com/15871340/153343622-1076854b-ef3e-479d-b6c3-3517d3287083.png#gh-light-mode-only" width="900" />
+  <img src="https://user-images.githubusercontent.com/15871340/153343510-a758943a-40d4-4aaf-8929-df3eab584aec.png#gh-dark-mode-only" width="900" />
   <br />
   <br />
   <br />
 </p>
-
 
 <h1 align="center">Make your users 10X more Productive</h1>
 <br />
