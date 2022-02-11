@@ -1,13 +1,14 @@
 <p align="center">
   <br />
-  <img src="https://user-images.githubusercontent.com/15871340/153343622-1076854b-ef3e-479d-b6c3-3517d3287083.png#gh-light-mode-only" width="750" alt="Command Palette for Solid.js" />
-  <img src="https://user-images.githubusercontent.com/15871340/153343510-a758943a-40d4-4aaf-8929-df3eab584aec.png#gh-dark-mode-only" width="750" alt="Command Palette for Solid.js" />
+  <img src="../public/images/branding/logo-light-horizontal.svg#gh-light-mode-only" width="650" alt="Command Palette for Solid.js" />
+  <img src="../public/images/branding/logo-dark-horizontal.svg#gh-dark-mode-only" width="650" alt="Command Palette for Solid.js" />
   <br />
   <br />
   <br />
 </p>
 
-<h1 align="center">Make your users 10x more productive 🚀</h1>
+<h1 align="center">Boost your user's productivity by 10x 🚀</h1>
+
 <br />
 
 ### Some of the features offered by this library-
