@@ -1,6 +1,6 @@
 <p align="center">
   <br />
-  <img src="./public/images/branding/logo-light-horizontal.svg" width="650" alt="Command Palette for Solid.js" />
+  <img src="./public/images/branding/logo-light-horizontal-large.png" width="650" alt="Command Palette for Solid.js" />
   <br />
   <br />
 </p>

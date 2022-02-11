@@ -1,7 +1,7 @@
 <p align="center">
   <br />
-  <img src="../public/images/branding/logo-light-horizontal.svg#gh-light-mode-only" width="650" alt="Command Palette for Solid.js" />
-  <img src="../public/images/branding/logo-dark-horizontal.svg#gh-dark-mode-only" width="650" alt="Command Palette for Solid.js" />
+  <img src="../public/images/branding/logo-light-horizontal-large.png#gh-light-mode-only" width="650" alt="Command Palette for Solid.js" />
+  <img src="../public/images/branding/logo-dark-horizontal-large.png#gh-dark-mode-only" width="650" alt="Command Palette for Solid.js" />
   <br />
   <br />
 </p>
