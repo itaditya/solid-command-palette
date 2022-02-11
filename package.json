@@ -1,6 +1,6 @@
 {
   "name": "solid-command-palette",
-  "version": "0.0.0-test-6",
+  "version": "0.0.0-test-8",
   "description": "Add a command palette to your SolidJS App",
   "main": "./pkg-dist/solid-command-palette.cjs.js",
   "module": "./pkg-dist/solid-command-palette.es.js",

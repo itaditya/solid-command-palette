@@ -4,6 +4,7 @@ import solidPlugin from 'vite-plugin-solid';
 
 export default defineConfig({
   plugins: [solidPlugin()],
+  publicDir: false,
   build: {
     outDir: 'pkg-dist',
     lib: {
