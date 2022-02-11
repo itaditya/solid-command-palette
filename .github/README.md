@@ -4,7 +4,6 @@
   <img src="../public/images/branding/logo-dark-horizontal.svg#gh-dark-mode-only" width="650" alt="Command Palette for Solid.js" />
   <br />
   <br />
-  <br />
 </p>
 
 <h1 align="center">Boost your user's productivity by 10x 🚀</h1>
