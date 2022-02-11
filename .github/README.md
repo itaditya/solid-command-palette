@@ -6,7 +6,7 @@
   <br />
 </p>
 
-<h1 align="center">Boost your user's productivity by 10x 🚀</h1>
+<h1 align="center">Boost your users productivity by 10x 🚀</h1>
 
 <br />
 
