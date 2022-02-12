@@ -8,6 +8,17 @@
 }
 
 :global body {
+  --brand-fg-color: #000;
+  --brand-bg-color: #fff;
+  --brand-accent-color-1: #fafafa;
+  --brand-accent-color-2: #eaeaea;
+  --brand-accent-color-3: #999;
+  --brand-accent-color-4: #888;
+  --brand-accent-color-5: #666;
+  --brand-accent-color-6: #444;
+  --brand-accent-color-7: #333;
+  --brand-accent-color-8: #111;
+
   margin: 0;
   padding: 0;
   height: 100%;
@@ -15,12 +26,14 @@
 
 :global #root {
   height: 100%;
+  outline-color: var(--brand-accent-color-8);
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: var(--brand-bg-color);
 }
 
 .header {
@@ -28,7 +41,6 @@
   align-items: center;
   gap: 40px;
   padding: 0 30px;
-  background-color: #4e85c2;
 }
 
 .heading {
@@ -36,8 +48,9 @@
 }
 
 .headingLink {
-  color: #fff;
+  color: var(--brand-accent-color-8);
   text-decoration: none;
+  outline-offset: 10px;
 }
 
 .navWrapper {
@@ -48,25 +61,42 @@
 .socialList {
   list-style: none;
   display: flex;
+  gap: 20px;
 }
 
 .navLink {
-  display: block;
-  padding: 20px 30px;
-  color: #fff;
-  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
   text-decoration: none;
+  padding-block: 15px;
+  outline: none;
 }
 
-.activeNavLink {
-  background-color: #fff;
-  color: #4e85c2;
-  box-shadow: 0px -25px 20px 0px rgb(0 0 0 / 30%);
+.navLinkContent {
+  color: var(--brand-fg-color);
+  padding: 10px 15px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
+}
+
+.navLink:not(.activeNavLink):hover .navLinkContent {
+  background-color: var(--brand-accent-color-2);
+}
+
+.navLink:focus-visible .navLinkContent {
+  border-color: var(--brand-accent-color-8);
+}
+
+.activeNavLink .navLinkContent {
+  background-color: var(--brand-accent-color-7);
+  color: var(--brand-bg-color);
 }
 
 .socialList {
   align-items: center;
-  gap: 20px;
 }
 
 .socialItem {
@@ -74,33 +104,46 @@
 }
 
 .socialLink {
+  display: block;
+  border-radius: 100%;
   text-decoration: none;
-  color: #fff;
+  color: var(--brand-accent-color-5);
   font-size: 2rem;
+  outline-offset: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.socialLink:hover {
+  transform: scale(1.05);
+  color: var(--brand-accent-color-6);
 }
 
 .main {
   flex: 1;
-  padding: 0 30px;
+  padding-block-end: 100px;
+  padding-inline: 30px;
+  border-top: 1px solid var(--brand-accent-color-2);
+  border-bottom: 1px solid var(--brand-accent-color-2);
+  background-color: var(--brand-accent-color-1);
 }
 
 .demoAction {
   display: inline-block;
-  background-color: #4e85c2;
-  color: #fff;
+  background-color: var(--brand-fg-color);
+  color: var(--brand-bg-color);
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 4px;
 }
 
 .footer {
-  margin-block-start: 100px;
   padding: 20px;
   display: flex;
   justify-content: center;
 }
 
 .creditLink {
+  color: var(--brand-accent-color-7);
   margin-inline-start: 5px;
   text-decoration: none;
   font-weight: bold;

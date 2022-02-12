@@ -5,7 +5,11 @@ import utilStyles from '../../utils.module.css';
 import styles from './AppShell.module.css';
 
 const HeaderNavLink: Component<NavLinkProps> = (p) => {
-  return <NavLink class={styles.navLink} activeClass={styles.activeNavLink} {...p} />;
+  return (
+    <NavLink class={styles.navLink} activeClass={styles.activeNavLink} {...p}>
+      <span class={styles.navLinkContent}>{p.children}</span>
+    </NavLink>
+  );
 };
 
 const MaintenanceContent: Component = () => {
