@@ -1,5 +1,5 @@
 import { parseKeybinding } from 'tinykeys';
-import { Action } from '../types';
+import { GetFormattedShortcut } from './types';
 
 function getFormattedKey(key: string) {
   if (key === 'Meta') {
@@ -17,7 +17,7 @@ function getFormattedKey(key: string) {
   return key;
 }
 
-export function getFormattedShortcut(shortcut: Action['shortcut']) {
+export const getFormattedShortcut: GetFormattedShortcut = (shortcut) => {
   const parsedShortcut = parseKeybinding(shortcut);
 
   const formattedShortcut = parsedShortcut.map((group) => {
@@ -27,4 +27,4 @@ export function getFormattedShortcut(shortcut: Action['shortcut']) {
   });
 
   return formattedShortcut;
-}
+};
