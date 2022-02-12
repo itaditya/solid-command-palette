@@ -3,6 +3,7 @@ import { KbdShortcut, createSyncActionsContext } from '../../../../lib';
 import { ownContactId, contacts, contactActionId } from './data';
 import { InputEventHandler, ContactItemProps, ReceiverContactDetailsProps } from './types';
 import demoStyles from '../demoUtils.module.css';
+import utilStyles from '../../../utils.module.css';
 import styles from './DynamicActionContextDemo.module.css';
 
 const ContactItem: Component<ContactItemProps> = (p) => {
@@ -40,7 +41,7 @@ const ReceiverContactDetails: Component<ReceiverContactDetailsProps> = (p) => {
 
   return (
     <div>
-      <h2>Receiver Details</h2>
+      <h2 class={utilStyles.stripSpace}>Receiver Details</h2>
       <p>{p.contactData().details}</p>
     </div>
   );
@@ -60,6 +61,15 @@ export const DynamicActionContextDemo: Component = () => {
     const newValue = event.currentTarget.value;
     setActiveContactId(newValue);
   };
+
+  function renderOwnDetails() {
+    return (
+      <div>
+        <h2 class={utilStyles.stripSpace}>Personal Details</h2>
+        <p>{activeContactData().details}</p>
+      </div>
+    );
+  }
 
   return (
     <section class={demoStyles.demoSection}>
@@ -97,10 +107,7 @@ export const DynamicActionContextDemo: Component = () => {
             </ul>
           </aside>
           <main class={styles.contactDetails}>
-            <Show
-              when={activeContactId() !== ownContactId}
-              fallback={<h2>{activeContactData().details}</h2>}
-            >
+            <Show when={activeContactId() !== ownContactId} fallback={renderOwnDetails()}>
               <ReceiverContactDetails contactId={activeContactId} contactData={activeContactData} />
             </Show>
           </main>

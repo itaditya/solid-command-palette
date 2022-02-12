@@ -30,4 +30,5 @@
   font-size: 1rem;
   text-decoration: none;
   padding: 10px 20px;
+  outline-offset: 3px;
 }

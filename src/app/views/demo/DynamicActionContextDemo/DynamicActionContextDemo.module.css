@@ -9,23 +9,29 @@
 }
 
 .contactList:focus-within {
-  outline: 2px solid #000;
-  outline-offset: 5px;
+  background-color: rgb(0 0 0 / 0.05);
 }
 
 .contactItem {
+  user-select: none;
   position: relative;
-  background-color: lightblue;
+  color: var(--brand-accent-color-7);
+  border-left: 2px solid transparent;
+  transition: all 0.1s ease-out;
+}
+
+.contactItem:not(.active):hover {
+  transform: translateX(5px);
 }
 
 .contactItem.active {
-  color: #fff;
-  background-color: #4e85c2;
+  border-color: var(--brand-accent-color-3);
 }
 
 .contactLabel {
   display: block;
-  padding: 20px 40px;
+  padding-block: 15px;
+  padding-inline: 15px 30px;
   cursor: pointer;
 }
 
@@ -37,4 +43,5 @@
 
 .contactDetails {
   padding: 10px 20px;
+  width: 25ch;
 }

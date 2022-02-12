@@ -5,24 +5,28 @@
 }
 
 .introSection {
-  min-height: 45vh;
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 25px;
+  gap: 30px;
+  padding-top: 10vh;
 }
 
 .introHeading {
   display: contents;
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 300;
   text-align: center;
-  color: #1e293b;
+  color: var(--brand-accent-color-3);
 }
 
 .introShortcutKey {
-  min-width: 70px;
-  color: #475569;
+  min-width: 85px;
+  color: var(--brand-accent-color-4);
+  font-weight: 600;
+  padding: 0;
 }
 
 .countValue {
