@@ -55,11 +55,17 @@
   gap: 10px;
   color: var(--brand-accent-color-8);
   text-decoration: none;
-  outline-offset: 10px;
+  outline-offset: 6px;
 }
 
 .logoStamp {
   height: 50px;
+  transition: all 0.2s ease-in;
+}
+
+.headingLink:hover .logoStamp {
+  transform: scale(1.01);
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
 
 .logoText {
