@@ -15,7 +15,7 @@
 1. Define actions with a simple config.
 1. Full keyboard support like open with <kbd>CMD</kbd> + <kbd>K</kbd>, navigate between actions using arrow keys.
 1. Fuzzy search between your actions on title, subtile, keywords.
-1. Bind custom keyboard shortcuts to your actions. They can be single letter, modifier combinations <kbd>Shift</kbd> + <kbd>P</kbd> or sequences <kbd>g</kbd> <kbd>p</kbd>.
+1. Bind custom keyboard shortcuts to your actions. They can be single letter, modifier combinations <kbd>Shift</kbd> + <kbd>l</kbd> or sequences <kbd>g</kbd> <kbd>p</kbd>.
 1. Enable actions based on dynamic conditions.
 1. Share your app state and methods to run any kind of functionality from actions.
 1. Full static type safety across the board.
@@ -44,6 +44,8 @@ npm install solid-transition-group tinykeys fuse.js
 
 ```jsx
 // define actions in one module say `actions.ts`
+
+import { defineAction } from 'solid-command-palette';
 
 const minimalAction = defineAction({
   id: 'minimal',

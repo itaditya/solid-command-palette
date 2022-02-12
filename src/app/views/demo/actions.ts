@@ -55,9 +55,9 @@ const navigationAction = defineAction({
   id: 'navigate-github',
   title: 'Go to GitHub repo',
   subtitle: 'First press G then press H. No need to hold them together',
+  keywords: ['oss', 'source', 'code'],
   shortcut: 'g h',
   run: () => {
-    console.log('go to github');
     window.open(
       'https://github.com/itaditya/solid-command-palette',
       '_blank',
