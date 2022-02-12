@@ -4,7 +4,6 @@
 
 :global html {
   height: 100%;
-  font-family: sans-serif;
 }
 
 :global body {
@@ -22,11 +21,13 @@
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: sans-serif;
 }
 
 :global #root {
   height: 100%;
   outline-color: var(--brand-accent-color-8);
+  font-family: 'Nunito', sans-serif;
 }
 
 .wrapper {
