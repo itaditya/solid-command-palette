@@ -103,7 +103,7 @@
   margin-inline-end: var(--scp-gutter-space-inline);
 }
 
-.closeBtn:focus {
+.closeBtn:focus-visible {
   outline-offset: 3px;
   outline-color: #94a3b8;
 }

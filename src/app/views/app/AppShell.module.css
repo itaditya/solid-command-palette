@@ -160,15 +160,6 @@
   background-color: var(--brand-accent-color-1);
 }
 
-.demoAction {
-  display: inline-block;
-  background-color: var(--brand-fg-color);
-  color: var(--brand-bg-color);
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-}
-
 .footer {
   padding: 20px;
   display: flex;

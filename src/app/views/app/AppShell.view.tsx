@@ -18,7 +18,7 @@ const MaintenanceContent: Component = () => {
     <Show when={!isDemo()}>
       <div>
         <h2>This page is under construction. Meanwhile check out the demo.</h2>
-        <Link class={styles.demoAction} href="/demo">
+        <Link class={utilStyles.demoAction} href="/demo">
           Try Demo
         </Link>
       </div>

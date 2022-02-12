@@ -20,3 +20,14 @@
   width: 1em;
   height: 1em;
 }
+
+.demoAction {
+  display: inline-block;
+  background-color: var(--brand-fg-color);
+  color: var(--brand-bg-color);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 10px 20px;
+}
