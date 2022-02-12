@@ -1,8 +1,8 @@
 import { createMemo, createEffect } from 'solid-js';
 import Fuse from 'fuse.js';
-
 import { useStore } from './StoreContext';
-import { Action } from './types';
+import { checkActionAllowed } from './actionUtils/actionUtils';
+import { WrappedAction } from './types';
 
 export function createActionList() {
   const [state] = useStore();
@@ -19,19 +19,12 @@ export function createConditionalActionList() {
   const actionsList = createActionList();
 
   const conditionalActionList = createMemo(() => {
-    function checkActionAllowed(action: Action) {
-      if (!action.cond) {
-        return true;
-      }
-
-      const rootContext = state.actionsContext.root;
-      const dynamicContext = state.actionsContext.dynamic[action.id] || {};
-      const isAllowed = action.cond({ actionId: action.id, rootContext, dynamicContext });
-
+    function actionFilter(action: WrappedAction) {
+      const isAllowed = checkActionAllowed(action, state.actionsContext);
       return isAllowed;
     }
 
-    const conditionalActionList = actionsList().filter(checkActionAllowed);
+    const conditionalActionList = actionsList().filter(actionFilter);
     return conditionalActionList;
   });
 

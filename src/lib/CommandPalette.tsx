@@ -17,6 +17,7 @@ import { ScrollAssist } from './ScrollAssist/ScrollAssist';
 import { PanelResult } from './Panel/Result/Result';
 import { PanelFooter } from './Panel/Footer/Footer';
 import { createSearchResultList } from './createActionList';
+import { runAction } from './actionUtils/actionUtils';
 import { WrappedAction } from './types';
 import utilStyles from './utils.module.css';
 import styles from './CommandPalette.module.css';
@@ -44,9 +45,7 @@ export const CommandPaletteInternal: Component = () => {
   let lastFocusedElem: HTMLElement;
 
   function triggerRun(action: WrappedAction) {
-    const rootContext = state.actionsContext.root;
-    const dynamicContext = state.actionsContext.dynamic[action.id] || {};
-    action.run({ actionId: action.id, rootContext, dynamicContext });
+    runAction(action, state.actionsContext);
     closePalette(); // commented for easy dev.
   }
 
