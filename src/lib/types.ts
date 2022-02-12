@@ -36,6 +36,7 @@ export type Action = {
 export type PartialAction = Partial<Action> & {
   id: ActionId;
   title: Action['title'];
+  run: Action['run'];
 };
 
 export type Actions = Record<ActionId, Action>;
