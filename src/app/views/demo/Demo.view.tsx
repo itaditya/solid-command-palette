@@ -67,7 +67,7 @@ const DemoView: Component = () => {
               <strong class={styles.countValue}>{count()}</strong>
             </p>
             <button class={utilStyles.demoAction} onClick={increment}>
-              Increment count by 1
+              Increment Count
             </button>
             <p class={demoStyles.demoInteractionDesc}>
               Try holding <KbdShortcut shortcut="$mod+e" />

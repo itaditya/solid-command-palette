@@ -28,6 +28,7 @@
   border-radius: 8px;
   box-shadow: 0 0 50px -12px rgb(0 0 0 / 0.25);
   overflow: hidden;
+  scrollbar-gutter: stable;
   font-family: inherit;
   transform-origin: 50%;
 }
