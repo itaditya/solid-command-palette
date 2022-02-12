@@ -30,13 +30,12 @@ const AppShellView: Component = () => {
   return (
     <section class={styles.wrapper}>
       <header class={styles.header}>
-        <div>
-          <h3 class={styles.heading}>
-            <Link class={styles.headingLink} href="/">
-              Solid Command Palette
-            </Link>
-          </h3>
-        </div>
+        <h3 class={styles.heading}>
+          <Link class={styles.headingLink} href="/">
+            <img class={styles.logoStamp} src="/images/branding/logo-light-stamp.svg" alt="" />
+            <span>Solid Command Palette</span>
+          </Link>
+        </h3>
         <nav class={styles.navWrapper}>
           <ul class={`${styles.navList} ${utilStyles.stripSpace}`}>
             <li>

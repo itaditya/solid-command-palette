@@ -48,9 +48,16 @@
 }
 
 .headingLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: var(--brand-accent-color-8);
   text-decoration: none;
   outline-offset: 10px;
+}
+
+.logoStamp {
+  width: 40px;
 }
 
 .navWrapper {
