@@ -12,9 +12,9 @@
   --brand-accent-color-1: #fafafa;
   --brand-accent-color-2: #eaeaea;
   --brand-accent-color-3: #999;
-  --brand-accent-color-4: #888;
+  --brand-accent-color-4: #73768C;
   --brand-accent-color-5: #666;
-  --brand-accent-color-6: #444;
+  --brand-accent-color-6: #454754;
   --brand-accent-color-7: #333;
   --brand-accent-color-8: #111;
 
@@ -46,6 +46,7 @@
 
 .heading {
   margin: 0;
+  font-weight: 300;
 }
 
 .headingLink {
@@ -58,7 +59,25 @@
 }
 
 .logoStamp {
-  width: 40px;
+  height: 50px;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  line-height: 0;
+}
+
+.logoTextPrimary {
+  font-size: 1.3rem;
+  color: var(--brand-accent-color-6);
+}
+
+.logoTextSecondary {
+  font-size: 0.9rem;
+  color: var(--brand-accent-color-4);
+  padding-left: 2px;
 }
 
 .navWrapper {

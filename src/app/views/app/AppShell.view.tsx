@@ -33,7 +33,10 @@ const AppShellView: Component = () => {
         <h3 class={styles.heading}>
           <Link class={styles.headingLink} href="/">
             <img class={styles.logoStamp} src="/images/branding/logo-light-stamp.svg" alt="" />
-            <span>Solid Command Palette</span>
+            <span class={styles.logoText}>
+              <span class={styles.logoTextPrimary}>cmd palette</span>
+              <span class={styles.logoTextSecondary}>for Solid.js</span>
+            </span>
           </Link>
         </h3>
         <nav class={styles.navWrapper}>
