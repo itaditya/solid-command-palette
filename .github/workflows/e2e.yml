@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: E2E Tests
 
 on: [deployment_status]
 
@@ -17,7 +17,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Install Playwright
-        run: npx playwright install --with-deps chromium firefox
+        run: npx playwright install --with-deps
       - name: Run E2E tests
         run: npm run test:e2e:run
         env:

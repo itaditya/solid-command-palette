@@ -1,7 +1,10 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 
+const isCi = Boolean(process.env.CI);
+
 const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000';
+const reporter: PlaywrightTestConfig['reporter'] = isCi ? 'html' : 'dot';
 
 const config: PlaywrightTestConfig = {
   testDir: './e2e',
@@ -9,9 +12,9 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 5000,
   },
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  reporter: 'dot',
+  forbidOnly: isCi,
+  retries: isCi ? 1 : 0,
+  reporter,
   use: {
     actionTimeout: 0,
     baseURL,
@@ -29,6 +32,10 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Firefox'],
       },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
     },
   ],
 };
