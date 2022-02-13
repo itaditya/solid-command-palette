@@ -1,6 +1,8 @@
 import { Component, createEffect } from 'solid-js';
 import styles from './ScrollAssist.module.css';
 
+type IntervalId = null | ReturnType<typeof setTimeout>;
+
 type ScrollAssistProps = {
   direction: 'up' | 'down';
   status: 'available' | 'running' | 'stopped';
@@ -9,7 +11,7 @@ type ScrollAssistProps = {
 };
 
 export const ScrollAssist: Component<ScrollAssistProps> = (p) => {
-  let intervalId = null;
+  let intervalId: IntervalId = null;
 
   function triggerNavigation() {
     p.onNavigate();

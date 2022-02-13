@@ -1,8 +1,10 @@
 import { Component, createRenderEffect, onCleanup } from 'solid-js';
 import { Portal } from 'solid-js/web';
 
+type PortalElem = undefined | HTMLDivElement;
+
 export const CommandPalettePortal: Component = (p) => {
-  let portalElem: HTMLDivElement = null;
+  let portalElem: PortalElem;
 
   createRenderEffect(() => {
     if (portalElem) {
@@ -19,7 +21,7 @@ export const CommandPalettePortal: Component = (p) => {
   onCleanup(() => {
     if (portalElem) {
       portalElem.remove();
-      portalElem = null;
+      portalElem = undefined;
     }
   });
 

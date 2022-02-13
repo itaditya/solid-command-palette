@@ -10,7 +10,11 @@ export const contactAction = defineAction({
     let receiverContactId = dynamicContext.receiverContactId as string;
 
     if (!receiverContactId) {
-      receiverContactId = prompt('Provide Contact Id of the receiver', '');
+      const contactId = prompt('Provide Contact Id of the receiver', '');
+
+      if (contactId) {
+        receiverContactId = contactId;
+      }
     }
 
     const contactLabel = contacts[receiverContactId]?.label || receiverContactId;

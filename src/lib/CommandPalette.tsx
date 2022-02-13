@@ -18,11 +18,12 @@ import { PanelResult } from './Panel/Result/Result';
 import { PanelFooter } from './Panel/Footer/Footer';
 import { createSearchResultList } from './createActionList';
 import { runAction } from './actionUtils/actionUtils';
-import { WrappedAction } from './types';
+import { ActionId, WrappedAction } from './types';
 import utilStyles from './utils.module.css';
 import styles from './CommandPalette.module.css';
 
 type InputEventHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
+type ActiveItemId = null | ActionId;
 type UserInteraction =
   | 'idle'
   | 'search'
@@ -33,16 +34,16 @@ type UserInteraction =
 export const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
   const resultsList = createSearchResultList();
-  const [activeItemId, setActiveItemId] = createSignal(null);
+  const [activeItemId, setActiveItemId] = createSignal<ActiveItemId>(null);
   const [userInteraction, setUserInteraction] = createSignal<UserInteraction>('idle');
   const searchLabelId = createUniqueId();
   const searchInputId = createUniqueId();
   const resultListId = createUniqueId();
 
-  let wrapperElem: HTMLDivElement;
-  let searchInputElem: HTMLInputElement;
-  let closeBtnElem: HTMLButtonElement;
-  let lastFocusedElem: HTMLElement;
+  let wrapperElem: undefined | HTMLDivElement;
+  let searchInputElem: undefined | HTMLInputElement;
+  let closeBtnElem: undefined | HTMLButtonElement;
+  let lastFocusedElem: null | HTMLElement;
 
   function triggerRun(action: WrappedAction) {
     runAction(action, state.actionsContext);
@@ -110,7 +111,7 @@ export const CommandPaletteInternal: Component = () => {
   function handleKbdEnter(event: KeyboardEvent) {
     const targetElem = event.target as HTMLElement;
 
-    if (closeBtnElem.contains(targetElem)) {
+    if (closeBtnElem && closeBtnElem.contains(targetElem)) {
       return;
     }
 
@@ -193,19 +194,24 @@ export const CommandPaletteInternal: Component = () => {
 
   onMount(() => {
     lastFocusedElem = document.activeElement as HTMLElement;
-    searchInputElem.select();
 
-    tinykeys(wrapperElem, {
-      Escape: (event) => {
-        event.preventDefault();
-        closePalette();
-      },
-      Enter: handleKbdEnter,
-      ArrowUp: handleKbdPrev,
-      ArrowDown: handleKbdNext,
-      PageUp: handleKbdFirst,
-      PageDown: handleKbdLast,
-    });
+    if (searchInputElem) {
+      searchInputElem.select();
+    }
+
+    if (wrapperElem) {
+      tinykeys(wrapperElem, {
+        Escape: (event) => {
+          event.preventDefault();
+          closePalette();
+        },
+        Enter: handleKbdEnter,
+        ArrowUp: handleKbdPrev,
+        ArrowDown: handleKbdNext,
+        PageUp: handleKbdFirst,
+        PageDown: handleKbdLast,
+      });
+    }
   });
 
   onCleanup(() => {

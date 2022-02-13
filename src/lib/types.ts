@@ -1,6 +1,7 @@
 import { DeepReadonly, Store } from 'solid-js/store';
 
 export type ActionId = string;
+export type ActionShortcut = string;
 
 export type ActionContext = Record<string, unknown>;
 
@@ -20,12 +21,12 @@ export type RunArgs = {
 export type Action = {
   id: ActionId;
   title: string;
-  subtitle?: string;
+  subtitle: null | string;
   keywords: Array<string>;
   /**
    * Keyboard Shortcut like `$mod+e`, `Shift+p`.
    */
-  shortcut: string | null;
+  shortcut: null | ActionShortcut;
   /**
    * Enable the action conditionally.
    */

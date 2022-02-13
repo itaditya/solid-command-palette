@@ -4,15 +4,18 @@ import { ActionId, WrappedAction, WrappedActionList } from '../../types';
 import utilStyles from '../../utils.module.css';
 import styles from './Result.module.css';
 
+type ActiveItemId = null | ActionId;
+type ResultItemElem = undefined | HTMLLIElement;
+
 interface ResultItemProps {
   action: WrappedAction;
-  activeItemId: ActionId;
+  activeItemId: ActiveItemId;
   onActionItemSelect: (action: WrappedAction) => void;
   onActionItemHover: (action: WrappedAction) => void;
 }
 
 const ResultItem: Component<ResultItemProps> = (p) => {
-  let resultItemElem: HTMLLIElement;
+  let resultItemElem: ResultItemElem;
   let isMoving = false;
 
   function isActive() {
@@ -38,7 +41,7 @@ const ResultItem: Component<ResultItemProps> = (p) => {
   }
 
   createEffect(() => {
-    if (isActive()) {
+    if (isActive() && resultItemElem) {
       resultItemElem.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
@@ -69,7 +72,7 @@ const ResultItem: Component<ResultItemProps> = (p) => {
       </div>
       <div>
         <Show when={p.action.shortcut}>
-          <KbdShortcut class={styles.resultShortcut} shortcut={p.action.shortcut} />
+          {(shortcut) => <KbdShortcut class={styles.resultShortcut} shortcut={shortcut} />}
         </Show>
       </div>
     </li>
@@ -77,7 +80,7 @@ const ResultItem: Component<ResultItemProps> = (p) => {
 };
 
 export interface PanelResultProps {
-  activeItemId: ActionId;
+  activeItemId: ActiveItemId;
   resultsList: WrappedActionList;
   resultListId: string;
   searchLabelId: string;

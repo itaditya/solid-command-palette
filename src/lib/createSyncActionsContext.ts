@@ -11,6 +11,6 @@ export const createSyncActionsContext: CreateSyncActionsContext = (actionId, cal
   });
 
   onCleanup(() => {
-    setActionsContext(actionId, undefined);
+    setActionsContext(actionId, {});
   });
 };

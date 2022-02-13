@@ -1,10 +1,10 @@
 import { JSX, Component, For, splitProps } from 'solid-js';
 import { getFormattedShortcut } from './utils';
-import { Action } from '../types';
+import { ActionShortcut } from '../types';
 import styles from './KbdShortcut.module.css';
 
 export interface Props extends JSX.HTMLAttributes<HTMLElement> {
-  shortcut: Action['shortcut'];
+  shortcut: ActionShortcut;
 }
 
 export const KbdShortcut: Component<Props> = (p) => {

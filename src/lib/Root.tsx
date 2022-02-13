@@ -38,6 +38,7 @@ export const Root: Component<RootProps> = (p) => {
       setState('searchText', newValue);
     },
     setActionsContext(actionId, newData) {
+      // @ts-expect-error need to figure out nested store setters.
       setState('actionsContext', 'dynamic', actionId, newData);
     },
   };

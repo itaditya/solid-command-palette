@@ -33,29 +33,30 @@ export function getShortcutHandlersMap(
 ) {
   const shortcutMap: KeyBindingMap = {};
 
-  actionsList
-    .filter((action) => Boolean(action.shortcut))
-    .forEach((action) => {
-      const actionHandler = (event: KeyboardEvent) => {
-        const targetElem = event.target as HTMLElement;
-        const shortcutsAttr = targetElem.dataset.cpKbdShortcuts;
+  actionsList.forEach((action) => {
+    const actionHandler = (event: KeyboardEvent) => {
+      const targetElem = event.target as HTMLElement;
+      const shortcutsAttr = targetElem.dataset.cpKbdShortcuts;
 
-        if (shortcutsAttr === 'disabled') {
-          return;
-        }
+      if (shortcutsAttr === 'disabled') {
+        return;
+      }
 
-        const isAllowed = checkActionAllowed(action, actionsContext);
+      const isAllowed = checkActionAllowed(action, actionsContext);
 
-        if (!isAllowed) {
-          return;
-        }
+      if (!isAllowed) {
+        return;
+      }
 
-        event.preventDefault();
-        runAction(action, actionsContext);
-      };
+      event.preventDefault();
+      runAction(action, actionsContext);
+    };
 
-      shortcutMap[action.shortcut] = actionHandler;
-    });
+    const shortcut = action.shortcut;
+    if (shortcut) {
+      shortcutMap[shortcut] = actionHandler;
+    }
+  });
 
   return shortcutMap;
 }

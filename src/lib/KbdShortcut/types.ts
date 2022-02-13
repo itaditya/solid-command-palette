@@ -1,3 +1,3 @@
-import { Action } from '../types';
+import { ActionShortcut } from '../types';
 
-export type GetFormattedShortcut = (shortcut: Action['shortcut']) => Array<Array<string>>;
+export type GetFormattedShortcut = (shortcut: ActionShortcut) => Array<Array<string>>;

@@ -4,11 +4,13 @@ import { useStore } from './StoreContext';
 import { createActionList } from './createActionList';
 import { getShortcutHandlersMap } from './actionUtils/actionUtils';
 
+type Unsubscribe = null | ReturnType<typeof tinykeys>;
+
 export function createKbdShortcuts() {
   const [state, { togglePalette }] = useStore();
   const actionsList = createActionList();
 
-  let unsubscribe = null;
+  let unsubscribe: Unsubscribe = null;
 
   onMount(() => {
     const shortcutMap = getShortcutHandlersMap(actionsList(), state.actionsContext);
