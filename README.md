@@ -21,7 +21,9 @@
 
 ## Demo
 
-Try the demo on [our documentation site](https://solid-command-palette.vercel.app/demo).
+![Solid Command Palette Demo](./public/images/demo-minimal.gif)
+
+Try the full demo on [our documentation site](https://solid-command-palette.vercel.app/demo).
 
 ## Usage
 
