@@ -21,5 +21,5 @@ jobs:
         run: npm ci
       - name: Check for linting issues
         run: npm run lint
-      - name: Run tests
-        run: npm test
+      - name: Run functional tests
+        run: npm run test:func:run
