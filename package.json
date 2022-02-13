@@ -1,9 +1,10 @@
 {
   "name": "solid-command-palette",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Add a command palette to your Solid.js App",
   "main": "./pkg-dist/solid-command-palette.cjs.js",
   "module": "./pkg-dist/solid-command-palette.es.js",
+  "types": "./pkg-dist/types",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,8 +18,9 @@
     "lint": "npm run lint:format && npm run lint:syntax && npm run lint:types",
     "test": "vitest",
     "test:run": "vitest run",
-    "pkg": "vite build -c vite-pkg.config.ts",
-    "prepublishOnly": "npm run pkg"
+    "gen:types": "tsc --emitDeclarationOnly",
+    "gen:lib": "vite build -c vite-pkg.config.ts",
+    "prepublishOnly": "npm run gen:lib && npm run gen:types"
   },
   "license": "MIT",
   "devDependencies": {
