@@ -28,4 +28,30 @@ test.describe('Test basic interactions of Command Palette', () => {
     const optionText = await optionLocator.first().textContent();
     await expect(optionText).toContain('Go to GitHub repo');
   });
+
+  test('should be able to navigate between actions using keyboard', async ({ page }) => {
+    await page.goto('/demo');
+
+    await page.keyboard.press('Meta+k'); // on Mac
+    await page.keyboard.press('Control+k'); // on Linux
+
+    // Navigate to third action by pressing Down key twice.
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
+
+    let optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+    let isThirdOptionSelected = await optionLocator.nth(2).getAttribute('aria-selected');
+
+    await expect(isThirdOptionSelected).toEqual('true');
+
+    // Navigate to second action by pressing Up key once.
+    await page.keyboard.press('ArrowUp');
+
+    optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+    isThirdOptionSelected = await optionLocator.nth(2).getAttribute('aria-selected');
+    const isSecondOptionSelected = await optionLocator.nth(1).getAttribute('aria-selected');
+
+    await expect(isThirdOptionSelected).toEqual('false');
+    await expect(isSecondOptionSelected).toEqual('true');
+  });
 });
