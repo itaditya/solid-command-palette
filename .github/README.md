@@ -22,7 +22,9 @@
 
 ## Demo
 
-Try the demo on [our documentation site](https://solid-command-palette.vercel.app/demo).
+https://user-images.githubusercontent.com/15871340/153769272-abc74538-91c9-415b-9ff5-525d7c97d00f.mov
+
+Try the full demo on [our documentation site](https://solid-command-palette.vercel.app/demo).
 
 ## Usage
 
