@@ -11,4 +11,21 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     await expect(page.locator('strong:has-text("1")')).toBeVisible();
   });
+
+  test('should be able to search for actions in command palette', async ({ page }) => {
+    await page.goto('/demo');
+
+    await page.keyboard.press('Meta+k'); // on Mac
+    await page.keyboard.press('Control+k'); // on Linux
+
+    await page.keyboard.type('GitHub');
+
+    const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+
+    const optionsNum = await optionLocator.count();
+    await expect(optionsNum).toBe(1);
+
+    const optionText = await optionLocator.first().textContent();
+    await expect(optionText).toContain('Go to GitHub repo');
+  });
 });
