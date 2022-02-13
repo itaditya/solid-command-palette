@@ -31,7 +31,7 @@ type UserInteraction =
   | 'navigate-mouse'
   | 'navigate-scroll-assist';
 
-export const CommandPaletteInternal: Component = () => {
+const CommandPaletteInternal: Component = () => {
   const [state, { closePalette, setSearchText }] = useStore();
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal<ActiveItemId>(null);

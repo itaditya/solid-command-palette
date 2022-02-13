@@ -3,11 +3,11 @@ import { getFormattedShortcut } from './utils';
 import { ActionShortcut } from '../types';
 import styles from './KbdShortcut.module.css';
 
-export interface Props extends JSX.HTMLAttributes<HTMLElement> {
+export interface KbdShortcutProps extends JSX.HTMLAttributes<HTMLElement> {
   shortcut: ActionShortcut;
 }
 
-export const KbdShortcut: Component<Props> = (p) => {
+export const KbdShortcut: Component<KbdShortcutProps> = (p) => {
   const [l, others] = splitProps(p, ['shortcut', 'class']);
 
   const formattedShortcut = getFormattedShortcut(l.shortcut);
