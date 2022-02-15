@@ -1,6 +1,7 @@
 import { DeepReadonly, Store } from 'solid-js/store';
 
 export type ActionId = string;
+export type ParentActionId = null | ActionId;
 export type ActionShortcut = string;
 
 export type ActionContext = Record<string, unknown>;
@@ -20,6 +21,7 @@ export type RunArgs = {
 
 export type Action = {
   id: ActionId;
+  parentActionId: ParentActionId;
   title: string;
   subtitle: null | string;
   keywords: Array<string>;
@@ -31,13 +33,12 @@ export type Action = {
    * Enable the action conditionally.
    */
   cond?: (args: RunArgs) => boolean;
-  run: (args: RunArgs) => void;
+  run?: (args: RunArgs) => void;
 };
 
 export type PartialAction = Partial<Action> & {
   id: ActionId;
   title: Action['title'];
-  run: Action['run'];
 };
 
 export type Actions = Record<ActionId, Action>;
@@ -53,6 +54,7 @@ export type RootProps = {
 export type StoreState = {
   visibility: 'opened' | 'closed';
   searchText: string;
+  activeParentActionId: ParentActionId;
   actions: Actions;
   actionsContext: ActionsContext;
 };
@@ -64,6 +66,7 @@ export type StoreMethods = {
   closePalette: () => void;
   togglePalette: () => void;
   setSearchText: (newValue: string) => void;
+  setParentActionId: (parentActionId: ParentActionId) => void;
   setActionsContext: (actionId: ActionId, newData: ActionContext) => void;
 };
 

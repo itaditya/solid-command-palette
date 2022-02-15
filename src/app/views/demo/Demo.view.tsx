@@ -37,6 +37,7 @@ const DemoView: Component = () => {
     increment,
     profile,
     toggleProfile,
+    setProfile,
   };
 
   return (

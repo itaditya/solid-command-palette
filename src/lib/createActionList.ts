@@ -14,17 +14,38 @@ export function createActionList() {
   return actionsList;
 }
 
-export function createConditionalActionList() {
-  const [state] = useStore();
+export function createNestedActionList() {
   const actionsList = createActionList();
+  const [state] = useStore();
 
-  const conditionalActionList = createMemo(() => {
-    function actionFilter(action: WrappedAction) {
-      const isAllowed = checkActionAllowed(action, state.actionsContext);
-      return isAllowed;
+  function nestedActionFilter(action: WrappedAction) {
+    if (state.activeParentActionId === null) {
+      return true;
     }
 
-    const conditionalActionList = actionsList().filter(actionFilter);
+    const isAllowed = action.parentActionId === state.activeParentActionId;
+    return isAllowed;
+  }
+
+  const nestedActionsList = createMemo(() => {
+    const nestedActionsList = actionsList().filter(nestedActionFilter);
+    return nestedActionsList;
+  });
+
+  return nestedActionsList;
+}
+
+export function createConditionalActionList() {
+  const [state] = useStore();
+  const nestedActionsList = createNestedActionList();
+
+  function conditionalActionFilter(action: WrappedAction) {
+    const isAllowed = checkActionAllowed(action, state.actionsContext);
+    return isAllowed;
+  }
+
+  const conditionalActionList = createMemo(() => {
+    const conditionalActionList = nestedActionsList().filter(conditionalActionFilter);
     return conditionalActionList;
   });
 

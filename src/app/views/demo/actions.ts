@@ -22,8 +22,52 @@ const loggerAction = defineAction({
   },
 });
 
+const changeProfileAction = defineAction({
+  id: 'change-profile',
+  title: 'Change profile',
+});
+
+const setToPersonalProfileAction = defineAction({
+  id: 'set-personal-profile',
+  parentActionId: changeProfileAction.id,
+  title: 'Set to personal profile',
+  cond: ({ rootContext }) => {
+    if (typeof rootContext.profile !== 'function') {
+      return false;
+    }
+
+    const activeProfile = rootContext.profile();
+    return activeProfile === 'work';
+  },
+  run: ({ rootContext }) => {
+    if (typeof rootContext.setProfile === 'function') {
+      rootContext.setProfile('personal');
+    }
+  },
+});
+
+const setToWorkProfileAction = defineAction({
+  id: 'set-work-profile',
+  parentActionId: changeProfileAction.id,
+  title: 'Set to work profile',
+  cond: ({ rootContext }) => {
+    if (typeof rootContext.profile !== 'function') {
+      return false;
+    }
+
+    const activeProfile = rootContext.profile();
+    return activeProfile === 'personal';
+  },
+  run: ({ rootContext }) => {
+    if (typeof rootContext.setProfile === 'function') {
+      rootContext.setProfile('work');
+    }
+  },
+});
+
 const toggleProfileAction = defineAction({
   id: 'toggle-profile',
+  parentActionId: changeProfileAction.id,
   title: 'Toggle profile',
   shortcut: '$mod+Shift+p',
   run: ({ rootContext }) => {
@@ -69,6 +113,9 @@ const navigationAction = defineAction({
 export const actions = {
   [incrementCounterAction.id]: incrementCounterAction,
   [loggerAction.id]: loggerAction,
+  [changeProfileAction.id]: changeProfileAction,
+  [setToPersonalProfileAction.id]: setToPersonalProfileAction,
+  [setToWorkProfileAction.id]: setToWorkProfileAction,
   [toggleProfileAction.id]: toggleProfileAction,
   [workMeetingAction.id]: workMeetingAction,
   [contactAction.id]: contactAction,

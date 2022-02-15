@@ -32,7 +32,8 @@ type UserInteraction =
   | 'navigate-scroll-assist';
 
 const CommandPaletteInternal: Component = () => {
-  const [state, { closePalette, setSearchText }] = useStore();
+  const [state, storeMethods] = useStore();
+  const { closePalette, setSearchText } = storeMethods;
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal<ActiveItemId>(null);
   const [userInteraction, setUserInteraction] = createSignal<UserInteraction>('idle');
@@ -46,8 +47,7 @@ const CommandPaletteInternal: Component = () => {
   let lastFocusedElem: null | HTMLElement;
 
   function triggerRun(action: WrappedAction) {
-    runAction(action, state.actionsContext);
-    closePalette(); // commented for easy dev.
+    runAction(action, state.actionsContext, storeMethods);
   }
 
   function activatePrevItem() {

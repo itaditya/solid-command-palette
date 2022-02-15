@@ -7,13 +7,14 @@ import { getShortcutHandlersMap } from './actionUtils/actionUtils';
 type Unsubscribe = null | ReturnType<typeof tinykeys>;
 
 export function createKbdShortcuts() {
-  const [state, { togglePalette }] = useStore();
+  const [state, storeMethods] = useStore();
+  const { togglePalette } = storeMethods;
   const actionsList = createActionList();
 
   let unsubscribe: Unsubscribe = null;
 
   onMount(() => {
-    const shortcutMap = getShortcutHandlersMap(actionsList(), state.actionsContext);
+    const shortcutMap = getShortcutHandlersMap(actionsList(), state.actionsContext, storeMethods);
 
     const commandPaletteHandler = (event: KeyboardEvent) => {
       event.preventDefault();

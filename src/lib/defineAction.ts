@@ -1,21 +1,17 @@
 import { Action, PartialAction } from './types';
 
-const defaultRun: Action['run'] = ({ actionId }) => {
-  console.warn(`The triggered action doesn't have a run function. It'll be a noop in production`, {
-    actionId,
-  });
-};
-
 export const defineAction = (partialAction: PartialAction): Action => {
   const id = partialAction.id || Math.random().toString();
+  const parentActionId = partialAction.parentActionId || null;
   const title = partialAction.title;
   const subtitle = partialAction.subtitle || null;
   const keywords = partialAction.keywords || [];
   const shortcut = partialAction.shortcut || null;
-  const run = partialAction.run || defaultRun;
+  const run = partialAction.run;
 
   const normalizedAction = {
     id,
+    parentActionId,
     title,
     subtitle,
     keywords,

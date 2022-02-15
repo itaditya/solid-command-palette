@@ -17,6 +17,7 @@ export const Root: Component<RootProps> = (p) => {
   const [state, setState] = createStore<StoreState>({
     visibility: 'closed',
     searchText: '',
+    activeParentActionId: null,
     actions: initialActions,
     actionsContext: {
       root: initialActionsContext,
@@ -36,6 +37,9 @@ export const Root: Component<RootProps> = (p) => {
     },
     setSearchText(newValue) {
       setState('searchText', newValue);
+    },
+    setParentActionId(parentActionId) {
+      setState('activeParentActionId', parentActionId);
     },
     setActionsContext(actionId, newData) {
       // @ts-expect-error need to figure out nested store setters.
