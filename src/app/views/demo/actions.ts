@@ -22,23 +22,35 @@ const loggerAction = defineAction({
   },
 });
 
-const changeProfileAction = defineAction({
-  id: 'change-profile',
-  title: 'Change profile',
+const unmuteAudioAction = defineAction({
+  id: 'unmute-audio',
+  title: 'Unmute Audio',
+  subtitle: 'Only shown when you have muted the audio',
+  shortcut: '$mod+u',
+  cond: ({ rootContext }) => {
+    if (typeof rootContext.muted !== 'function') {
+      return false;
+    }
+
+    return rootContext.muted();
+  },
+  run: ({ rootContext }) => {
+    if (typeof rootContext.unmuteAudio === 'function') {
+      rootContext.unmuteAudio();
+    }
+  },
+});
+
+const setProfileAction = defineAction({
+  id: 'set-profile',
+  title: 'Set profile',
 });
 
 const setToPersonalProfileAction = defineAction({
   id: 'set-personal-profile',
-  parentActionId: changeProfileAction.id,
-  title: 'Set to personal profile',
-  cond: ({ rootContext }) => {
-    if (typeof rootContext.profile !== 'function') {
-      return false;
-    }
-
-    const activeProfile = rootContext.profile();
-    return activeProfile === 'work';
-  },
+  parentActionId: setProfileAction.id,
+  title: 'Set to Personal profile',
+  shortcut: 'p p',
   run: ({ rootContext }) => {
     if (typeof rootContext.setProfile === 'function') {
       rootContext.setProfile('personal');
@@ -48,50 +60,13 @@ const setToPersonalProfileAction = defineAction({
 
 const setToWorkProfileAction = defineAction({
   id: 'set-work-profile',
-  parentActionId: changeProfileAction.id,
-  title: 'Set to work profile',
-  cond: ({ rootContext }) => {
-    if (typeof rootContext.profile !== 'function') {
-      return false;
-    }
-
-    const activeProfile = rootContext.profile();
-    return activeProfile === 'personal';
-  },
+  parentActionId: setProfileAction.id,
+  title: 'Set to Work profile',
+  shortcut: 'p w',
   run: ({ rootContext }) => {
     if (typeof rootContext.setProfile === 'function') {
       rootContext.setProfile('work');
     }
-  },
-});
-
-const toggleProfileAction = defineAction({
-  id: 'toggle-profile',
-  parentActionId: changeProfileAction.id,
-  title: 'Toggle profile',
-  shortcut: '$mod+Shift+p',
-  run: ({ rootContext }) => {
-    if (typeof rootContext.toggleProfile === 'function') {
-      rootContext.toggleProfile();
-    }
-  },
-});
-
-const workMeetingAction = defineAction({
-  id: 'work-meeting',
-  title: 'Join the Standup Meeting',
-  subtitle: 'Only shown in Work profile',
-  shortcut: '$mod+j',
-  cond: ({ rootContext }) => {
-    if (typeof rootContext.profile !== 'function') {
-      return false;
-    }
-
-    const activeProfile = rootContext.profile();
-    return activeProfile === 'work';
-  },
-  run: () => {
-    alert('Launching meeting app!!!!');
   },
 });
 
@@ -113,11 +88,10 @@ const navigationAction = defineAction({
 export const actions = {
   [incrementCounterAction.id]: incrementCounterAction,
   [loggerAction.id]: loggerAction,
-  [changeProfileAction.id]: changeProfileAction,
+  [unmuteAudioAction.id]: unmuteAudioAction,
+  [setProfileAction.id]: setProfileAction,
   [setToPersonalProfileAction.id]: setToPersonalProfileAction,
   [setToWorkProfileAction.id]: setToWorkProfileAction,
-  [toggleProfileAction.id]: toggleProfileAction,
-  [workMeetingAction.id]: workMeetingAction,
   [contactAction.id]: contactAction,
   [navigationAction.id]: navigationAction,
 };

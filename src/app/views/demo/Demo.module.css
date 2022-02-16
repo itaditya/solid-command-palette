@@ -35,6 +35,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+.muteLabel:focus-within {
+  outline: 2px solid var(--brand-accent-color-8);
+  outline-offset: 5px;
+}
+
 .profileMenu {
   appearance: none;
   font-size: 1rem;

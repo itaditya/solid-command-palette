@@ -10,20 +10,19 @@ type Profile = 'personal' | 'work';
 
 const DemoView: Component = () => {
   const [count, setCount] = createSignal(0);
+  const [muted, setMuted] = createSignal(false);
   const [profile, setProfile] = createSignal<Profile>('personal');
 
   const increment = () => {
     setCount((prev) => (prev += 1));
   };
 
-  const toggleProfile = () => {
-    setProfile((prev) => {
-      if (prev === 'work') {
-        return 'personal';
-      }
+  const unmuteAudio = () => {
+    setMuted(false);
+  };
 
-      return 'work';
-    });
+  const handleMuteInput = () => {
+    setMuted((old) => !old);
   };
 
   const handleProfileChange = (event: Event) => {
@@ -35,8 +34,8 @@ const DemoView: Component = () => {
 
   const actionsContext = {
     increment,
-    profile,
-    toggleProfile,
+    muted,
+    unmuteAudio,
     setProfile,
   };
 
@@ -79,17 +78,51 @@ const DemoView: Component = () => {
           <div>
             <h3 class={utilStyles.stripSpace}>Conditionally enable actions</h3>
             <p>
-              We have a <strong>profile</strong> signal and a <strong>toggleProfile</strong>{' '}
-              function to toggle between <strong>personal</strong> & <strong>work</strong>.
+              The <strong>Unmute Audio</strong> action is only enabled when the muted signal has
+              value <strong>true</strong>.
             </p>
             <p>
-              You can trigger it by selecting options in the menu, command palette & keyboard
-              shortcut.
+              The action's <strong>cond</strong> & <strong>run</strong> functions can use latest
+              application state to enable actions or change behavior.
             </p>
-            <p>We have also bound this profile signal to the command palette's action context.</p>
+          </div>
+          <div class={demoStyles.demoInteraction}>
+            <div>
+              <label
+                htmlFor="audio-mute"
+                class={`${styles.muteLabel} ${demoStyles.demoInteractionDesc}`}
+              >
+                <input
+                  type="checkbox"
+                  class={utilStyles.visuallyHidden}
+                  name="audio-mute"
+                  id="audio-mute"
+                  checked={muted()}
+                  onInput={handleMuteInput}
+                />
+                <strong>
+                  <Show when={muted()} fallback="Audible" children="Muted" />
+                </strong>
+                <span>(click to toggle)</span>
+              </label>
+            </div>
+            <Show when={muted()}>
+              <p class={demoStyles.demoInteractionDesc}>
+                Press <KbdShortcut shortcut="$mod+u" /> to unmute.
+              </p>
+            </Show>
+          </div>
+        </section>
+        <section class={demoStyles.demoSection}>
+          <div>
+            <h3 class={utilStyles.stripSpace}>Nested actions</h3>
             <p>
-              The <strong>Join the Standup Meeting</strong> action uses the profile value to enable
-              itself only when Work profile is active.
+              When user selects an action but wants to further choose an option in it, this comes in
+              handy.
+            </p>
+            <p>
+              After selecting <strong>Change Profile</strong> action, user can choose between
+              Personal & Work profiles.
             </p>
           </div>
           <div class={demoStyles.demoInteraction}>
@@ -106,13 +139,8 @@ const DemoView: Component = () => {
               <option value="work">Work</option>
             </select>
             <p class={demoStyles.demoInteractionDesc}>
-              Try pressing <KbdShortcut shortcut="$mod+Shift+p" />
+              Try <KbdShortcut shortcut="p p" /> / <KbdShortcut shortcut="p w" />
             </p>
-            <Show when={profile() === 'work'}>
-              <p class={demoStyles.demoInteractionDesc}>
-                Try pressing <KbdShortcut shortcut="$mod+j" />
-              </p>
-            </Show>
           </div>
         </section>
         <DynamicActionContextDemo />
