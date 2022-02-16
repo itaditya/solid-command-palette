@@ -2,9 +2,9 @@ import { KeyBindingMap } from 'tinykeys';
 import { ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
 
 type RunStoreMethods = {
-  setParentActionId: StoreMethods['setParentActionId'],
-  closePalette: StoreMethods['closePalette'],
-}
+  setParentActionId: StoreMethods['setParentActionId'];
+  closePalette: StoreMethods['closePalette'];
+};
 
 function getActionContext(action: WrappedAction, actionsContext: ActionsContext) {
   const rootContext = actionsContext.root;
