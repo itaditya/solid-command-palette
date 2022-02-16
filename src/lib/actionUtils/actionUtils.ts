@@ -1,6 +1,11 @@
 import { KeyBindingMap } from 'tinykeys';
 import { ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
 
+type RunStoreMethods = {
+  setParentActionId: StoreMethods['setParentActionId'],
+  closePalette: StoreMethods['closePalette'],
+}
+
 function getActionContext(action: WrappedAction, actionsContext: ActionsContext) {
   const rootContext = actionsContext.root;
   const dynamicContext = actionsContext.dynamic[action.id] || {};
@@ -25,7 +30,7 @@ export function checkActionAllowed(action: WrappedAction, actionsContext: Action
 export function runAction(
   action: WrappedAction,
   actionsContext: ActionsContext,
-  storeMethods: StoreMethods
+  storeMethods: RunStoreMethods
 ) {
   const { id, run } = action;
 
