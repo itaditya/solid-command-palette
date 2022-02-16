@@ -3,3 +3,6 @@ node_modules
 dist
 pkg-dist
 coverage
+.DS_Store
+test-results/
+playwright-report/
