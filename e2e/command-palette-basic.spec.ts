@@ -20,6 +20,9 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     await page.keyboard.type('GitHub');
 
+    const searchLocator = page.locator('input[type="search"]');
+    await expect(searchLocator).toHaveValue('GitHub');
+
     const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
 
     const optionsNum = await optionLocator.count();
@@ -65,5 +68,33 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     const isUnmuted = await page.isChecked('label[for="audio-mute"]');
     await expect(isUnmuted).toBeFalsy();
+  });
+
+  test('should be able to run nested actions', async ({ page }) => {
+    await page.goto('/demo');
+    await triggerCommandPaletteOpen(page);
+
+    await page.keyboard.type('Profile');
+
+    const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+
+    await optionLocator.locator('text=Set profile').click();
+
+    const searchLocator = page.locator('input[type="search"]');
+    await expect(searchLocator).toHaveValue('');
+
+    const optionsNum = await optionLocator.count();
+    await expect(optionsNum).toBe(2);
+
+    await optionLocator.locator('text=Set to Work profile').click();
+
+    const profileStatusLocator = await page
+      .locator('section', {
+        hasText: 'Nested actions',
+      })
+      .last()
+      .locator('text=Active profile is work');
+
+    await expect(profileStatusLocator).toBeVisible();
   });
 });
