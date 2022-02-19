@@ -44,7 +44,11 @@ export const Root: Component<RootProps> = (p) => {
     },
     closePalette() {
       setState('visibility', 'closed');
-      storeMethods.setParentActionId(null);
+
+      if (state.activeParentActionId) {
+        storeMethods.setSearchText('');
+        storeMethods.setParentActionId(null);
+      }
     },
     togglePalette() {
       setState('visibility', (prev) => (prev === 'opened' ? 'closed' : 'opened'));
