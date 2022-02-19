@@ -26,15 +26,7 @@ export const Root: Component<RootProps> = (p) => {
   });
 
   const storeMethods: StoreMethods = {
-    openPalette() {
-      setState('visibility', 'opened');
-    },
-    closePalette() {
-      setState('visibility', 'closed');
-    },
-    togglePalette() {
-      setState('visibility', (prev) => (prev === 'opened' ? 'closed' : 'opened'));
-    },
+    // low level methods
     setSearchText(newValue) {
       setState('searchText', newValue);
     },
@@ -44,6 +36,22 @@ export const Root: Component<RootProps> = (p) => {
     setActionsContext(actionId, newData) {
       // @ts-expect-error need to figure out nested store setters.
       setState('actionsContext', 'dynamic', actionId, newData);
+    },
+
+    // high level methods
+    openPalette() {
+      setState('visibility', 'opened');
+    },
+    closePalette() {
+      setState('visibility', 'closed');
+      storeMethods.setParentActionId(null);
+    },
+    togglePalette() {
+      setState('visibility', (prev) => (prev === 'opened' ? 'closed' : 'opened'));
+    },
+    selectParentAction(parentActionId) {
+      storeMethods.setParentActionId(parentActionId);
+      storeMethods.setSearchText('');
     },
   };
 

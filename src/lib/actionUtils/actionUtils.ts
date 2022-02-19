@@ -2,7 +2,7 @@ import { KeyBindingMap } from 'tinykeys';
 import { ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
 
 type RunStoreMethods = {
-  setParentActionId: StoreMethods['setParentActionId'];
+  selectParentAction: StoreMethods['selectParentAction'];
   closePalette: StoreMethods['closePalette'];
 };
 
@@ -35,13 +35,12 @@ export function runAction(
   const { id, run } = action;
 
   if (!run) {
-    storeMethods.setParentActionId(id);
+    storeMethods.selectParentAction(id);
     return;
   }
 
   const { rootContext, dynamicContext } = getActionContext(action, actionsContext);
   run({ actionId: id, rootContext, dynamicContext });
-  storeMethods.setParentActionId(null);
   storeMethods.closePalette();
 }
 

@@ -62,12 +62,13 @@ export type StoreState = {
 export type StoreStateWrapped = Store<StoreState>;
 
 export type StoreMethods = {
-  openPalette: () => void;
-  closePalette: () => void;
-  togglePalette: () => void;
   setSearchText: (newValue: string) => void;
   setParentActionId: (parentActionId: ParentActionId) => void;
   setActionsContext: (actionId: ActionId, newData: ActionContext) => void;
+  openPalette: () => void;
+  closePalette: () => void;
+  togglePalette: () => void;
+  selectParentAction: (parentActionId: ParentActionId) => void;
 };
 
 export type StoreContext = [StoreStateWrapped, StoreMethods];
