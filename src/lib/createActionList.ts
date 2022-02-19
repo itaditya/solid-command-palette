@@ -1,7 +1,7 @@
 import { createMemo, createEffect } from 'solid-js';
 import Fuse from 'fuse.js';
 import { useStore } from './StoreContext';
-import { checkActionAllowed } from './actionUtils/actionUtils';
+import { checkActionAllowed, getActiveParentAction } from './actionUtils/actionUtils';
 import { WrappedAction } from './types';
 
 export function createActionList() {
@@ -14,17 +14,36 @@ export function createActionList() {
   return actionsList;
 }
 
+export function createNestedActionList() {
+  const actionsList = createActionList();
+  const [state] = useStore();
+
+  function nestedActionFilter(action: WrappedAction) {
+    const { activeId, isRoot } = getActiveParentAction(state.activeParentActionIdList);
+
+    const isAllowed = isRoot || action.parentActionId === activeId;
+    return isAllowed;
+  }
+
+  const nestedActionsList = createMemo(() => {
+    const nestedActionsList = actionsList().filter(nestedActionFilter);
+    return nestedActionsList;
+  });
+
+  return nestedActionsList;
+}
+
 export function createConditionalActionList() {
   const [state] = useStore();
-  const actionsList = createActionList();
+  const nestedActionsList = createNestedActionList();
+
+  function conditionalActionFilter(action: WrappedAction) {
+    const isAllowed = checkActionAllowed(action, state.actionsContext);
+    return isAllowed;
+  }
 
   const conditionalActionList = createMemo(() => {
-    function actionFilter(action: WrappedAction) {
-      const isAllowed = checkActionAllowed(action, state.actionsContext);
-      return isAllowed;
-    }
-
-    const conditionalActionList = actionsList().filter(actionFilter);
+    const conditionalActionList = nestedActionsList().filter(conditionalActionFilter);
     return conditionalActionList;
   });
 

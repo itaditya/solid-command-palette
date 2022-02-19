@@ -32,7 +32,8 @@ type UserInteraction =
   | 'navigate-scroll-assist';
 
 const CommandPaletteInternal: Component = () => {
-  const [state, { closePalette, setSearchText }] = useStore();
+  const [state, storeMethods] = useStore();
+  const { closePalette, setSearchText, revertParentAction } = storeMethods;
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal<ActiveItemId>(null);
   const [userInteraction, setUserInteraction] = createSignal<UserInteraction>('idle');
@@ -46,8 +47,7 @@ const CommandPaletteInternal: Component = () => {
   let lastFocusedElem: null | HTMLElement;
 
   function triggerRun(action: WrappedAction) {
-    runAction(action, state.actionsContext);
-    closePalette(); // commented for easy dev.
+    runAction(action, state.actionsContext, storeMethods);
   }
 
   function activatePrevItem() {
@@ -157,12 +157,20 @@ const CommandPaletteInternal: Component = () => {
     event.preventDefault();
 
     const actionsList = resultsList();
-    // @ts-expect-error Solid has issues with `.at`
+    // @ts-expect-error TS has issues with `.at`
     const lastAction = actionsList.at(-1);
 
     if (lastAction) {
       setUserInteraction('navigate-kbd');
       setActiveItemId(lastAction.id);
+    }
+  }
+
+  function handleKbdDelete() {
+    const isSearchEmpty = state.searchText.length <= 0;
+
+    if (isSearchEmpty) {
+      revertParentAction();
     }
   }
 
@@ -210,6 +218,7 @@ const CommandPaletteInternal: Component = () => {
         ArrowDown: handleKbdNext,
         PageUp: handleKbdFirst,
         PageDown: handleKbdLast,
+        Backspace: handleKbdDelete,
       });
     }
   });

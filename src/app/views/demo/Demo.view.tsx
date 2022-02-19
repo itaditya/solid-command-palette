@@ -1,29 +1,28 @@
 import { Component, createSignal, Show } from 'solid-js';
 import { Root, CommandPalette, KbdShortcut } from '../../../lib';
 import { actions } from './actions';
+import { NestedActionDemo } from './NestedActionDemo/NestedActionDemo';
 import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
+import { Profile } from './types';
 import utilStyles from '../../utils.module.css';
 import demoStyles from './demoUtils.module.css';
 import styles from './Demo.module.css';
 
-type Profile = 'personal' | 'work';
-
 const DemoView: Component = () => {
   const [count, setCount] = createSignal(0);
+  const [muted, setMuted] = createSignal(false);
   const [profile, setProfile] = createSignal<Profile>('personal');
 
   const increment = () => {
     setCount((prev) => (prev += 1));
   };
 
-  const toggleProfile = () => {
-    setProfile((prev) => {
-      if (prev === 'work') {
-        return 'personal';
-      }
+  const unmuteAudio = () => {
+    setMuted(false);
+  };
 
-      return 'work';
-    });
+  const handleMuteInput = () => {
+    setMuted((old) => !old);
   };
 
   const handleProfileChange = (event: Event) => {
@@ -35,8 +34,9 @@ const DemoView: Component = () => {
 
   const actionsContext = {
     increment,
-    profile,
-    toggleProfile,
+    muted,
+    unmuteAudio,
+    setProfile,
   };
 
   return (
@@ -78,42 +78,42 @@ const DemoView: Component = () => {
           <div>
             <h3 class={utilStyles.stripSpace}>Conditionally enable actions</h3>
             <p>
-              We have a <strong>profile</strong> signal and a <strong>toggleProfile</strong>{' '}
-              function to toggle between <strong>personal</strong> & <strong>work</strong>.
+              The <strong>Unmute Audio</strong> action is only enabled when the muted signal has
+              value <strong>true</strong>.
             </p>
             <p>
-              You can trigger it by selecting options in the menu, command palette & keyboard
-              shortcut.
-            </p>
-            <p>We have also bound this profile signal to the command palette's action context.</p>
-            <p>
-              The <strong>Join the Standup Meeting</strong> action uses the profile value to enable
-              itself only when Work profile is active.
+              The action's <strong>cond</strong> & <strong>run</strong> functions can use latest
+              application state to enable actions or change behavior.
             </p>
           </div>
           <div class={demoStyles.demoInteraction}>
-            <p class={demoStyles.demoInteractionDesc}>
-              Active profile is <strong>{profile()}</strong>
-            </p>
-            <select
-              aria-label="Select Profile"
-              class={styles.profileMenu}
-              value={profile()}
-              onChange={handleProfileChange}
-            >
-              <option value="personal">Personal</option>
-              <option value="work">Work</option>
-            </select>
-            <p class={demoStyles.demoInteractionDesc}>
-              Try pressing <KbdShortcut shortcut="$mod+Shift+p" />
-            </p>
-            <Show when={profile() === 'work'}>
+            <div>
+              <label
+                htmlFor="audio-mute"
+                class={`${styles.muteLabel} ${demoStyles.demoInteractionDesc}`}
+              >
+                <input
+                  type="checkbox"
+                  class={utilStyles.visuallyHidden}
+                  name="audio-mute"
+                  id="audio-mute"
+                  checked={muted()}
+                  onInput={handleMuteInput}
+                />
+                <strong>
+                  <Show when={muted()} fallback="Audible" children="Muted" />
+                </strong>
+                <span>(click to toggle)</span>
+              </label>
+            </div>
+            <Show when={muted()}>
               <p class={demoStyles.demoInteractionDesc}>
-                Try pressing <KbdShortcut shortcut="$mod+j" />
+                Press <KbdShortcut shortcut="$mod+u" /> to unmute.
               </p>
             </Show>
           </div>
         </section>
+        <NestedActionDemo profile={profile()} onProfileChange={handleProfileChange} />
         <DynamicActionContextDemo />
       </div>
     </Root>

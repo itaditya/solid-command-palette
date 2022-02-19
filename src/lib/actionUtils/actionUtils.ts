@@ -1,5 +1,11 @@
 import { KeyBindingMap } from 'tinykeys';
-import { ActionsContext, WrappedAction, WrappedActionList } from '../types';
+import { rootParentActionId } from '../constants';
+import { ActionId, ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
+
+type RunStoreMethods = {
+  selectParentAction: StoreMethods['selectParentAction'];
+  closePalette: StoreMethods['closePalette'];
+};
 
 function getActionContext(action: WrappedAction, actionsContext: ActionsContext) {
   const rootContext = actionsContext.root;
@@ -22,14 +28,27 @@ export function checkActionAllowed(action: WrappedAction, actionsContext: Action
   return isAllowed;
 }
 
-export function runAction(action: WrappedAction, actionsContext: ActionsContext) {
+export function runAction(
+  action: WrappedAction,
+  actionsContext: ActionsContext,
+  storeMethods: RunStoreMethods
+) {
+  const { id, run } = action;
+
+  if (!run) {
+    storeMethods.selectParentAction(id);
+    return;
+  }
+
   const { rootContext, dynamicContext } = getActionContext(action, actionsContext);
-  action.run({ actionId: action.id, rootContext, dynamicContext });
+  run({ actionId: id, rootContext, dynamicContext });
+  storeMethods.closePalette();
 }
 
 export function getShortcutHandlersMap(
   actionsList: WrappedActionList,
-  actionsContext: ActionsContext
+  actionsContext: ActionsContext,
+  storeMethods: StoreMethods
 ) {
   const shortcutMap: KeyBindingMap = {};
 
@@ -49,7 +68,7 @@ export function getShortcutHandlersMap(
       }
 
       event.preventDefault();
-      runAction(action, actionsContext);
+      runAction(action, actionsContext, storeMethods);
     };
 
     const shortcut = action.shortcut;
@@ -59,4 +78,17 @@ export function getShortcutHandlersMap(
   });
 
   return shortcutMap;
+}
+
+type ActiveParentActionIdListArg = Readonly<Array<ActionId>>;
+
+export function getActiveParentAction(activeParentActionIdList: ActiveParentActionIdListArg) {
+  // @ts-expect-error TS has issues with `.at`
+  const activeId: ActionId = activeParentActionIdList.at(-1);
+  const isRoot = activeId === rootParentActionId;
+
+  return {
+    activeId,
+    isRoot,
+  };
 }

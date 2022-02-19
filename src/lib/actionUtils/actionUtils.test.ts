@@ -91,6 +91,8 @@ describe('Test Action Utils', () => {
 
   describe('Test runAction util', () => {
     const runMock = vi.fn();
+    const selectParentActionMock = vi.fn();
+    const closePaletteMock = vi.fn();
 
     const baseAction = {
       id: 'test-action',
@@ -98,12 +100,21 @@ describe('Test Action Utils', () => {
       run: runMock,
     };
 
+    const baseStoreMethods = {
+      selectParentAction: selectParentActionMock,
+      closePalette: closePaletteMock,
+    };
+
     afterEach(() => {
       runMock.mockClear();
+      selectParentActionMock.mockClear();
+      closePaletteMock.mockClear();
     });
 
     afterAll(() => {
       runMock.mockReset();
+      selectParentActionMock.mockReset();
+      closePaletteMock.mockReset();
     });
 
     test('should trigger run callback of the action correctly', () => {
@@ -123,7 +134,8 @@ describe('Test Action Utils', () => {
         },
       };
 
-      runAction(action, actionsContext);
+      runAction(action, actionsContext, baseStoreMethods);
+
       expect(runMock).toBeCalledWith({
         actionId: 'test-action',
         rootContext: {
@@ -133,6 +145,27 @@ describe('Test Action Utils', () => {
           isActive: true,
         },
       });
+      expect(selectParentActionMock).not.toBeCalled();
+      expect(closePaletteMock).toBeCalled();
+    });
+
+    test('should setup nested actions correctly', () => {
+      const action = defineAction({
+        ...baseAction,
+        id: 'parent-test-action',
+        run: undefined,
+      });
+
+      const actionsContext = {
+        root: {},
+        dynamic: {},
+      };
+
+      runAction(action, actionsContext, baseStoreMethods);
+
+      expect(selectParentActionMock).toBeCalledWith('parent-test-action');
+      expect(runMock).not.toBeCalled();
+      expect(closePaletteMock).not.toBeCalled();
     });
   });
 });

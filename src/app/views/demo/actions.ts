@@ -1,5 +1,6 @@
 import { defineAction } from '../../../lib';
 import { contactAction } from './DynamicActionContextDemo/dynamicContextActions';
+import { nestedActionsConfig } from './NestedActionDemo/nestedActions';
 
 const incrementCounterAction = defineAction({
   id: 'increment-counter',
@@ -22,32 +23,22 @@ const loggerAction = defineAction({
   },
 });
 
-const toggleProfileAction = defineAction({
-  id: 'toggle-profile',
-  title: 'Toggle profile',
-  shortcut: '$mod+Shift+p',
-  run: ({ rootContext }) => {
-    if (typeof rootContext.toggleProfile === 'function') {
-      rootContext.toggleProfile();
-    }
-  },
-});
-
-const workMeetingAction = defineAction({
-  id: 'work-meeting',
-  title: 'Join the Standup Meeting',
-  subtitle: 'Only shown in Work profile',
-  shortcut: '$mod+j',
+const unmuteAudioAction = defineAction({
+  id: 'unmute-audio',
+  title: 'Unmute Audio',
+  subtitle: 'Only shown when you have muted the audio',
+  shortcut: '$mod+u',
   cond: ({ rootContext }) => {
-    if (typeof rootContext.profile !== 'function') {
+    if (typeof rootContext.muted !== 'function') {
       return false;
     }
 
-    const activeProfile = rootContext.profile();
-    return activeProfile === 'work';
+    return rootContext.muted();
   },
-  run: () => {
-    alert('Launching meeting app!!!!');
+  run: ({ rootContext }) => {
+    if (typeof rootContext.unmuteAudio === 'function') {
+      rootContext.unmuteAudio();
+    }
   },
 });
 
@@ -69,8 +60,8 @@ const navigationAction = defineAction({
 export const actions = {
   [incrementCounterAction.id]: incrementCounterAction,
   [loggerAction.id]: loggerAction,
-  [toggleProfileAction.id]: toggleProfileAction,
-  [workMeetingAction.id]: workMeetingAction,
+  [unmuteAudioAction.id]: unmuteAudioAction,
+  ...nestedActionsConfig,
   [contactAction.id]: contactAction,
   [navigationAction.id]: navigationAction,
 };
