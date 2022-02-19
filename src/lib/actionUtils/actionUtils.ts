@@ -1,5 +1,6 @@
 import { KeyBindingMap } from 'tinykeys';
-import { ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
+import { rootParentActionId } from '../constants';
+import { ActionId, ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
 
 type RunStoreMethods = {
   selectParentAction: StoreMethods['selectParentAction'];
@@ -77,4 +78,17 @@ export function getShortcutHandlersMap(
   });
 
   return shortcutMap;
+}
+
+type ActiveParentActionIdListArg = Readonly<Array<ActionId>>;
+
+export function getActiveParentAction(activeParentActionIdList: ActiveParentActionIdListArg) {
+  // @ts-expect-error TS has issues with `.at`
+  const activeId: ActionId = activeParentActionIdList.at(-1);
+  const isRoot = activeId === rootParentActionId;
+
+  return {
+    activeId,
+    isRoot,
+  };
 }

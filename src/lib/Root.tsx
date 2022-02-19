@@ -1,6 +1,8 @@
 import { Component } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { createKbdShortcuts } from './createKbdShortcuts';
+import { getActiveParentAction } from './actionUtils/actionUtils';
+import { rootParentActionId } from './constants';
 import { Provider } from './StoreContext';
 import { RootProps, StoreState, StoreMethods, StoreContext } from './types';
 
@@ -17,7 +19,7 @@ export const Root: Component<RootProps> = (p) => {
   const [state, setState] = createStore<StoreState>({
     visibility: 'closed',
     searchText: '',
-    activeParentActionId: null,
+    activeParentActionIdList: [rootParentActionId],
     actions: initialActions,
     actionsContext: {
       root: initialActionsContext,
@@ -29,9 +31,6 @@ export const Root: Component<RootProps> = (p) => {
     // low level methods
     setSearchText(newValue) {
       setState('searchText', newValue);
-    },
-    setParentActionId(parentActionId) {
-      setState('activeParentActionId', parentActionId);
     },
     setActionsContext(actionId, newData) {
       // @ts-expect-error need to figure out nested store setters.
@@ -45,17 +44,41 @@ export const Root: Component<RootProps> = (p) => {
     closePalette() {
       setState('visibility', 'closed');
 
-      if (state.activeParentActionId) {
+      const hasActiveParent = state.activeParentActionIdList.length > 1;
+
+      if (hasActiveParent) {
         storeMethods.setSearchText('');
-        storeMethods.setParentActionId(null);
+        storeMethods.resetParentAction();
       }
     },
     togglePalette() {
       setState('visibility', (prev) => (prev === 'opened' ? 'closed' : 'opened'));
     },
     selectParentAction(parentActionId) {
-      storeMethods.setParentActionId(parentActionId);
+      if (parentActionId === rootParentActionId) {
+        return;
+      }
+
+      setState('activeParentActionIdList', (old) => {
+        return [...old, parentActionId];
+      });
       storeMethods.setSearchText('');
+    },
+    revertParentAction() {
+      setState('activeParentActionIdList', (old) => {
+        const { isRoot } = getActiveParentAction(old);
+        if (isRoot) {
+          return old;
+        }
+
+        const copiedList = [...old];
+        copiedList.pop();
+
+        return copiedList;
+      });
+    },
+    resetParentAction() {
+      setState('activeParentActionIdList', [rootParentActionId]);
     },
   };
 

@@ -54,7 +54,7 @@ export type RootProps = {
 export type StoreState = {
   visibility: 'opened' | 'closed';
   searchText: string;
-  activeParentActionId: ParentActionId;
+  activeParentActionIdList: Array<ActionId>;
   actions: Actions;
   actionsContext: ActionsContext;
 };
@@ -63,12 +63,13 @@ export type StoreStateWrapped = Store<StoreState>;
 
 export type StoreMethods = {
   setSearchText: (newValue: string) => void;
-  setParentActionId: (parentActionId: ParentActionId) => void;
   setActionsContext: (actionId: ActionId, newData: ActionContext) => void;
   openPalette: () => void;
   closePalette: () => void;
   togglePalette: () => void;
-  selectParentAction: (parentActionId: ParentActionId) => void;
+  selectParentAction: (parentActionId: ActionId) => void;
+  revertParentAction: () => void;
+  resetParentAction: () => void;
 };
 
 export type StoreContext = [StoreStateWrapped, StoreMethods];

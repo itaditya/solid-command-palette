@@ -33,7 +33,7 @@ type UserInteraction =
 
 const CommandPaletteInternal: Component = () => {
   const [state, storeMethods] = useStore();
-  const { closePalette, setSearchText, setParentActionId } = storeMethods;
+  const { closePalette, setSearchText, revertParentAction } = storeMethods;
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal<ActiveItemId>(null);
   const [userInteraction, setUserInteraction] = createSignal<UserInteraction>('idle');
@@ -157,7 +157,7 @@ const CommandPaletteInternal: Component = () => {
     event.preventDefault();
 
     const actionsList = resultsList();
-    // @ts-expect-error Solid has issues with `.at`
+    // @ts-expect-error TS has issues with `.at`
     const lastAction = actionsList.at(-1);
 
     if (lastAction) {
@@ -167,11 +167,10 @@ const CommandPaletteInternal: Component = () => {
   }
 
   function handleKbdDelete() {
-    const isParentActive = Boolean(state.activeParentActionId);
     const isSearchEmpty = state.searchText.length <= 0;
 
-    if (isParentActive && isSearchEmpty) {
-      setParentActionId(null);
+    if (isSearchEmpty) {
+      revertParentAction();
     }
   }
 
