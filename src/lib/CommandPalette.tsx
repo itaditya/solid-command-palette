@@ -33,7 +33,7 @@ type UserInteraction =
 
 const CommandPaletteInternal: Component = () => {
   const [state, storeMethods] = useStore();
-  const { closePalette, setSearchText } = storeMethods;
+  const { closePalette, setSearchText, setParentActionId } = storeMethods;
   const resultsList = createSearchResultList();
   const [activeItemId, setActiveItemId] = createSignal<ActiveItemId>(null);
   const [userInteraction, setUserInteraction] = createSignal<UserInteraction>('idle');
@@ -166,6 +166,15 @@ const CommandPaletteInternal: Component = () => {
     }
   }
 
+  function handleKbdDelete() {
+    const isParentActive = Boolean(state.activeParentActionId);
+    const isSearchEmpty = state.searchText.length <= 0;
+
+    if (isParentActive && isSearchEmpty) {
+      setParentActionId(null);
+    }
+  }
+
   function handleScrollAssistPrev() {
     setUserInteraction('navigate-scroll-assist');
     activatePrevItem();
@@ -210,6 +219,7 @@ const CommandPaletteInternal: Component = () => {
         ArrowDown: handleKbdNext,
         PageUp: handleKbdFirst,
         PageDown: handleKbdLast,
+        Backspace: handleKbdDelete,
       });
     }
   });
