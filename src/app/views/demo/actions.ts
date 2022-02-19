@@ -1,10 +1,6 @@
 import { defineAction } from '../../../lib';
 import { contactAction } from './DynamicActionContextDemo/dynamicContextActions';
-import {
-  setProfileAction,
-  setToPersonalProfileAction,
-  setToWorkProfileAction,
-} from './NestedActionDemo/nestedActions';
+import { nestedActionsConfig } from './NestedActionDemo/nestedActions';
 
 const incrementCounterAction = defineAction({
   id: 'increment-counter',
@@ -65,9 +61,7 @@ export const actions = {
   [incrementCounterAction.id]: incrementCounterAction,
   [loggerAction.id]: loggerAction,
   [unmuteAudioAction.id]: unmuteAudioAction,
-  [setProfileAction.id]: setProfileAction,
-  [setToPersonalProfileAction.id]: setToPersonalProfileAction,
-  [setToWorkProfileAction.id]: setToWorkProfileAction,
+  ...nestedActionsConfig,
   [contactAction.id]: contactAction,
   [navigationAction.id]: navigationAction,
 };
