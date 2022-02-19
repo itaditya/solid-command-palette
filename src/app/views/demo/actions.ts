@@ -1,5 +1,10 @@
 import { defineAction } from '../../../lib';
 import { contactAction } from './DynamicActionContextDemo/dynamicContextActions';
+import {
+  setProfileAction,
+  setToPersonalProfileAction,
+  setToWorkProfileAction,
+} from './NestedActionDemo/nestedActions';
 
 const incrementCounterAction = defineAction({
   id: 'increment-counter',
@@ -37,35 +42,6 @@ const unmuteAudioAction = defineAction({
   run: ({ rootContext }) => {
     if (typeof rootContext.unmuteAudio === 'function') {
       rootContext.unmuteAudio();
-    }
-  },
-});
-
-const setProfileAction = defineAction({
-  id: 'set-profile',
-  title: 'Set profile',
-});
-
-const setToPersonalProfileAction = defineAction({
-  id: 'set-personal-profile',
-  parentActionId: setProfileAction.id,
-  title: 'Set to Personal profile',
-  shortcut: 'p p',
-  run: ({ rootContext }) => {
-    if (typeof rootContext.setProfile === 'function') {
-      rootContext.setProfile('personal');
-    }
-  },
-});
-
-const setToWorkProfileAction = defineAction({
-  id: 'set-work-profile',
-  parentActionId: setProfileAction.id,
-  title: 'Set to Work profile',
-  shortcut: 'p w',
-  run: ({ rootContext }) => {
-    if (typeof rootContext.setProfile === 'function') {
-      rootContext.setProfile('work');
     }
   },
 });

@@ -39,13 +39,3 @@
   outline: 2px solid var(--brand-accent-color-8);
   outline-offset: 5px;
 }
-
-.profileMenu {
-  appearance: none;
-  font-size: 1rem;
-  min-width: 150px;
-  padding-block: 5px;
-  padding-inline-start: 20px;
-  padding-inline-end: 10px;
-  border-radius: 20px;
-}
