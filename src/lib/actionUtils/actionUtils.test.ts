@@ -91,7 +91,7 @@ describe('Test Action Utils', () => {
 
   describe('Test runAction util', () => {
     const runMock = vi.fn();
-    const setParentActionIdMock = vi.fn();
+    const selectParentActionMock = vi.fn();
     const closePaletteMock = vi.fn();
 
     const baseAction = {
@@ -101,19 +101,19 @@ describe('Test Action Utils', () => {
     };
 
     const baseStoreMethods = {
-      setParentActionId: setParentActionIdMock,
+      selectParentAction: selectParentActionMock,
       closePalette: closePaletteMock,
     };
 
     afterEach(() => {
       runMock.mockClear();
-      setParentActionIdMock.mockClear();
+      selectParentActionMock.mockClear();
       closePaletteMock.mockClear();
     });
 
     afterAll(() => {
       runMock.mockReset();
-      setParentActionIdMock.mockReset();
+      selectParentActionMock.mockReset();
       closePaletteMock.mockReset();
     });
 
@@ -145,7 +145,7 @@ describe('Test Action Utils', () => {
           isActive: true,
         },
       });
-      expect(setParentActionIdMock).toBeCalledWith(null);
+      expect(selectParentActionMock).not.toBeCalled();
       expect(closePaletteMock).toBeCalled();
     });
 
@@ -163,7 +163,7 @@ describe('Test Action Utils', () => {
 
       runAction(action, actionsContext, baseStoreMethods);
 
-      expect(setParentActionIdMock).toBeCalledWith('parent-test-action');
+      expect(selectParentActionMock).toBeCalledWith('parent-test-action');
       expect(runMock).not.toBeCalled();
       expect(closePaletteMock).not.toBeCalled();
     });
