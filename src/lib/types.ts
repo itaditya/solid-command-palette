@@ -6,7 +6,7 @@ export type ActionShortcut = string;
 
 export type ActionContext = Record<string, unknown>;
 
-type DynamicContextMap = Record<ActionId, ActionContext>;
+export type DynamicContextMap = Record<ActionId, ActionContext>;
 
 export type ActionsContext = {
   root: ActionContext;
@@ -64,6 +64,7 @@ export type StoreStateWrapped = Store<StoreState>;
 export type StoreMethods = {
   setSearchText: (newValue: string) => void;
   setActionsContext: (actionId: ActionId, newData: ActionContext) => void;
+  resetActionsContext: (actionId: ActionId) => void;
   openPalette: () => void;
   closePalette: () => void;
   togglePalette: () => void;

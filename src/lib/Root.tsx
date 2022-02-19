@@ -1,10 +1,10 @@
 import { Component } from 'solid-js';
-import { createStore } from 'solid-js/store';
+import { createStore, produce } from 'solid-js/store';
 import { createKbdShortcuts } from './createKbdShortcuts';
 import { getActiveParentAction } from './actionUtils/actionUtils';
 import { rootParentActionId } from './constants';
 import { Provider } from './StoreContext';
-import { RootProps, StoreState, StoreMethods, StoreContext } from './types';
+import { RootProps, StoreState, StoreMethods, StoreContext, DynamicContextMap } from './types';
 
 const RootInternal: Component = () => {
   createKbdShortcuts();
@@ -28,7 +28,6 @@ export const Root: Component<RootProps> = (p) => {
   });
 
   const storeMethods: StoreMethods = {
-    // low level methods
     setSearchText(newValue) {
       setState('searchText', newValue);
     },
@@ -36,8 +35,15 @@ export const Root: Component<RootProps> = (p) => {
       // @ts-expect-error need to figure out nested store setters.
       setState('actionsContext', 'dynamic', actionId, newData);
     },
-
-    // high level methods
+    resetActionsContext(actionId) {
+      setState(
+        'actionsContext',
+        'dynamic',
+        produce<DynamicContextMap>((dynamicContext) => {
+          delete dynamicContext[actionId];
+        })
+      );
+    },
     openPalette() {
       setState('visibility', 'opened');
     },

@@ -3,7 +3,7 @@ import { useStore } from './StoreContext';
 import { CreateSyncActionsContext } from './types';
 
 export const createSyncActionsContext: CreateSyncActionsContext = (actionId, callback) => {
-  const [_state, { setActionsContext }] = useStore();
+  const [_state, { setActionsContext, resetActionsContext }] = useStore();
 
   createEffect(() => {
     const data = callback();
@@ -11,6 +11,6 @@ export const createSyncActionsContext: CreateSyncActionsContext = (actionId, cal
   });
 
   onCleanup(() => {
-    setActionsContext(actionId, {});
+    resetActionsContext(actionId);
   });
 };
