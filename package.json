@@ -1,7 +1,8 @@
 {
   "name": "solid-command-palette",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Add a command palette to your Solid.js App",
+  "info": "Boost your users productivity 10x by integrating our command palette.",
   "main": "./pkg-dist/solid-command-palette.cjs.js",
   "module": "./pkg-dist/solid-command-palette.es.js",
   "types": "./pkg-dist/types",
@@ -61,17 +62,21 @@
     "url": "github:itaditya/solid-command-palette"
   },
   "bugs": "https://github.com/itaditya/solid-command-palette/issues",
-  "author": {
-    "name": "Aditya Agarwal",
-    "email": "adityaa803@gmail.com",
-    "url": "https://devadi.netlify.app"
-  },
+  "contributors": [
+    {
+      "name": "Aditya Agarwal",
+      "email": "adityaa803@gmail.com",
+      "url": "https://devadi.netlify.app"
+    }
+  ],
   "keywords": [
     "palette",
     "actions",
     "command",
     "CMD+K",
     "quick menu",
-    "search bar"
+    "search bar",
+    "solidhack",
+    "best_ecosystem"
   ]
 }
