@@ -1,0 +1,14 @@
+.snippet :global(.shiki) {
+  max-width: 100ch;
+  overflow: scroll;
+  padding-block: 20px;
+  padding-inline: 30px;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.snippet :global(.line) {
+  display: inline-block;
+  padding-block: 4px;
+}
