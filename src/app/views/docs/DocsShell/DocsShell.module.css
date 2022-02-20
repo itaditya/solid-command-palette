@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: max-content;
+  width: 300px;
+}
+
+.main {
+  flex: 1;
+}
+
+.loader {
+  font-weight: 300;
+  text-align: center;
+}

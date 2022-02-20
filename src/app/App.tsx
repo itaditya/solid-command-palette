@@ -1,6 +1,7 @@
 import { Component, lazy } from 'solid-js';
 import { useRoutes } from 'solid-app-router';
 import AppShellView from './views/app/AppShell.view';
+import DocsShellView from './views/docs/DocsShell/DocsShell.view';
 import HomeView from './views/Home.view';
 
 const routes = [
@@ -10,7 +11,7 @@ const routes = [
     children: [
       {
         path: '/docs',
-        component: lazy(() => import('./views/docs/DocsShell.view')),
+        component: DocsShellView,
         children: [
           {
             path: '/',
