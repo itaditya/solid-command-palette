@@ -84,7 +84,7 @@
 .logoTextSecondary {
   font-size: 0.9rem;
   color: var(--brand-accent-color-4);
-  padding-left: 2px;
+  padding-inline-start: 2px;
 }
 
 .navWrapper {
@@ -156,8 +156,7 @@
   flex: 1;
   padding-block-end: 100px;
   padding-inline: 30px;
-  border-top: 1px solid var(--brand-accent-color-2);
-  border-bottom: 1px solid var(--brand-accent-color-2);
+  border-block: 1px solid var(--brand-accent-color-2);
   background-color: var(--brand-accent-color-1);
 }
 

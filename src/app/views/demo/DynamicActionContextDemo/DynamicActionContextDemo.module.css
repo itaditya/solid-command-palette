@@ -16,7 +16,7 @@
   user-select: none;
   position: relative;
   color: var(--brand-accent-color-7);
-  border-left: 2px solid transparent;
+  border-inline-start: 2px solid transparent;
   transition: all 0.1s ease-out;
 }
 
