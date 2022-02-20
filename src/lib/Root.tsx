@@ -25,6 +25,7 @@ export const Root: Component<RootProps> = (p) => {
       root: initialActionsContext,
       dynamic: {},
     },
+    components: p.components,
   });
 
   const storeMethods: StoreMethods = {

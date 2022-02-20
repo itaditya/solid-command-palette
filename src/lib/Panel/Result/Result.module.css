@@ -8,7 +8,7 @@
   list-style: none;
 }
 
-.resultItem {
+.resultContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +18,7 @@
   padding-inline: var(--scp-gutter-space-inline);
 }
 
-.resultItem.activeItem {
+.resultContent.active {
   background-color: #f1f5f9;
 }
 

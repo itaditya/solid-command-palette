@@ -1,8 +1,33 @@
 import { Component, For, Show, createEffect } from 'solid-js';
-import { KbdShortcut } from '../..';
-import { ActionId, WrappedAction, WrappedActionList } from '../../types';
+import { useStore } from '../../StoreContext';
+import { KbdShortcut } from '../../KbdShortcut/KbdShortcut';
+import { ActionId, WrappedAction, WrappedActionList, ResultContentProps } from '../../types';
 import utilStyles from '../../utils.module.css';
 import styles from './Result.module.css';
+import { Dynamic } from 'solid-js/web';
+
+const ResultContent: Component<ResultContentProps> = (p) => {
+  return (
+    <div
+      class={styles.resultContent}
+      classList={{
+        [styles.active]: p.isActive,
+      }}
+    >
+      <div>
+        <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>{p.action.title}</h4>
+        <Show when={p.action.subtitle}>
+          <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>{p.action.subtitle}</p>
+        </Show>
+      </div>
+      <div>
+        <Show when={p.action.shortcut}>
+          {(shortcut) => <KbdShortcut class={styles.resultShortcut} shortcut={shortcut} />}
+        </Show>
+      </div>
+    </div>
+  );
+};
 
 type ActiveItemId = null | ActionId;
 type ResultItemElem = undefined | HTMLLIElement;
@@ -17,6 +42,9 @@ interface ResultItemProps {
 const ResultItem: Component<ResultItemProps> = (p) => {
   let resultItemElem: ResultItemElem;
   let isMoving = false;
+
+  const [state] = useStore();
+  const ResultContentComponent = state.components?.ResultContent || ResultContent;
 
   function isActive() {
     return p.action.id === p.activeItemId;
@@ -54,27 +82,13 @@ const ResultItem: Component<ResultItemProps> = (p) => {
       role="option"
       ref={resultItemElem}
       id={`scp-result-item-${p.action.id}`}
-      class={styles.resultItem}
-      classList={{
-        [styles.activeItem]: isActive(),
-      }}
       aria-selected={isActive()}
       onClick={[p.onActionItemSelect, p.action]}
       onMouseMove={[handleMouseMove, p.action]}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
     >
-      <div>
-        <h4 class={`${styles.resultTitle} ${utilStyles.stripSpace}`}>{p.action.title}</h4>
-        <Show when={p.action.subtitle}>
-          <p class={`${styles.resultSubtitle} ${utilStyles.stripSpace}`}>{p.action.subtitle}</p>
-        </Show>
-      </div>
-      <div>
-        <Show when={p.action.shortcut}>
-          {(shortcut) => <KbdShortcut class={styles.resultShortcut} shortcut={shortcut} />}
-        </Show>
-      </div>
+      <Dynamic component={ResultContentComponent} isActive={isActive()} action={p.action} />
     </li>
   );
 };

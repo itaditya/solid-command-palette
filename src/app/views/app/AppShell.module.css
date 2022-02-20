@@ -17,6 +17,7 @@
   --brand-accent-color-6: #454754;
   --brand-accent-color-7: #333;
   --brand-accent-color-8: #111;
+  --brand-body-font: 'Nunito', sans-serif;
 
   margin: 0;
   padding: 0;
@@ -27,7 +28,7 @@
 :global #root {
   height: 100%;
   outline-color: var(--brand-accent-color-8);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--brand-body-font);
 }
 
 .wrapper {

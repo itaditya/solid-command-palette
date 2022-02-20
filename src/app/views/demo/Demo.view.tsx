@@ -1,8 +1,10 @@
 import { Component, createSignal, Show } from 'solid-js';
+import { useSearchParams } from 'solid-app-router';
 import { Root, CommandPalette, KbdShortcut } from '../../../lib';
 import { actions } from './actions';
 import { NestedActionDemo } from './NestedActionDemo/NestedActionDemo';
 import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
+import { components } from './CustomComponentsDemo/components';
 import { Profile } from './types';
 import utilStyles from '../../utils.module.css';
 import demoStyles from './demoUtils.module.css';
@@ -12,6 +14,7 @@ const DemoView: Component = () => {
   const [count, setCount] = createSignal(0);
   const [muted, setMuted] = createSignal(false);
   const [profile, setProfile] = createSignal<Profile>('personal');
+  const [searchParams] = useSearchParams();
 
   const increment = () => {
     setCount((prev) => (prev += 1));
@@ -32,6 +35,23 @@ const DemoView: Component = () => {
     setProfile(newProfile);
   };
 
+  const getCustomProps = () => {
+    const features = searchParams.feat || [];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const props: Record<string, any> = {};
+
+    if (features.includes('components')) {
+      props.components = components;
+    }
+
+    if (features.includes('placeholder')) {
+      props.placeholder = 'Search for an action...';
+    }
+
+    return props;
+  };
+
   const actionsContext = {
     increment,
     muted,
@@ -39,10 +59,12 @@ const DemoView: Component = () => {
     setProfile,
   };
 
+  const customProps = getCustomProps();
+
   return (
-    <Root actions={actions} actionsContext={actionsContext}>
+    <Root actions={actions} actionsContext={actionsContext} components={customProps.components}>
       <div class={styles.demoWrapper}>
-        <CommandPalette />
+        <CommandPalette searchPlaceholder={customProps.placeholder} />
         <section class={styles.introSection}>
           <h1 class={styles.introHeading}>
             <span>Bring it up by pressing</span>

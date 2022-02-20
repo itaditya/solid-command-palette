@@ -1,3 +1,4 @@
+import { Component } from 'solid-js';
 import { DeepReadonly, Store } from 'solid-js/store';
 
 export type ActionId = string;
@@ -8,18 +9,18 @@ export type ActionContext = Record<string, unknown>;
 
 export type DynamicContextMap = Record<ActionId, ActionContext>;
 
-export type ActionsContext = {
+export interface ActionsContext {
   root: ActionContext;
   dynamic: DynamicContextMap;
-};
+}
 
-export type RunArgs = {
+export interface RunArgs {
   actionId: ActionId;
   rootContext: ActionContext;
   dynamicContext: ActionContext;
-};
+}
 
-export type Action = {
+export interface Action {
   id: ActionId;
   parentActionId: ParentActionId;
   title: string;
@@ -34,7 +35,7 @@ export type Action = {
    */
   cond?: (args: RunArgs) => boolean;
   run?: (args: RunArgs) => void;
-};
+}
 
 export type PartialAction = Partial<Action> & {
   id: ActionId;
@@ -46,22 +47,33 @@ export type ActionsList = Array<Action>;
 export type WrappedAction = DeepReadonly<Action>;
 export type WrappedActionList = Array<WrappedAction>;
 
-export type RootProps = {
+export interface ResultContentProps {
+  action: WrappedAction;
+  isActive: boolean;
+}
+
+export interface Components {
+  ResultContent: Component<ResultContentProps>;
+}
+
+export interface RootProps {
   actions: Actions;
   actionsContext: ActionContext;
-};
+  components?: Components;
+}
 
-export type StoreState = {
+export interface StoreState {
   visibility: 'opened' | 'closed';
   searchText: string;
   activeParentActionIdList: Array<ActionId>;
   actions: Actions;
   actionsContext: ActionsContext;
-};
+  components?: Components;
+}
 
 export type StoreStateWrapped = Store<StoreState>;
 
-export type StoreMethods = {
+export interface StoreMethods {
   setSearchText: (newValue: string) => void;
   setActionsContext: (actionId: ActionId, newData: ActionContext) => void;
   resetActionsContext: (actionId: ActionId) => void;
@@ -71,7 +83,7 @@ export type StoreMethods = {
   selectParentAction: (parentActionId: ActionId) => void;
   revertParentAction: () => void;
   resetParentAction: () => void;
-};
+}
 
 export type StoreContext = [StoreStateWrapped, StoreMethods];
 

@@ -31,7 +31,11 @@ type UserInteraction =
   | 'navigate-mouse'
   | 'navigate-scroll-assist';
 
-const CommandPaletteInternal: Component = () => {
+export interface CommandPaletteProps {
+  searchPlaceholder?: string;
+}
+
+const CommandPaletteInternal: Component<CommandPaletteProps> = (p) => {
   const [state, storeMethods] = useStore();
   const { closePalette, setSearchText, revertParentAction } = storeMethods;
   const resultsList = createSearchResultList();
@@ -286,7 +290,7 @@ const CommandPaletteInternal: Component = () => {
               autocomplete="off"
               autocapitalize="off"
               spellcheck={false}
-              placeholder="Type a command or search..."
+              placeholder={p.searchPlaceholder || 'Type a command or search...'}
               data-cp-kbd-shortcuts="disabled"
               ref={searchInputElem}
               value={state.searchText}
@@ -319,7 +323,7 @@ const CommandPaletteInternal: Component = () => {
   );
 };
 
-export const CommandPalette: Component = () => {
+export const CommandPalette: Component<CommandPaletteProps> = (p) => {
   const [state] = useStore();
 
   return (
@@ -331,7 +335,7 @@ export const CommandPalette: Component = () => {
         exitActiveClass={styles.animExitActive}
       >
         <Show when={state.visibility === 'opened'}>
-          <CommandPaletteInternal />
+          <CommandPaletteInternal {...p} />
         </Show>
       </Transition>
     </CommandPalettePortal>
