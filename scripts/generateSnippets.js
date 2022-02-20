@@ -34,14 +34,15 @@ async function writeHighlightedSnippet(snippetId, highlightedSnippet) {
 async function generateSnippet(highlighter, snippetId) {
   const plainSnippet = await readPlainSnippet(snippetId);
   const highlightedSnippet = highlighter.codeToHtml(plainSnippet, {
-    lang: 'ts',
+    lang: 'tsx',
   });
   await writeHighlightedSnippet(snippetId, highlightedSnippet);
 }
 
 async function generateSnippets() {
   const highlighter = await shiki.getHighlighter({
-    theme: 'nord',
+    theme: 'github-dark',
+    langs: ['tsx'],
   });
 
   const snippetIdList = await getSnippetIdList();
