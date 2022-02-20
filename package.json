@@ -9,7 +9,7 @@
   "sideEffects": false,
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run gen:snippets",
+    "build": "vite build",
     "serve": "vite preview",
     "format": "prettier --write .",
     "lint:format": "prettier --check .",

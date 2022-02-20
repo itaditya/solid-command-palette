@@ -1,1 +1,0 @@
-# This folder will get copied to dist so that the generateSnippets.js can run without having to create snippets folder itself.

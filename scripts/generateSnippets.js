@@ -27,7 +27,7 @@ async function readPlainSnippet(snippetId) {
 }
 
 async function writeHighlightedSnippet(snippetId, highlightedSnippet) {
-  const snippetFilePath = path.join(process.cwd(), 'dist', 'snippets', `${snippetId}.html`);
+  const snippetFilePath = path.join(process.cwd(), 'public', 'snippets', `${snippetId}.html`);
   await fs.writeFile(snippetFilePath, highlightedSnippet, 'utf8');
 }
 
