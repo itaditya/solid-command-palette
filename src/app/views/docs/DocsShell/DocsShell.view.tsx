@@ -1,35 +1,47 @@
 import { Component, Suspense } from 'solid-js';
-import { NavLink, Outlet } from 'solid-app-router';
+import { NavLink, NavLinkProps, Outlet } from 'solid-app-router';
 import utilStyles from '../../../utils.module.css';
 import styles from './DocsShell.module.css';
 
+const SidebarNavLink: Component<NavLinkProps> = (p) => {
+  return (
+    <NavLink class={styles.navLink} activeClass={styles.activeNavLink} {...p}>
+      {p.children}
+    </NavLink>
+  );
+};
+
 const Loader: Component = () => {
-  return <h2 class={`${styles.loader} ${utilStyles.nonFlickerLoader} ${utilStyles.stripSpace}`}>Loading...</h2>;
+  return (
+    <h2 class={`${styles.loader} ${utilStyles.nonFlickerLoader} ${utilStyles.stripSpace}`}>
+      Loading...
+    </h2>
+  );
 };
 
 const DocsShellView: Component = () => {
   return (
     <section class={styles.wrapper}>
       <aside class={styles.sidebar}>
-        <nav>
-          <h2>Introduction</h2>
-          <ul>
+        <nav class={styles.sidebarNavGroup}>
+          <h3>Introduction</h3>
+          <ul class={styles.sidebarNavList}>
             <li>
-              <NavLink href="/docs/overview">Overview</NavLink>
+              <SidebarNavLink href="/docs/overview">Overview</SidebarNavLink>
             </li>
             <li>
-              <NavLink href="/docs/installation">Installation</NavLink>
+              <SidebarNavLink href="/docs/installation">Installation</SidebarNavLink>
             </li>
           </ul>
         </nav>
-        <nav>
-          <h2>API</h2>
-          <ul>
+        <nav class={styles.sidebarNavGroup}>
+          <h3>API</h3>
+          <ul class={styles.sidebarNavList}>
             <li>
-              <NavLink href="/docs/api#root">Root</NavLink>
+              <SidebarNavLink href="/docs/api/root">Root</SidebarNavLink>
             </li>
             <li>
-              <NavLink href="/docs/api#define-action">defineAction</NavLink>
+              <SidebarNavLink href="/docs/api/define-action">defineAction</SidebarNavLink>
             </li>
           </ul>
         </nav>

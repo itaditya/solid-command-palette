@@ -1,5 +1,5 @@
 .snippet :global(.shiki) {
-  max-width: 100ch;
+  max-width: 80ch;
   overflow: scroll;
   padding-block: 20px;
   padding-inline: 30px;

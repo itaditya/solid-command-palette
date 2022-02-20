@@ -25,7 +25,7 @@ const routes = [
             path: '/installation',
             component: lazy(() => import('./views/docs/introduction/Installation.view')),
           },
-          { path: '/api', component: lazy(() => import('./views/docs/Api.view')) },
+          { path: '/api/*', component: lazy(() => import('./views/docs/Api/Api.view')) },
         ],
       },
       {

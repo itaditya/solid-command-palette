@@ -1,13 +1,50 @@
 .wrapper {
   display: flex;
-  gap: 30px;
+  gap: 100px;
+}
+
+.wrapper :is(h1, h2, h3, h4, h5, h6, p, ul) {
+  margin: 0;
+  padding: 0;
 }
 
 .sidebar {
   position: sticky;
   top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   height: max-content;
-  width: 300px;
+  width: 250px;
+}
+
+.sidebarNavGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebarNavList {
+  list-style: none;
+}
+
+.navLink {
+  text-decoration: none;
+  display: block;
+  color: var(--brand-accent-color-6);
+  padding-block: 8px;
+  padding-inline-start: 10px;
+  border-radius: 6px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.navLink:not(.activeNavLink):hover {
+  background-color: var(--brand-accent-color-2);
+}
+
+.activeNavLink {
+  background-color: var(--brand-accent-color-7);
+  color: var(--brand-bg-color);
 }
 
 .main {
