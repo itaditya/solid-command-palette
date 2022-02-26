@@ -1,10 +1,13 @@
 import { Component } from 'solid-js';
+import { Snippet } from '../Snippet/Snippet';
+import docsStyles from '../docsUtils.module.css';
 
 const InstallationView: Component = () => {
   return (
-    <div>
+    <section class={docsStyles.section}>
       <h2>Installation</h2>
-    </div>
+      <Snippet snippetId="installation-setup" />
+    </section>
   );
 };
 

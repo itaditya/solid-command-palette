@@ -1,0 +1,11 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.text {
+  max-width: 70ch;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}

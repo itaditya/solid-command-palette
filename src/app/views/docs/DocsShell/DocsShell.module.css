@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   gap: 100px;
+  padding-top: 30px;
 }
 
 .wrapper :is(h1, h2, h3, h4, h5, h6, p, ul, ol) {

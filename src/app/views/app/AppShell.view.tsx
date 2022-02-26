@@ -1,6 +1,8 @@
 import { Component, Show } from 'solid-js';
-import { Link, NavLink, NavLinkProps, Outlet, useMatch } from 'solid-app-router';
+import { Link, NavLink, NavLinkProps, Outlet, useMatch, useNavigate } from 'solid-app-router';
+import { Root, CommandPalette } from '../../../lib';
 import { SocialIcon, socialsData } from './SocialIcons';
+import { actions } from './actions';
 import utilStyles from '../../utils.module.css';
 import styles from './AppShell.module.css';
 
@@ -12,17 +14,40 @@ const HeaderNavLink: Component<NavLinkProps> = (p) => {
   );
 };
 
-const MaintenanceContent: Component = () => {
+const Main: Component = () => {
   const isDemo = useMatch(() => '/demo');
+  const isDocs = useMatch(() => '/docs/*');
+  const navigate = useNavigate();
+
+  function checkMaintenanceContentShown() {
+    if (isDemo() || isDocs()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  const actionsContext = {
+    navigate,
+  };
+
   return (
-    <Show when={!isDemo()}>
-      <div class={styles.maintenanceContent}>
-        <h2>This page is under construction. Meanwhile check out the demo.</h2>
-        <Link class={utilStyles.demoAction} href="/demo">
-          Try Demo
-        </Link>
-      </div>
-    </Show>
+    <main class={styles.main}>
+      <Show when={checkMaintenanceContentShown()}>
+        <div class={styles.maintenanceContent}>
+          <h2>This page is under construction. Meanwhile check out the demo.</h2>
+          <Link class={utilStyles.demoAction} href="/demo">
+            Try Demo
+          </Link>
+        </div>
+      </Show>
+      <Show when={!isDemo()} fallback={<Outlet />}>
+        <Root actions={actions} actionsContext={actionsContext}>
+          <CommandPalette />
+          <Outlet />
+        </Root>
+      </Show>
+    </main>
   );
 };
 
@@ -60,10 +85,7 @@ const AppShellView: Component = () => {
           </ul>
         </div>
       </header>
-      <main class={styles.main}>
-        <MaintenanceContent />
-        <Outlet />
-      </main>
+      <Main />
       <footer class={styles.footer}>
         <span>Made by</span>
         <a
