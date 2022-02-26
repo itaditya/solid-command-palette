@@ -1,6 +1,7 @@
 node_modules
 .vercel
 dist
+public
 pkg-dist
 coverage
 .DS_Store
