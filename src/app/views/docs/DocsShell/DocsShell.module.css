@@ -3,9 +3,13 @@
   gap: 100px;
 }
 
-.wrapper :is(h1, h2, h3, h4, h5, h6, p, ul) {
+.wrapper :is(h1, h2, h3, h4, h5, h6, p, ul, ol) {
   margin: 0;
   padding: 0;
+}
+
+.wrapper :is(ul, ol) {
+  list-style: none;
 }
 
 .sidebar {
@@ -25,7 +29,9 @@
 }
 
 .sidebarNavList {
-  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .navLink {
