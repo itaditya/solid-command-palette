@@ -4,7 +4,6 @@ const homeAction = defineAction({
   id: 'navigate-home',
   title: 'Go to Home',
   subtitle: 'Navigate to the homepage.',
-  shortcut: 'g h',
   run({ rootContext }) {
     if (typeof rootContext.navigate === 'function') {
       rootContext.navigate('/');
@@ -52,7 +51,7 @@ const githubAction = defineAction({
 
 const npmAction = defineAction({
   id: 'navigate-npm',
-  title: 'Go to NPM package',
+  title: 'Go to npm package',
   keywords: ['oss', 'package', 'pkg'],
   shortcut: 'g n',
   run: () => {
