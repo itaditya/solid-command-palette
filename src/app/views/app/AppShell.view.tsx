@@ -16,7 +16,7 @@ const MaintenanceContent: Component = () => {
   const isDemo = useMatch(() => '/demo');
   return (
     <Show when={!isDemo()}>
-      <div>
+      <div class={styles.maintenanceContent}>
         <h2>This page is under construction. Meanwhile check out the demo.</h2>
         <Link class={utilStyles.demoAction} href="/demo">
           Try Demo

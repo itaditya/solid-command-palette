@@ -3,7 +3,7 @@ import { Component } from 'solid-js';
 const InstallationView: Component = () => {
   return (
     <div>
-      <h2>Installation World</h2>
+      <h2>Installation</h2>
     </div>
   );
 };

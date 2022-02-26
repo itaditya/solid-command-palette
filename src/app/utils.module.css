@@ -33,3 +33,16 @@
   padding: 10px 20px;
   outline-offset: 3px;
 }
+
+.nonFlickerLoader {
+  visibility: hidden;
+  animation-name: anim-loading;
+  animation-delay: 500ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes anim-loading {
+  to {
+    visibility: visible;
+  }
+}

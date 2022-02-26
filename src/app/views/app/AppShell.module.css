@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-:global html {
-  height: 100%;
-}
-
 :global body {
   --brand-fg-color: #000;
   --brand-bg-color: #fff;
@@ -21,12 +17,10 @@
 
   margin: 0;
   padding: 0;
-  height: 100%;
   font-family: sans-serif;
 }
 
 :global #root {
-  height: 100%;
   outline-color: var(--brand-accent-color-8);
   font-family: var(--brand-body-font);
 }
@@ -34,7 +28,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100vh;
   background-color: var(--brand-bg-color);
 }
 
@@ -158,6 +152,10 @@
   padding-inline: 30px;
   border-block: 1px solid var(--brand-accent-color-2);
   background-color: var(--brand-accent-color-1);
+}
+
+.maintenanceContent {
+  margin-block-end: 50px;
 }
 
 .footer {

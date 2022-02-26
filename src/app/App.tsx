@@ -1,20 +1,23 @@
 import { Component, lazy } from 'solid-js';
-import { useRoutes } from 'solid-app-router';
+import { RouteDefinition, useRoutes } from 'solid-app-router';
 import AppShellView from './views/app/AppShell.view';
+import DocsShellView from './views/docs/DocsShell/DocsShell.view';
+import DocsView from './views/docs/Docs.view';
+import ApiView from './views/docs/Api/Api.view';
 import HomeView from './views/Home.view';
 
-const routes = [
+const routes: Array<RouteDefinition> = [
   {
     path: '/',
     component: AppShellView,
     children: [
       {
         path: '/docs',
-        component: lazy(() => import('./views/docs/DocsShell.view')),
+        component: DocsShellView,
         children: [
           {
             path: '/',
-            component: lazy(() => import('./views/docs/Docs.view')),
+            component: DocsView,
           },
           {
             path: '/overview',
@@ -24,7 +27,17 @@ const routes = [
             path: '/installation',
             component: lazy(() => import('./views/docs/introduction/Installation.view')),
           },
-          { path: '/api', component: lazy(() => import('./views/docs/Api.view')) },
+          {
+            path: '/api',
+            children: [
+              { path: '/', component: ApiView },
+              { path: '/root', component: lazy(() => import('./views/docs/Api/ApiRoot.view')) },
+              {
+                path: '/define-action',
+                component: lazy(() => import('./views/docs/Api/ApiDefineAction.view')),
+              },
+            ],
+          },
         ],
       },
       {

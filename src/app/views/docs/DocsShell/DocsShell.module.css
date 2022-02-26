@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  gap: 100px;
+}
+
+.wrapper :is(h1, h2, h3, h4, h5, h6, p, ul, ol) {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper :is(ul, ol) {
+  list-style: none;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  height: max-content;
+  width: 250px;
+}
+
+.sidebarNavGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebarNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.navLink {
+  text-decoration: none;
+  display: block;
+  color: var(--brand-accent-color-6);
+  padding-block: 8px;
+  padding-inline-start: 10px;
+  border-radius: 6px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.navLink:not(.activeNavLink):hover {
+  background-color: var(--brand-accent-color-2);
+}
+
+.activeNavLink {
+  background-color: var(--brand-accent-color-7);
+  color: var(--brand-bg-color);
+}
+
+.main {
+  flex: 1;
+}
+
+.loader {
+  font-weight: 300;
+  text-align: center;
+}
