@@ -62,11 +62,11 @@ test.describe('Test basic interactions of Command Palette', () => {
     await expect(page.locator('[role="combobox"]')).not.toContainText('Unmute');
 
     await page.keyboard.press('Escape');
-    await page.check('label[for="audio-mute"]');
+    await page.check('label >> text=Audible');
     await triggerCommandPaletteOpen(page);
     await page.click('[role="combobox"] >> text=Unmute');
 
-    const isUnmuted = await page.isChecked('label[for="audio-mute"]');
+    const isUnmuted = await page.isChecked('label >> text=Audible');
     expect(isUnmuted).toBeFalsy();
   });
 
