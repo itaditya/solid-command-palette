@@ -1,8 +1,8 @@
 import { test, expect, Page } from '@playwright/test';
+import { checkMac } from './testUtils/checkMac';
 
 async function triggerCommandPaletteOpen(page: Page) {
-  const platform = await page.evaluate(() => window.navigator.platform);
-  const isMac = platform.includes('Mac');
+  const isMac = await checkMac(page);
 
   if (isMac) {
     await page.keyboard.press('Meta+k');

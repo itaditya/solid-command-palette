@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { checkMac } from './testUtils/checkMac';
 
 test.describe('Test basic interactions of Demo Page', () => {
   test.beforeEach(async ({ page }) => {
@@ -13,7 +14,10 @@ test.describe('Test basic interactions of Demo Page', () => {
   test('should be able to toggle mute', async ({ page }) => {
     const unmuteLabelLocator = page.locator('label >> text=Audible');
     const muteLabelLocator = page.locator('label >> text=Muted');
-    const kbdShortcutLocator = page.locator('kbd >> text=⌘U').first();
+
+    const isMac = await checkMac(page);
+    const shortcutPrefix = isMac ? '⌘' : 'Ctrl';
+    const kbdShortcutLocator = page.locator(`kbd >> text=${shortcutPrefix}U`).first();
 
     await unmuteLabelLocator.check();
     await expect(muteLabelLocator).toBeChecked();
