@@ -17,7 +17,7 @@ test.describe('Test basic interactions of Command Palette', () => {
     await triggerCommandPaletteOpen(page);
 
     await page.click('text=Increment Counter by 1');
-    await expect(page.locator('strong:has-text("1")')).toBeVisible();
+    await expect(page.locator('strong >> text=1')).toBeVisible();
   });
 
   test('should be able to search for actions in command palette', async ({ page }) => {
@@ -45,7 +45,7 @@ test.describe('Test basic interactions of Command Palette', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
 
-    let optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+    const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
     let isThirdOptionSelected = await optionLocator.nth(2).getAttribute('aria-selected');
 
     expect(isThirdOptionSelected).toEqual('true');
@@ -53,7 +53,6 @@ test.describe('Test basic interactions of Command Palette', () => {
     // Navigate to second action by pressing Up key once.
     await page.keyboard.press('ArrowUp');
 
-    optionLocator = page.locator('[role="combobox"] >> [role="option"]');
     isThirdOptionSelected = await optionLocator.nth(2).getAttribute('aria-selected');
     const isSecondOptionSelected = await optionLocator.nth(1).getAttribute('aria-selected');
 
