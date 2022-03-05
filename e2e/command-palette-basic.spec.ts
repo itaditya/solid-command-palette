@@ -26,7 +26,7 @@ test.describe('Test basic interactions of Command Palette', () => {
     const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
 
     const optionsNum = await optionLocator.count();
-    await expect(optionsNum).toBe(1);
+    expect(optionsNum).toBe(1);
 
     await expect(optionLocator.first()).toContainText('Go to GitHub repo');
   });
@@ -42,7 +42,7 @@ test.describe('Test basic interactions of Command Palette', () => {
     let optionLocator = page.locator('[role="combobox"] >> [role="option"]');
     let isThirdOptionSelected = await optionLocator.nth(2).getAttribute('aria-selected');
 
-    await expect(isThirdOptionSelected).toEqual('true');
+    expect(isThirdOptionSelected).toEqual('true');
 
     // Navigate to second action by pressing Up key once.
     await page.keyboard.press('ArrowUp');
@@ -51,8 +51,8 @@ test.describe('Test basic interactions of Command Palette', () => {
     isThirdOptionSelected = await optionLocator.nth(2).getAttribute('aria-selected');
     const isSecondOptionSelected = await optionLocator.nth(1).getAttribute('aria-selected');
 
-    await expect(isThirdOptionSelected).toEqual('false');
-    await expect(isSecondOptionSelected).toEqual('true');
+    expect(isThirdOptionSelected).toEqual('false');
+    expect(isSecondOptionSelected).toEqual('true');
   });
 
   test('should only render Unmute Audio action when muted', async ({ page }) => {
@@ -67,7 +67,7 @@ test.describe('Test basic interactions of Command Palette', () => {
     await page.click('[role="combobox"] >> text=Unmute');
 
     const isUnmuted = await page.isChecked('label[for="audio-mute"]');
-    await expect(isUnmuted).toBeFalsy();
+    expect(isUnmuted).toBeFalsy();
   });
 
   test('should be able to run nested actions', async ({ page }) => {
@@ -84,11 +84,11 @@ test.describe('Test basic interactions of Command Palette', () => {
     await expect(searchLocator).toHaveValue('');
 
     const optionsNum = await optionLocator.count();
-    await expect(optionsNum).toBe(2);
+    expect(optionsNum).toBe(2);
 
     await optionLocator.locator('text=Set to Work profile').click();
 
-    const profileStatusLocator = await page
+    const profileStatusLocator = page
       .locator('section', {
         hasText: 'Nested actions',
       })
