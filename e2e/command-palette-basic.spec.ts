@@ -1,8 +1,14 @@
 import { test, expect, Page } from '@playwright/test';
+import { checkMac } from './testUtils/checkMac';
 
 async function triggerCommandPaletteOpen(page: Page) {
-  await page.keyboard.press('Meta+k'); // on Mac
-  await page.keyboard.press('Control+k'); // on Linux
+  const isMac = await checkMac(page);
+
+  if (isMac) {
+    await page.keyboard.press('Meta+k');
+  } else {
+    await page.keyboard.press('Control+k');
+  }
 }
 
 test.describe('Test basic interactions of Command Palette', () => {
