@@ -2,11 +2,21 @@ import { Component, createResource } from 'solid-js';
 import styles from './Snippet.module.css';
 
 type SnippetId = string;
+type SnippetContent = string;
+
+const snippetsCache = new Map<SnippetId, SnippetContent>();
 
 async function fetchSnippet(snippetId: SnippetId) {
+  if (snippetsCache.has(snippetId)) {
+    return snippetsCache.get(snippetId);
+  }
+
   const apiUrl = `/snippets/${snippetId}.html`;
   const response = await fetch(apiUrl);
-  const snippet = await response.text();
+  const snippet = await response.text() as SnippetContent;
+
+  snippetsCache.set(snippetId, snippet);
+
   return snippet;
 }
 
