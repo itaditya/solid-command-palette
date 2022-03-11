@@ -1,6 +1,6 @@
 import { Component, Suspense } from 'solid-js';
-import { NavLink, NavLinkProps, Outlet } from 'solid-app-router';
-import utilStyles from '../../../utils.module.css';
+import { NavLink, NavLinkProps, Outlet, useIsRouting } from 'solid-app-router';
+import { Loader } from '../../../shared/Loader/Loader';
 import styles from './DocsShell.module.css';
 
 const SidebarNavLink: Component<NavLinkProps> = (p) => {
@@ -11,15 +11,9 @@ const SidebarNavLink: Component<NavLinkProps> = (p) => {
   );
 };
 
-const Loader: Component = () => {
-  return (
-    <h2 class={`${styles.loader} ${utilStyles.nonFlickerLoader} ${utilStyles.stripSpace}`}>
-      Loading...
-    </h2>
-  );
-};
-
 const DocsShellView: Component = () => {
+  const isRouting = useIsRouting();
+
   return (
     <section class={styles.wrapper}>
       <aside class={styles.sidebar}>
@@ -45,10 +39,15 @@ const DocsShellView: Component = () => {
             </li>
           </ul>
         </nav>
+        <Show when={isRouting()}>
+          <Loader />
+        </Show>
       </aside>
       <main class={styles.main}>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
+        <Suspense fallback={<Loader size="large" />}>
+          <div class={styles.mainContent}>
+            <Outlet />
+          </div>
         </Suspense>
       </main>
     </section>

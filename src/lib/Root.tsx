@@ -93,10 +93,8 @@ export const Root: Component<RootProps> = (p) => {
 
   return (
     <Provider value={store}>
-      <div>
-        <RootInternal />
-        {p.children}
-      </div>
+      <RootInternal />
+      {p.children}
     </Provider>
   );
 };

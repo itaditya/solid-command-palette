@@ -147,6 +147,8 @@
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding-block-end: 100px;
   padding-inline: 30px;

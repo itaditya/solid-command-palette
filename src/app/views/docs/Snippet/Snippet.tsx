@@ -13,7 +13,7 @@ async function fetchSnippet(snippetId: SnippetId) {
 
   const apiUrl = `/snippets/${snippetId}.html`;
   const response = await fetch(apiUrl);
-  const snippet = await response.text() as SnippetContent;
+  const snippet = (await response.text()) as SnippetContent;
 
   snippetsCache.set(snippetId, snippet);
 

@@ -36,12 +36,12 @@
 
 .nonFlickerLoader {
   visibility: hidden;
-  animation-name: anim-loading;
+  animation-name: anim-non-flicker-loader;
   animation-delay: 500ms;
   animation-fill-mode: forwards;
 }
 
-@keyframes anim-loading {
+@keyframes anim-non-flicker-loader {
   to {
     visibility: visible;
   }

@@ -1,0 +1,30 @@
+.wrapper {
+  display: contents;
+}
+
+.loader {
+  color: var(--brand-accent-color-5);
+  animation-name: anim-rotating-loader;
+  animation-duration: 600ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+
+.loader[data-size='normal'] {
+  font-size: 2rem;
+}
+
+.loader[data-size='large'] {
+  font-size: 4rem;
+}
+
+@keyframes anim-rotating-loader {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
