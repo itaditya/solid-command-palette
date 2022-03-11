@@ -161,7 +161,6 @@ const CommandPaletteInternal: Component<CommandPaletteProps> = (p) => {
     event.preventDefault();
 
     const actionsList = resultsList();
-    // @ts-expect-error TS has issues with `.at`
     const lastAction = actionsList.at(-1);
 
     if (lastAction) {

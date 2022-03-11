@@ -83,8 +83,7 @@ export function getShortcutHandlersMap(
 type ActiveParentActionIdListArg = Readonly<Array<ActionId>>;
 
 export function getActiveParentAction(activeParentActionIdList: ActiveParentActionIdListArg) {
-  // @ts-expect-error TS has issues with `.at`
-  const activeId: ActionId = activeParentActionIdList.at(-1);
+  const activeId = activeParentActionIdList.at(-1) || rootParentActionId;
   const isRoot = activeId === rootParentActionId;
 
   return {
