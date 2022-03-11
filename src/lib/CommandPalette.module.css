@@ -101,6 +101,7 @@
   }
 
   .panel {
+    height: max-content;
     max-height: 350px;
   }
 }
