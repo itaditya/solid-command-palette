@@ -21,7 +21,7 @@
   flex-direction: column;
   gap: 30px;
   height: 100%;
-  width: 250px;
+  min-width: 250px;
 }
 
 .sidebarNavGroup {
@@ -65,4 +65,5 @@
 .mainContent {
   flex: 1;
   height: 100%;
+  width: 0; /* Ensures width not exceed parent */
 }
