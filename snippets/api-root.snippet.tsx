@@ -1,10 +1,31 @@
-import { Root } from 'solid-command-palette';
+import { Root, CommandPalette } from 'solid-command-palette';
 
-const actionsContext = {
-  increment,
-  muted,
-  unmuteAudio,
-  setProfile,
+/* map of all actions */
+const actions = {
+  [myAction.id]: myAction,
+  /* ... other actions ... */
 };
 
-<Root actionsContext={actionsContext} />;
+/* share App's signals and methods with actions */
+const actionsContext = {
+  count,
+  incrementCount,
+  deleteMessage,
+};
+
+/* Custom components to render in palette */
+const components = {
+  /* content for action in search result list */
+  ResultContent,
+};
+
+const props = {
+  actions,
+  actionsContext,
+  components,
+};
+
+<Root {...props}>
+  <CommandPalette />
+  {/* ... your app code ... */}
+</Root>;

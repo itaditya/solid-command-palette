@@ -1,11 +1,32 @@
-<pre class="shiki" style="background-color: #0d1117"><code><span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> { Root } </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&#39;solid-command-palette&#39;</span><span style="color: #C9D1D9">;</span></span>
+<pre class="shiki" style="background-color: #0d1117"><code><span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> { Root, CommandPalette } </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&#39;solid-command-palette&#39;</span><span style="color: #C9D1D9">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">actionsContext</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
-<span class="line"><span style="color: #C9D1D9">  increment,</span></span>
-<span class="line"><span style="color: #C9D1D9">  muted,</span></span>
-<span class="line"><span style="color: #C9D1D9">  unmuteAudio,</span></span>
-<span class="line"><span style="color: #C9D1D9">  setProfile,</span></span>
+<span class="line"><span style="color: #8B949E">/* map of all actions */</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">actions</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">  [myAction.id]: myAction,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">/* ... other actions ... */</span></span>
 <span class="line"><span style="color: #C9D1D9">};</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #C9D1D9">&lt;</span><span style="color: #7EE787">Root</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">actionsContext</span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9">{actionsContext} /&gt;;</span></span>
+<span class="line"><span style="color: #8B949E">/* share App&#39;s signals and methods with actions */</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">actionsContext</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">  count,</span></span>
+<span class="line"><span style="color: #C9D1D9">  incrementCount,</span></span>
+<span class="line"><span style="color: #C9D1D9">  deleteMessage,</span></span>
+<span class="line"><span style="color: #C9D1D9">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">/* Custom components to render in palette */</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">components</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">/* content for action in search result list */</span></span>
+<span class="line"><span style="color: #C9D1D9">  ResultContent,</span></span>
+<span class="line"><span style="color: #C9D1D9">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">props</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">  actions,</span></span>
+<span class="line"><span style="color: #C9D1D9">  actionsContext,</span></span>
+<span class="line"><span style="color: #C9D1D9">  components,</span></span>
+<span class="line"><span style="color: #C9D1D9">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">&lt;</span><span style="color: #7EE787">Root</span><span style="color: #C9D1D9"> {</span><span style="color: #FF7B72">...</span><span style="color: #C9D1D9">props}&gt;</span></span>
+<span class="line"><span style="color: #C9D1D9">  &lt;</span><span style="color: #7EE787">CommandPalette</span><span style="color: #C9D1D9"> /&gt;</span></span>
+<span class="line"><span style="color: #C9D1D9">  {</span><span style="color: #8B949E">/* ... your app code ... */</span><span style="color: #C9D1D9">}</span></span>
+<span class="line"><span style="color: #C9D1D9">&lt;/</span><span style="color: #7EE787">Root</span><span style="color: #C9D1D9">&gt;;</span></span>
 <span class="line"></span></code></pre>

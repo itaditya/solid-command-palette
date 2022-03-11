@@ -32,10 +32,13 @@ const DocsShellView: Component = () => {
           <h3>API</h3>
           <ul class={styles.sidebarNavList}>
             <li>
+              <SidebarNavLink href="/docs/api/define-action">defineAction</SidebarNavLink>
+            </li>
+            <li>
               <SidebarNavLink href="/docs/api/root">Root</SidebarNavLink>
             </li>
             <li>
-              <SidebarNavLink href="/docs/api/define-action">defineAction</SidebarNavLink>
+              <SidebarNavLink href="/docs/api/command-palette">CommandPalette</SidebarNavLink>
             </li>
           </ul>
         </nav>

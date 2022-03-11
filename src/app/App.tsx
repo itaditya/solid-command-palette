@@ -31,10 +31,14 @@ const routes: Array<RouteDefinition> = [
             path: '/api',
             children: [
               { path: '/', component: ApiView },
-              { path: '/root', component: lazy(() => import('./views/docs/Api/ApiRoot.view')) },
               {
                 path: '/define-action',
                 component: lazy(() => import('./views/docs/Api/ApiDefineAction.view')),
+              },
+              { path: '/root', component: lazy(() => import('./views/docs/Api/ApiRoot.view')) },
+              {
+                path: '/command-palette',
+                component: lazy(() => import('./views/docs/Api/ApiCommandPalette.view')),
               },
             ],
           },
