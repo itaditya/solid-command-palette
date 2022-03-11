@@ -11,7 +11,6 @@
 
 .palette {
   position: relative;
-  margin-block-start: 100px;
   height: max-content;
 }
 
@@ -20,10 +19,9 @@
 
   display: flex;
   flex-direction: column;
-  background-color: white;
-  width: 600px;
-  height: max-content;
-  max-height: 350px;
+  background-color: #fff;
+  width: min(100vw, 600px);
+  height: 100vh;
   border: 0.5px solid #e2e8f0;
   border-radius: 8px;
   box-shadow: 0 0 50px -12px rgb(0 0 0 / 0.25);
@@ -36,12 +34,6 @@
 .animEnter .panel {
   opacity: 0;
   transform: translateY(50px) scaleX(0.95);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animEnter .panel {
-    transform: none;
-  }
 }
 
 .animEnterActive .panel {
@@ -57,12 +49,6 @@
   opacity: 0;
   transform: translateY(70px) scaleX(0.8);
   transition: opacity, transform 300ms, 200ms;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animExitActive .panel {
-    transform: none;
-  }
 }
 
 .searchForm {
@@ -107,4 +93,24 @@
 .closeBtn:focus-visible {
   outline-offset: 3px;
   outline-color: #94a3b8;
+}
+
+@media (min-width: 640px) {
+  .palette {
+    margin-block-start: 100px;
+  }
+
+  .panel {
+    max-height: 350px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animEnter .panel {
+    transform: none;
+  }
+
+  .animExitActive .panel {
+    transform: none;
+  }
 }

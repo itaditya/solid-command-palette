@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+:global html {
+  overscroll-behavior: contain; /* disable Pull to Refresh in Firefox */
+}
+
 :global body {
   --brand-fg-color: #000;
   --brand-bg-color: #fff;
@@ -18,6 +22,7 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  overscroll-behavior: contain; /* disable Pull to Refresh in Chrome */
 }
 
 :global #root {
