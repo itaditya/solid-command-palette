@@ -19,7 +19,12 @@ export const DemoResultContent: Component<ResultContentProps> = (p) => {
       </div>
       <div>
         <Show when={p.action.shortcut}>
-          {(shortcut) => <KbdShortcut class={styles.resultShortcut} shortcut={shortcut} />}
+          {(shortcut) => (
+            <KbdShortcut
+              class={styles.resultShortcut}
+              shortcut={shortcut}
+            />
+          )}
         </Show>
       </div>
     </div>

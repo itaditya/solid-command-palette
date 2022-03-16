@@ -15,7 +15,10 @@ export const KbdShortcut: Component<KbdShortcutProps> = (p) => {
   const keyClasses = [styles.kbdKey, l.class].join(' ');
 
   return (
-    <kbd {...others} class={styles.kbdShortcut}>
+    <kbd
+      {...others}
+      class={styles.kbdShortcut}
+    >
       <For each={formattedShortcut}>
         {(group) => (
           <kbd class={styles.kbdGroup}>

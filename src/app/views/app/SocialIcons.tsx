@@ -24,10 +24,20 @@ export const SocialIcon: Component<Props> = (p) => {
   const [l, others] = splitProps(p, ['alt', 'icon']);
 
   return (
-    <a {...others} rel="noopener" target="_blank">
+    <a
+      {...others}
+      rel="noopener"
+      target="_blank"
+    >
       <span class={utilStyles.visuallyHidden}>{l.alt}</span>
-      <svg class={utilStyles.sizeIconWithFont} viewBox="0 0 24 24">
-        <path fill="currentColor" d={l.icon} />
+      <svg
+        class={utilStyles.sizeIconWithFont}
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d={l.icon}
+        />
       </svg>
     </a>
   );

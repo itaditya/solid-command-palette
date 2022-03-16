@@ -246,7 +246,11 @@ const CommandPaletteInternal: Component<CommandPaletteProps> = (p) => {
   });
 
   return (
-    <div class={styles.wrapper} ref={wrapperElem} onClick={handleWrapperClick}>
+    <div
+      class={styles.wrapper}
+      ref={wrapperElem}
+      onClick={handleWrapperClick}
+    >
       <div class={styles.palette}>
         <ScrollAssist
           direction="up"
@@ -278,7 +282,11 @@ const CommandPaletteInternal: Component<CommandPaletteProps> = (p) => {
               event.preventDefault();
             }}
           >
-            <label htmlFor={searchInputId} id={searchLabelId} class={utilStyles.visuallyHidden}>
+            <label
+              htmlFor={searchInputId}
+              id={searchLabelId}
+              class={utilStyles.visuallyHidden}
+            >
               Search for an action and then select one of the option.
             </label>
             <input
@@ -304,7 +312,10 @@ const CommandPaletteInternal: Component<CommandPaletteProps> = (p) => {
               }}
             >
               <span class={utilStyles.visuallyHidden}>Close the Command Palette</span>
-              <KbdShortcut shortcut="Escape" aria-hidden />
+              <KbdShortcut
+                shortcut="Escape"
+                aria-hidden
+              />
             </button>
           </form>
           <PanelResult

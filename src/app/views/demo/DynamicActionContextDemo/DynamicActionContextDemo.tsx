@@ -16,7 +16,10 @@ const ContactItem: Component<ContactItemProps> = (p) => {
         [styles.active]: p.isActive,
       }}
     >
-      <label class={styles.contactLabel} htmlFor={inputId}>
+      <label
+        class={styles.contactLabel}
+        htmlFor={inputId}
+      >
         {p.contactData.label}
       </label>
       <input
@@ -107,8 +110,14 @@ export const DynamicActionContextDemo: Component = () => {
             </ul>
           </aside>
           <main class={styles.contactDetails}>
-            <Show when={activeContactId() !== ownContactId} fallback={renderOwnDetails()}>
-              <ReceiverContactDetails contactId={activeContactId} contactData={activeContactData} />
+            <Show
+              when={activeContactId() !== ownContactId}
+              fallback={renderOwnDetails()}
+            >
+              <ReceiverContactDetails
+                contactId={activeContactId}
+                contactData={activeContactData}
+              />
             </Show>
           </main>
         </div>

@@ -89,7 +89,10 @@ const App = () => {
 
   return (
     <div class="my-app">
-      <Root actions={actions} actionsContext={actionsContext}>
+      <Root
+        actions={actions}
+        actionsContext={actionsContext}
+      >
         <CommandPalette />
       </Root>
     </div>

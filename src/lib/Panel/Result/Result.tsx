@@ -22,7 +22,12 @@ const ResultContent: Component<ResultContentProps> = (p) => {
       </div>
       <div>
         <Show when={p.action.shortcut}>
-          {(shortcut) => <KbdShortcut class={styles.resultShortcut} shortcut={shortcut} />}
+          {(shortcut) => (
+            <KbdShortcut
+              class={styles.resultShortcut}
+              shortcut={shortcut}
+            />
+          )}
         </Show>
       </div>
     </div>
@@ -88,7 +93,11 @@ const ResultItem: Component<ResultItemProps> = (p) => {
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
     >
-      <Dynamic component={ResultContentComponent} isActive={isActive()} action={p.action} />
+      <Dynamic
+        component={ResultContentComponent}
+        isActive={isActive()}
+        action={p.action}
+      />
     </li>
   );
 };

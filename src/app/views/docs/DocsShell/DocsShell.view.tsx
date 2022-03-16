@@ -5,7 +5,11 @@ import styles from './DocsShell.module.css';
 
 const SidebarNavLink: Component<NavLinkProps> = (p) => {
   return (
-    <NavLink class={styles.navLink} activeClass={styles.activeNavLink} {...p}>
+    <NavLink
+      class={styles.navLink}
+      activeClass={styles.activeNavLink}
+      {...p}
+    >
       {p.children}
     </NavLink>
   );

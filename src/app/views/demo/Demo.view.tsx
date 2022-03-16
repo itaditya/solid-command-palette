@@ -62,13 +62,20 @@ const DemoView: Component = () => {
   const customProps = getCustomProps();
 
   return (
-    <Root actions={actions} actionsContext={actionsContext} components={customProps.components}>
+    <Root
+      actions={actions}
+      actionsContext={actionsContext}
+      components={customProps.components}
+    >
       <div class={styles.demoWrapper}>
         <CommandPalette searchPlaceholder={customProps.placeholder} />
         <section class={styles.introSection}>
           <h1 class={styles.introHeading}>
             <span>Bring it up by pressing</span>
-            <KbdShortcut class={styles.introShortcutKey} shortcut="$mod+k" />
+            <KbdShortcut
+              class={styles.introShortcutKey}
+              shortcut="$mod+k"
+            />
           </h1>
         </section>
         <section class={demoStyles.demoSection}>
@@ -84,11 +91,18 @@ const DemoView: Component = () => {
             </p>
           </div>
           <div class={demoStyles.demoInteraction}>
-            <p class={utilStyles.stripSpace} aria-live="polite" aria-atomic={true}>
+            <p
+              class={utilStyles.stripSpace}
+              aria-live="polite"
+              aria-atomic={true}
+            >
               <span class={utilStyles.visuallyHidden}>Current count is</span>
               <strong class={styles.countValue}>{count()}</strong>
             </p>
-            <button class={utilStyles.demoAction} onClick={increment}>
+            <button
+              class={utilStyles.demoAction}
+              onClick={increment}
+            >
               Increment Count
             </button>
             <p class={demoStyles.demoInteractionDesc}>
@@ -123,7 +137,11 @@ const DemoView: Component = () => {
                   onInput={handleMuteInput}
                 />
                 <strong>
-                  <Show when={muted()} fallback="Audible" children="Muted" />
+                  <Show
+                    when={muted()}
+                    fallback="Audible"
+                    children="Muted"
+                  />
                 </strong>
                 <span>(click to toggle)</span>
               </label>
@@ -135,7 +153,10 @@ const DemoView: Component = () => {
             </Show>
           </div>
         </section>
-        <NestedActionDemo profile={profile()} onProfileChange={handleProfileChange} />
+        <NestedActionDemo
+          profile={profile()}
+          onProfileChange={handleProfileChange}
+        />
         <DynamicActionContextDemo />
       </div>
     </Root>

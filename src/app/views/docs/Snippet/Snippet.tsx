@@ -27,5 +27,11 @@ export interface SnippetProps {
 export const Snippet: Component<SnippetProps> = (p) => {
   const [snippet] = createResource(p.snippetId, fetchSnippet);
 
-  return <div class={styles.snippet} data-snippet-id={p.snippetId} innerHTML={snippet()} />;
+  return (
+    <div
+      class={styles.snippet}
+      data-snippet-id={p.snippetId}
+      innerHTML={snippet()}
+    />
+  );
 };

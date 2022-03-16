@@ -8,7 +8,10 @@ export interface LoaderProps {
 
 export const Loader: Component<LoaderProps> = (p) => {
   return (
-    <span class={`${styles.wrapper} ${utilStyles.nonFlickerLoader}`} aria-live="polite">
+    <span
+      class={`${styles.wrapper} ${utilStyles.nonFlickerLoader}`}
+      aria-live="polite"
+    >
       <svg
         class={styles.loader}
         data-size={p.size || 'normal'}
