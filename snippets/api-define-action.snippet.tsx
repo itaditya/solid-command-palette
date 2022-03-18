@@ -1,6 +1,6 @@
 import { defineAction } from 'solid-command-palette';
 
-const myAction = defineAction({
+export const myAction = defineAction({
   /* Unique identifier for your action */
   id: 'my-action',
 

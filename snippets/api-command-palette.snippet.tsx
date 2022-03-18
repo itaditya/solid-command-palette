@@ -1,8 +1,6 @@
 import { CommandPalette } from 'solid-command-palette';
 
-const props = {
+<CommandPalette
   /* Placeholder for palette's search field */
-  searchPlaceholder: 'Search actions',
-};
-
-<CommandPalette {...props} />;
+  searchPlaceholder="Search actions"
+/>;
