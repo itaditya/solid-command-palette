@@ -9,3 +9,8 @@
   font-size: 1.125rem;
   line-height: 1.5;
 }
+
+.embedWrapper iframe {
+  border: none;
+  background-color: #202327;
+}

@@ -7,6 +7,7 @@ const OverviewView: Component = () => {
 
   onMount(() => {
     sdk.embedProjectId(exampleElem, 'solid-command-palette-example-lite', {
+      view: 'editor',
       forceEmbedLayout: true,
       openFile: 'src/App.tsx',
       clickToLoad: true,
@@ -22,7 +23,9 @@ const OverviewView: Component = () => {
         mouse around. Users can fuzzy search to find the action. If the action has a keyboard
         shortcut then they can trigger it from anywhere. This increases their productivity by 10x.
       </p>
-      <div ref={exampleElem} />
+      <div class={docsStyles.embedWrapper}>
+        <div ref={exampleElem} />
+      </div>
     </section>
   );
 };
