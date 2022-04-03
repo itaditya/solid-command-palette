@@ -43,6 +43,7 @@
     "shiki": "^0.10.1",
     "solid-app-router": "^0.2.1",
     "solid-js": "^1.3.2",
+    "solid-testing-library": "^0.3.0",
     "solid-transition-group": "0.0.8",
     "tinykeys": "^1.4.0",
     "ts-node": "^10.5.0",
