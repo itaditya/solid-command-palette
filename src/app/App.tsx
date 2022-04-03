@@ -4,7 +4,7 @@ import AppShellView from './views/app/AppShell.view';
 import DocsShellView from './views/docs/DocsShell/DocsShell.view';
 import DocsView from './views/docs/Docs.view';
 import ApiView from './views/docs/Api/Api.view';
-import HomeView from './views/Home.view';
+import HomeView from './views/home/Home.view';
 
 const routes: Array<RouteDefinition> = [
   {

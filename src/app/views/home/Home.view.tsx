@@ -1,6 +1,6 @@
 import { Component } from 'solid-js';
-import { KbdShortcut, useControls } from '../../lib';
-import utilStyles from '../utils.module.css';
+import { KbdShortcut, useControls } from '../../../lib';
+import utilStyles from '../../utils.module.css';
 import styles from './Home.module.css';
 
 const HomeView: Component = () => {
