@@ -1,0 +1,25 @@
+<pre class="shiki" style="background-color: #0d1117"><code><span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> { defineAction } </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&#39;solid-command-palette&#39;</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">minimalAction</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">defineAction</span><span style="color: #C9D1D9">({</span></span>
+<span class="line"><span style="color: #C9D1D9">  id: </span><span style="color: #A5D6FF">&#39;minimal&#39;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  title: </span><span style="color: #A5D6FF">&#39;Minimal Action&#39;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #D2A8FF">run</span><span style="color: #C9D1D9">: () </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">    console.</span><span style="color: #D2A8FF">log</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&#39;ran minimal action&#39;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">  },</span></span>
+<span class="line"><span style="color: #C9D1D9">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">incrementCounterAction</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">defineAction</span><span style="color: #C9D1D9">({</span></span>
+<span class="line"><span style="color: #C9D1D9">  id: </span><span style="color: #A5D6FF">&#39;increment-counter&#39;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  title: </span><span style="color: #A5D6FF">&#39;Increment Counter by 1&#39;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  subtitle: </span><span style="color: #A5D6FF">&#39;Press CMD + E to trigger this.&#39;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  shortcut: </span><span style="color: #A5D6FF">&#39;$mod+e&#39;</span><span style="color: #C9D1D9">, </span><span style="color: #8B949E">// $mod = Command on Mac &amp; Control on Windows.</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #D2A8FF">run</span><span style="color: #C9D1D9">: ({ </span><span style="color: #FFA657">rootContext</span><span style="color: #C9D1D9"> }) </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">    rootContext.</span><span style="color: #D2A8FF">increment</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">  },</span></span>
+<span class="line"><span style="color: #C9D1D9">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">export</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">actions</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">  [minimalAction.id]: minimalAction,</span></span>
+<span class="line"><span style="color: #C9D1D9">  [incrementCounterAction.id]: incrementCounterAction,</span></span>
+<span class="line"><span style="color: #C9D1D9">};</span></span>
+<span class="line"></span></code></pre>
