@@ -29,6 +29,7 @@
   color: var(--brand-bg-color);
   border: none;
   border-radius: 4px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   font-size: 1rem;
   font-family: inherit;
   text-decoration: none;
@@ -38,10 +39,10 @@
   transition: all 0.2s ease-out;
 }
 
-.demoAction[data-size="large"] {
+.demoAction[data-size='large'] {
   gap: 15px;
   font-size: 2rem;
-  padding: 12px 20px;
+  padding: 10px 15px;
   border-radius: 6px;
 }
 

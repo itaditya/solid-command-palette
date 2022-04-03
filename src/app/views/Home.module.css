@@ -2,14 +2,19 @@
   display: flex;
   align-items: center;
   flex: 1;
+  gap: 10px;
 }
 
 .main {
   flex: 1;
 }
 
+.aside {
+  flex: 1;
+}
+
 .title {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 300;
   color: var(--brand-accent-color-5);
   line-height: 1.5;
@@ -24,6 +29,28 @@
 .demoShortcut {
   background-color: transparent;
   color: var(--brand-accent-color-1);
-  padding: 0 10px;
-  font-size: 2rem;
+  padding: 3px 10px;
+  font-size: 1.5rem;
+}
+
+.exampleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.exampleImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+.exampleLink {
+  color: var(--brand-accent-color-7);
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  outline-offset: 2px;
 }

@@ -18,7 +18,7 @@ const HomeView: Component = () => {
               data-size="large"
               onClick={openPalette}
             >
-              command palette{' '}
+              cmd palette{' '}
               <KbdShortcut
                 shortcut="$mod+k"
                 class={styles.demoShortcut}
@@ -27,7 +27,28 @@ const HomeView: Component = () => {
           </span>
         </h3>
       </main>
-      <aside>Hello</aside>
+      <aside class={styles.aside}>
+        <div>
+          <figure class={`${styles.exampleWrapper} ${utilStyles.stripSpace}`}>
+            <img
+              class={styles.exampleImage}
+              src="/images/command-palette-examples/linear.png"
+              alt="Command Palette in Linear"
+            />
+            <figcaption>
+              Tasks can be quickly assigned in{' '}
+              <a
+                class={styles.exampleLink}
+                href="https://linear.app/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Linear
+              </a>
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
     </section>
   );
 };
