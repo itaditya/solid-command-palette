@@ -1,9 +1,11 @@
 import { Component } from 'solid-js';
-import { KbdShortcut } from '../../lib';
+import { KbdShortcut, useControls } from '../../lib';
 import utilStyles from '../utils.module.css';
 import styles from './Home.module.css';
 
 const HomeView: Component = () => {
+  const { openPalette } = useControls();
+
   return (
     <section class={styles.wrapper}>
       <main class={styles.main}>
@@ -14,6 +16,7 @@ const HomeView: Component = () => {
             <button
               class={utilStyles.demoAction}
               data-size="large"
+              onClick={openPalette}
             >
               command palette{' '}
               <KbdShortcut
