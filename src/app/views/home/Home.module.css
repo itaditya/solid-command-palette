@@ -11,6 +11,7 @@
 
 .aside {
   flex: 1;
+  padding-top: 50px;
 }
 
 .title {
@@ -31,26 +32,4 @@
   color: var(--brand-accent-color-1);
   padding: 3px 10px;
   font-size: 1.5rem;
-}
-
-.exampleWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-
-.exampleImage {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-}
-
-.exampleLink {
-  color: var(--brand-accent-color-7);
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-  outline-offset: 2px;
 }

@@ -1,0 +1,33 @@
+.slidesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  overflow-y: scroll;
+  height: 60vh;
+  padding: 0 10px;
+  scroll-snap-type: block mandatory;
+  overscroll-behavior: contain;
+}
+
+.exampleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  scroll-snap-align: start;
+}
+
+.exampleImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.exampleLink {
+  color: var(--brand-accent-color-7);
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  outline-offset: 2px;
+}
