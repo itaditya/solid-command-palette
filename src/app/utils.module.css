@@ -22,7 +22,9 @@
 }
 
 .demoAction {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   background-color: var(--brand-fg-color);
   color: var(--brand-bg-color);
   border: none;
@@ -30,8 +32,25 @@
   font-size: 1rem;
   font-family: inherit;
   text-decoration: none;
+  cursor: pointer;
   padding: 10px 20px;
   outline-offset: 3px;
+  transition: all 0.2s ease-out;
+}
+
+.demoAction[data-size="large"] {
+  gap: 15px;
+  font-size: 2rem;
+  padding: 12px 20px;
+  border-radius: 6px;
+}
+
+.demoAction:hover {
+  transform: scale(1.01);
+}
+
+.demoAction:active {
+  background-color: var(--brand-accent-color-6);
 }
 
 .nonFlickerLoader {

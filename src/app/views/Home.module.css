@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.main {
+  flex: 1;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--brand-accent-color-5);
+  line-height: 1.5;
+}
+
+.titleSecondary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.demoShortcut {
+  background-color: transparent;
+  color: var(--brand-accent-color-1);
+  padding: 0 10px;
+  font-size: 2rem;
+}

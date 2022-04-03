@@ -161,10 +161,6 @@
   background-color: var(--brand-accent-color-1);
 }
 
-.maintenanceContent {
-  margin-block-end: 50px;
-}
-
 .footer {
   padding: 20px;
   display: flex;

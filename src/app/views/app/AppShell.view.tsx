@@ -20,16 +20,7 @@ const HeaderNavLink: Component<NavLinkProps> = (p) => {
 
 const Main: Component = () => {
   const isDemo = useMatch(() => '/demo');
-  const isDocs = useMatch(() => '/docs/*');
   const navigate = useNavigate();
-
-  function checkMaintenanceContentShown() {
-    if (isDemo() || isDocs()) {
-      return false;
-    }
-
-    return true;
-  }
 
   const actionsContext = {
     navigate,
@@ -37,17 +28,6 @@ const Main: Component = () => {
 
   return (
     <main class={styles.main}>
-      <Show when={checkMaintenanceContentShown()}>
-        <div class={styles.maintenanceContent}>
-          <h2>This page is under construction. Meanwhile check out the demo.</h2>
-          <Link
-            class={utilStyles.demoAction}
-            href="/demo"
-          >
-            Try Demo
-          </Link>
-        </div>
-      </Show>
       <Show
         when={!isDemo()}
         fallback={<Outlet />}

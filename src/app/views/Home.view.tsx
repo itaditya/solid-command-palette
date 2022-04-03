@@ -1,10 +1,31 @@
 import { Component } from 'solid-js';
+import { KbdShortcut } from '../../lib';
+import utilStyles from '../utils.module.css';
+import styles from './Home.module.css';
 
 const HomeView: Component = () => {
   return (
-    <div>
-      <h3>This is the Home Page. Although as you can see it's blank.</h3>
-    </div>
+    <section class={styles.wrapper}>
+      <main class={styles.main}>
+        <h3 class={`${styles.title} ${utilStyles.stripSpace}`}>
+          <span>Make your tool lighting fast</span>
+          <span class={styles.titleSecondary}>
+            <span>with </span>
+            <button
+              class={utilStyles.demoAction}
+              data-size="large"
+            >
+              command palette{' '}
+              <KbdShortcut
+                shortcut="$mod+k"
+                class={styles.demoShortcut}
+              />
+            </button>
+          </span>
+        </h3>
+      </main>
+      <aside>Hello</aside>
+    </section>
   );
 };
 
