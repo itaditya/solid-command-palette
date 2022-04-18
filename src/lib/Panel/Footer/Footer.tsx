@@ -1,4 +1,6 @@
-import { Component } from 'solid-js';
+import { Component, Show } from 'solid-js';
+import { getActiveParentAction } from '../../actionUtils/actionUtils';
+import { useStore } from '../../StoreContext';
 import styles from './Footer.module.css';
 
 export interface IconArrowProps {
@@ -43,23 +45,44 @@ const IconReturn: Component = () => {
 };
 
 export const PanelFooter: Component = () => {
+  const [state] = useStore();
+
+  function getParentActionTitle() {
+    const { isRoot, activeId } = getActiveParentAction(state.activeParentActionIdList);
+
+    if (isRoot) {
+      return null;
+    }
+
+    const parentAction = state.actions[activeId];
+
+    return parentAction.title;
+  }
+
   return (
-    <div class={styles.footer}>
-      <div class={styles.group}>
-        Navigate with{' '}
-        <kbd class={styles.shortcut}>
-          <IconArrow />
-        </kbd>
-        <kbd class={styles.shortcut}>
-          <IconArrow direction="down" />
-        </kbd>
+    <footer class={styles.footer}>
+      <div class={styles.kbdInfo}>
+        <div class={styles.group}>
+          Navigate with{' '}
+          <kbd class={styles.shortcut}>
+            <IconArrow />
+          </kbd>
+          <kbd class={styles.shortcut}>
+            <IconArrow direction="down" />
+          </kbd>
+        </div>
+        <div class={styles.group}>
+          Select using{' '}
+          <kbd class={`${styles.shortcut} ${styles.runShortcut}`}>
+            <IconReturn />
+          </kbd>
+        </div>
       </div>
-      <div class={styles.group}>
-        Select using{' '}
-        <kbd class={`${styles.shortcut} ${styles.runShortcut}`}>
-          <IconReturn />
-        </kbd>
+      <div>
+        <Show when={getParentActionTitle()}>
+          {(title) => <span class={styles.parentActionTitle}>{title}</span>}
+        </Show>
       </div>
-    </div>
+    </footer>
   );
 };

@@ -1,11 +1,17 @@
 .footer {
   display: flex;
-  gap: 15px;
+  justify-content: space-between;
+  gap: 10px;
   color: #64748b;
   font-size: 0.85rem;
   border-block-start: 0.5px solid #e2e8f0;
   padding-block: 10px;
   padding-inline: var(--scp-gutter-space-inline);
+}
+
+.kbdInfo {
+  display: flex;
+  gap: 15px;
 }
 
 .group {
@@ -39,4 +45,12 @@
 
 .iconReturn {
   transform: rotateX(180deg);
+}
+
+.parentActionTitle {
+  display: block;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  padding: 4px 8px;
 }
