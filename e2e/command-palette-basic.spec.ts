@@ -18,6 +18,7 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     await page.click('text=Increment Counter by 1');
     await expect(page.locator('strong >> text=1')).toBeVisible();
+    console.log('hello');
   });
 
   test('should be able to search for actions in command palette', async ({ page }) => {
