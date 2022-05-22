@@ -93,6 +93,7 @@ describe('Test Action Utils', () => {
     const runMock = vi.fn();
     const selectParentActionMock = vi.fn();
     const closePaletteMock = vi.fn();
+    const openPaletteMock = vi.fn();
 
     const baseAction = {
       id: 'test-action',
@@ -103,6 +104,7 @@ describe('Test Action Utils', () => {
     const baseStoreMethods = {
       selectParentAction: selectParentActionMock,
       closePalette: closePaletteMock,
+      openPalette: openPaletteMock,
     };
 
     afterEach(() => {

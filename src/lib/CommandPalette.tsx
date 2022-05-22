@@ -51,7 +51,7 @@ const CommandPaletteInternal: Component<CommandPaletteProps> = (p) => {
   let lastFocusedElem: null | HTMLElement;
 
   function triggerRun(action: WrappedAction) {
-    runAction(action, state.actionsContext, storeMethods);
+    runAction(action, state.actionsContext, storeMethods, 'palette');
   }
 
   function activatePrevItem() {

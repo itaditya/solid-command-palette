@@ -4,6 +4,7 @@ const setProfileAction = defineAction({
   id: 'set-profile',
   title: 'Set profile',
   subtitle: 'Select this and then choose one of the options',
+  shortcut: 'p o',
 });
 
 const setToPersonalProfileAction = defineAction({

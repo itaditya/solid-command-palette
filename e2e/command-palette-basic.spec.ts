@@ -102,4 +102,13 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     await expect(profileStatusLocator).toBeVisible();
   });
+
+  test('should be able to open nested actions using keyboard', async ({ page }) => {
+    await page.goto('/demo');
+
+    await page.keyboard.press('p');
+    await page.keyboard.press('o');
+
+    await expect(page.locator('.command-palette-portal [role="combobox"]')).toBeVisible();
+  });
 });
