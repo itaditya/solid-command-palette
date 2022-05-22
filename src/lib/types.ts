@@ -20,7 +20,7 @@ export interface RunArgs {
   dynamicContext: ActionContext;
 }
 
-export interface Action {
+export interface BaseAction {
   id: ActionId;
   parentActionId: ParentActionId;
   title: string;
@@ -35,7 +35,26 @@ export interface Action {
    */
   cond?: (args: RunArgs) => boolean;
   run?: (args: RunArgs) => void;
+  /**
+   * Prevent children from being displayed at the root level of the palette.
+   *
+   * Default: `true`
+   */
+  isolateChildren?: boolean;
 }
+
+export interface ChildAction {
+  isolateChildren?: never;
+}
+
+export interface ParentAction {
+  parentActionId: never;
+  run?: never;
+}
+
+export type Action =
+  | (Omit<BaseAction, keyof ChildAction> & ChildAction)
+  | (Omit<BaseAction, keyof ParentAction> & ParentAction)
 
 export type PartialAction = Partial<Action> & {
   id: ActionId;

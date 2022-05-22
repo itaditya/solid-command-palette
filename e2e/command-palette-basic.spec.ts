@@ -111,4 +111,18 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     await expect(page.locator('.command-palette-portal [role="combobox"]')).toBeVisible();
   });
+
+  test('should not show child actions at root by default', async ({ page }) => {
+    await page.goto('/demo');
+    await triggerCommandPaletteOpen(page);
+
+    await expect(page.locator('text=Set to Personal profile')).not.toBeVisible();
+  });
+
+  test('should show child actions at root with option', async ({ page }) => {
+    await page.goto('/demo');
+    await triggerCommandPaletteOpen(page);
+
+    await expect(page.locator('text=Configure Personal profile')).toBeVisible();
+  });
 });

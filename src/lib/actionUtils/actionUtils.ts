@@ -1,6 +1,7 @@
 import { KeyBindingMap } from 'tinykeys';
 import { rootParentActionId } from '../constants';
-import { ActionId, ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
+import { ActionId, Actions, ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
+import { DeepReadonly } from 'solid-js/store';
 
 type RunStoreMethods = {
   selectParentAction: StoreMethods['selectParentAction'];
@@ -86,6 +87,10 @@ export function getShortcutHandlersMap(
 }
 
 type ActiveParentActionIdListArg = Readonly<Array<ActionId>>;
+
+export function getParentAction(action: WrappedAction, actions: DeepReadonly<Actions>) {
+  return Object.values(actions).filter(({id}) => id === action.parentActionId)[0]
+}
 
 export function getActiveParentAction(activeParentActionIdList: ActiveParentActionIdListArg) {
   const activeId = activeParentActionIdList.at(-1) || rootParentActionId;

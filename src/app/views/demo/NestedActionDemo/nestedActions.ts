@@ -35,6 +35,7 @@ const configureProfileAction = defineAction({
   id: 'configure-profile',
   title: 'Configure profile',
   subtitle: 'Select this to try 2 levels of nested actions',
+  isolateChildren: false,
 });
 
 const configurePersonalProfileAction = defineAction({

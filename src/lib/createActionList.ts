@@ -1,7 +1,7 @@
 import { createMemo, createEffect } from 'solid-js';
 import Fuse from 'fuse.js';
 import { useStore } from './StoreContext';
-import { checkActionAllowed, getActiveParentAction } from './actionUtils/actionUtils';
+import { checkActionAllowed, getParentAction, getActiveParentAction } from './actionUtils/actionUtils';
 import { WrappedAction } from './types';
 
 export function createActionList() {
@@ -19,9 +19,13 @@ export function createNestedActionList() {
   const [state] = useStore();
 
   function nestedActionFilter(action: WrappedAction) {
+    const parent = getParentAction(action, state.actions);
     const { activeId, isRoot } = getActiveParentAction(state.activeParentActionIdList);
 
-    const isAllowed = isRoot || action.parentActionId === activeId;
+    const showAtRoot = isRoot && !parent?.isolateChildren;
+    const isActiveChild = action.parentActionId === activeId;
+    const isAllowed = showAtRoot || isActiveChild;
+
     return isAllowed;
   }
 
