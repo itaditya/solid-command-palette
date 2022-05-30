@@ -1,7 +1,6 @@
 import { KeyBindingMap } from 'tinykeys';
 import { rootParentActionId } from '../constants';
-import { ActionId, Actions, ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
-import { DeepReadonly } from 'solid-js/store';
+import { ActionId, ActionsContext, InvokeBy, StoreMethods, WrappedAction, WrappedActionList } from '../types';
 
 type RunStoreMethods = {
   selectParentAction: StoreMethods['selectParentAction'];
@@ -34,7 +33,7 @@ export function runAction(
   action: WrappedAction,
   actionsContext: ActionsContext,
   storeMethods: RunStoreMethods,
-  invokedBy: 'shortcut' | 'palette'
+  invokedBy: InvokeBy
 ) {
   const { id, run } = action;
 

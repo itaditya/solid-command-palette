@@ -102,3 +102,5 @@ export type CreateSyncActionsContext = (
 ) => void;
 
 export type InitialVisibleActions = 'root' | 'all'
+
+export type InvokeBy = 'shortcut' | 'palette'
