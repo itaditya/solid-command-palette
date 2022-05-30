@@ -15,6 +15,7 @@ const RootInternal: Component = () => {
 export const Root: Component<RootProps> = (p) => {
   const initialActions = p.actions || {};
   const initialActionsContext = p.actionsContext || {};
+  const initialVisibleActions = p.initialVisibleActions || 'root';
 
   const [state, setState] = createStore<StoreState>({
     visibility: 'closed',
@@ -26,6 +27,7 @@ export const Root: Component<RootProps> = (p) => {
       dynamic: {},
     },
     components: p.components,
+    initialVisibleActions: initialVisibleActions,
   });
 
   const storeMethods: StoreMethods = {

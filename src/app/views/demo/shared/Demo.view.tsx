@@ -1,16 +1,19 @@
 import { Component, createSignal, Show } from 'solid-js';
 import { useSearchParams } from 'solid-app-router';
-import { Root, CommandPalette, KbdShortcut } from '../../../lib';
+import { Root, CommandPalette, KbdShortcut } from '../../../../lib';
+import { RootProps } from '../../../../lib/types';
 import { actions } from './actions';
 import { NestedActionDemo } from './NestedActionDemo/NestedActionDemo';
 import { DynamicActionContextDemo } from './DynamicActionContextDemo/DynamicActionContextDemo';
 import { components } from './CustomComponentsDemo/components';
 import { Profile } from './types';
-import utilStyles from '../../utils.module.css';
+import utilStyles from '../../../utils.module.css';
 import demoStyles from './demoUtils.module.css';
 import styles from './Demo.module.css';
 
-const DemoView: Component = () => {
+type DemoProps = Pick<RootProps, 'initialVisibleActions'>;
+
+const DemoView: Component<DemoProps> = (p) => {
   const [count, setCount] = createSignal(0);
   const [muted, setMuted] = createSignal(false);
   const [profile, setProfile] = createSignal<Profile>('personal');
@@ -66,6 +69,7 @@ const DemoView: Component = () => {
       actions={actions}
       actionsContext={actionsContext}
       components={customProps.components}
+      initialVisibleActions={p.initialVisibleActions}
     >
       <div class={styles.demoWrapper}>
         <CommandPalette searchPlaceholder={customProps.placeholder} />

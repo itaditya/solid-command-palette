@@ -88,10 +88,6 @@ export function getShortcutHandlersMap(
 
 type ActiveParentActionIdListArg = Readonly<Array<ActionId>>;
 
-export function getParentAction(action: WrappedAction, actions: DeepReadonly<Actions>) {
-  return Object.values(actions).filter(({id}) => id === action.parentActionId)[0]
-}
-
 export function getActiveParentAction(activeParentActionIdList: ActiveParentActionIdListArg) {
   const activeId = activeParentActionIdList.at(-1) || rootParentActionId;
   const isRoot = activeId === rootParentActionId;

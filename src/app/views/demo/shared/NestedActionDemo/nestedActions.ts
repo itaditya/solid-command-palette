@@ -1,10 +1,10 @@
-import { defineAction } from '../../../../lib';
+import { defineAction } from '../../../../../lib';
 
 const setProfileAction = defineAction({
   id: 'set-profile',
   title: 'Set profile',
   subtitle: 'Select this and then choose one of the options',
-  shortcut: 'p o',
+  shortcut: 'p s',
 });
 
 const setToPersonalProfileAction = defineAction({
@@ -35,7 +35,6 @@ const configureProfileAction = defineAction({
   id: 'configure-profile',
   title: 'Configure profile',
   subtitle: 'Select this to try 2 levels of nested actions',
-  isolateChildren: false,
 });
 
 const configurePersonalProfileAction = defineAction({

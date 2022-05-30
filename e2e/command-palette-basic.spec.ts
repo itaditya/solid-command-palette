@@ -1,15 +1,5 @@
-import { test, expect, Page } from '@playwright/test';
-import { checkMac } from './testUtils/checkMac';
-
-async function triggerCommandPaletteOpen(page: Page) {
-  const isMac = await checkMac(page);
-
-  if (isMac) {
-    await page.keyboard.press('Meta+k');
-  } else {
-    await page.keyboard.press('Control+k');
-  }
-}
+import { test, expect } from '@playwright/test';
+import { triggerCommandPaletteOpen } from './testUtils/triggerCommandPaletteOpen';
 
 test.describe('Test basic interactions of Command Palette', () => {
   test('should be able to open command palette & run first action', async ({ page }) => {
@@ -107,22 +97,8 @@ test.describe('Test basic interactions of Command Palette', () => {
     await page.goto('/demo');
 
     await page.keyboard.press('p');
-    await page.keyboard.press('o');
+    await page.keyboard.press('s');
 
     await expect(page.locator('.command-palette-portal [role="combobox"]')).toBeVisible();
-  });
-
-  test('should not show child actions at root by default', async ({ page }) => {
-    await page.goto('/demo');
-    await triggerCommandPaletteOpen(page);
-
-    await expect(page.locator('text=Set to Personal profile')).not.toBeVisible();
-  });
-
-  test('should show child actions at root with option', async ({ page }) => {
-    await page.goto('/demo');
-    await triggerCommandPaletteOpen(page);
-
-    await expect(page.locator('text=Configure Personal profile')).toBeVisible();
   });
 });

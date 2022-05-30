@@ -20,7 +20,7 @@ export interface RunArgs {
   dynamicContext: ActionContext;
 }
 
-export interface BaseAction {
+export interface Action {
   id: ActionId;
   parentActionId: ParentActionId;
   title: string;
@@ -35,26 +35,7 @@ export interface BaseAction {
    */
   cond?: (args: RunArgs) => boolean;
   run?: (args: RunArgs) => void;
-  /**
-   * Prevent children from being displayed at the root level of the palette.
-   *
-   * Default: `true`
-   */
-  isolateChildren?: boolean;
 }
-
-export interface ChildAction {
-  isolateChildren?: never;
-}
-
-export interface ParentAction {
-  parentActionId: never;
-  run?: never;
-}
-
-export type Action =
-  | (Omit<BaseAction, keyof ChildAction> & ChildAction)
-  | (Omit<BaseAction, keyof ParentAction> & ParentAction)
 
 export type PartialAction = Partial<Action> & {
   id: ActionId;
@@ -79,6 +60,7 @@ export interface RootProps {
   actions: Actions;
   actionsContext: ActionContext;
   components?: Components;
+  initialVisibleActions?: InitialVisibleActions;
 }
 
 export interface StoreState {
@@ -88,6 +70,12 @@ export interface StoreState {
   actions: Actions;
   actionsContext: ActionsContext;
   components?: Components;
+  /**
+   * `root`: nested children are hidden from the root-level palette. (*default*)
+   *
+   * `all`: nested children are shown in the root-level palette.
+   */
+  initialVisibleActions?: InitialVisibleActions;
 }
 
 export type StoreStateWrapped = Store<StoreState>;
@@ -112,3 +100,5 @@ export type CreateSyncActionsContext = (
   actionId: ActionId,
   callback: CreateSyncActionsContextCallback
 ) => void;
+
+export type InitialVisibleActions = 'root' | 'all'

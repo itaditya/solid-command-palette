@@ -1,8 +1,8 @@
 import { Component } from 'solid-js';
-import { KbdShortcut } from '../../../../lib';
+import { KbdShortcut } from '../../../../../lib';
 import { Profile } from '../types';
 import demoStyles from '../demoUtils.module.css';
-import utilStyles from '../../../utils.module.css';
+import utilStyles from '../../../../utils.module.css';
 import styles from './NestedActionDemo.module.css';
 
 export interface Props {
