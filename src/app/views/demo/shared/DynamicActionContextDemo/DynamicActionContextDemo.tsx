@@ -1,9 +1,9 @@
 import { Component, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js';
-import { KbdShortcut, createSyncActionsContext } from '../../../../lib';
+import { KbdShortcut, createSyncActionsContext } from '../../../../../lib';
 import { ownContactId, contacts, contactActionId } from './data';
 import { InputEventHandler, ContactItemProps, ReceiverContactDetailsProps } from './types';
 import demoStyles from '../demoUtils.module.css';
-import utilStyles from '../../../utils.module.css';
+import utilStyles from '../../../../utils.module.css';
 import styles from './DynamicActionContextDemo.module.css';
 
 const ContactItem: Component<ContactItemProps> = (p) => {

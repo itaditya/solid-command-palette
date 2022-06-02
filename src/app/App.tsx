@@ -46,7 +46,15 @@ const routes: Array<RouteDefinition> = [
       },
       {
         path: '/demo',
-        component: lazy(() => import('./views/demo/Demo.view')),
+        component: lazy(() => import('./views/demo/Default.view')),
+      },
+      {
+        path: '/demo/InitialVisibleActions/All',
+        component: lazy(() => import('./views/demo/InitialVisibleActions-All.view')),
+      },
+      {
+        path: '/demo/InitialVisibleActions/Root',
+        component: lazy(() => import('./views/demo/InitialVisibleActions-Root.view')),
       },
       {
         path: '/',

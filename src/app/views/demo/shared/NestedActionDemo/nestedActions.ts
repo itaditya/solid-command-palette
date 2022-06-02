@@ -1,9 +1,10 @@
-import { defineAction } from '../../../../lib';
+import { defineAction } from '../../../../../lib';
 
 const setProfileAction = defineAction({
   id: 'set-profile',
   title: 'Set profile',
   subtitle: 'Select this and then choose one of the options',
+  shortcut: 'p s',
 });
 
 const setToPersonalProfileAction = defineAction({

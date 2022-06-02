@@ -21,7 +21,14 @@ export function createNestedActionList() {
   function nestedActionFilter(action: WrappedAction) {
     const { activeId, isRoot } = getActiveParentAction(state.activeParentActionIdList);
 
-    const isAllowed = isRoot || action.parentActionId === activeId;
+    const isRootAction = !action.parentActionId;
+    const isActiveChild = action.parentActionId === activeId;
+
+    const isAllowed =
+      (isRoot && isRootAction)
+      || isActiveChild
+      || state.initialVisibleActions === 'all'
+
     return isAllowed;
   }
 

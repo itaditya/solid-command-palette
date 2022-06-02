@@ -1,10 +1,11 @@
 import { KeyBindingMap } from 'tinykeys';
 import { rootParentActionId } from '../constants';
-import { ActionId, ActionsContext, StoreMethods, WrappedAction, WrappedActionList } from '../types';
+import { ActionId, ActionsContext, InvokeBy, StoreMethods, WrappedAction, WrappedActionList } from '../types';
 
 type RunStoreMethods = {
   selectParentAction: StoreMethods['selectParentAction'];
   closePalette: StoreMethods['closePalette'];
+  openPalette: StoreMethods['openPalette'];
 };
 
 function getActionContext(action: WrappedAction, actionsContext: ActionsContext) {
@@ -31,12 +32,16 @@ export function checkActionAllowed(action: WrappedAction, actionsContext: Action
 export function runAction(
   action: WrappedAction,
   actionsContext: ActionsContext,
-  storeMethods: RunStoreMethods
+  storeMethods: RunStoreMethods,
+  invokedBy: InvokeBy
 ) {
   const { id, run } = action;
 
   if (!run) {
     storeMethods.selectParentAction(id);
+    if (invokedBy === 'shortcut') {
+      storeMethods.openPalette();
+    }
     return;
   }
 
@@ -68,7 +73,7 @@ export function getShortcutHandlersMap(
       }
 
       event.preventDefault();
-      runAction(action, actionsContext, storeMethods);
+      runAction(action, actionsContext, storeMethods, 'shortcut');
     };
 
     const shortcut = action.shortcut;

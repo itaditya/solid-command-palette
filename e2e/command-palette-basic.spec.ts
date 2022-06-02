@@ -1,15 +1,5 @@
-import { test, expect, Page } from '@playwright/test';
-import { checkMac } from './testUtils/checkMac';
-
-async function triggerCommandPaletteOpen(page: Page) {
-  const isMac = await checkMac(page);
-
-  if (isMac) {
-    await page.keyboard.press('Meta+k');
-  } else {
-    await page.keyboard.press('Control+k');
-  }
-}
+import { test, expect } from '@playwright/test';
+import { triggerCommandPaletteOpen } from './testUtils/triggerCommandPaletteOpen';
 
 test.describe('Test basic interactions of Command Palette', () => {
   test('should be able to open command palette & run first action', async ({ page }) => {
@@ -101,5 +91,14 @@ test.describe('Test basic interactions of Command Palette', () => {
       .locator('text=Active profile is work');
 
     await expect(profileStatusLocator).toBeVisible();
+  });
+
+  test('should be able to open nested actions using keyboard', async ({ page }) => {
+    await page.goto('/demo');
+
+    await page.keyboard.press('p');
+    await page.keyboard.press('s');
+
+    await expect(page.locator('.command-palette-portal [role="combobox"]')).toBeVisible();
   });
 });

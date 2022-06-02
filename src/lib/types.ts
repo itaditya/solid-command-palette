@@ -60,6 +60,7 @@ export interface RootProps {
   actions: Actions;
   actionsContext: ActionContext;
   components?: Components;
+  initialVisibleActions?: InitialVisibleActions;
 }
 
 export interface StoreState {
@@ -69,6 +70,12 @@ export interface StoreState {
   actions: Actions;
   actionsContext: ActionsContext;
   components?: Components;
+  /**
+   * `root`: nested children are hidden from the root-level palette. (*default*)
+   *
+   * `all`: nested children are shown in the root-level palette.
+   */
+  initialVisibleActions?: InitialVisibleActions;
 }
 
 export type StoreStateWrapped = Store<StoreState>;
@@ -93,3 +100,7 @@ export type CreateSyncActionsContext = (
   actionId: ActionId,
   callback: CreateSyncActionsContextCallback
 ) => void;
+
+export type InitialVisibleActions = 'root' | 'all'
+
+export type InvokeBy = 'shortcut' | 'palette'

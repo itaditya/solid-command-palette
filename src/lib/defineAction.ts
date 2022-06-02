@@ -18,7 +18,7 @@ export const defineAction = (partialAction: PartialAction): Action => {
     shortcut,
     cond: partialAction.cond,
     run,
-  };
+  } as Action;
 
   return normalizedAction;
 };

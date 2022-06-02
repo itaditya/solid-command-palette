@@ -1,4 +1,4 @@
-import { defineAction } from '../../../../lib';
+import { defineAction } from '../../../../../lib';
 import { contactActionId, contacts } from './data';
 
 export const contactAction = defineAction({

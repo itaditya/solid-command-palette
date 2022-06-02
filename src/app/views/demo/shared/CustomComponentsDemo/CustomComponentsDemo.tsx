@@ -1,6 +1,6 @@
 import { Component, Show } from 'solid-js';
-import { KbdShortcut, ResultContentProps } from '../../../../lib';
-import utilStyles from '../../../utils.module.css';
+import { KbdShortcut, ResultContentProps } from '../../../../../lib';
+import utilStyles from '../../../../utils.module.css';
 import styles from './CustomComponentsDemo.module.css';
 
 export const DemoResultContent: Component<ResultContentProps> = (p) => {
