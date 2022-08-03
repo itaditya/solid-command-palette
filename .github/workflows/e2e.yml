@@ -10,16 +10,20 @@ jobs:
     steps:
       - name: Checkout commit
         uses: actions/checkout@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.1.0
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install
       - name: Install Playwright
-        run: npx playwright install --with-deps
+        run: pnpm exec playwright install --with-deps
       - name: Run E2E tests
-        run: npm run test:e2e:run
+        run: pnpm test:e2e:run
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
       - name: Save Test Results
