@@ -23,7 +23,7 @@ jobs:
           cache: 'pnpm'
       - name: Install Dependencies
         run: pnpm install
-      - name: Check for linting issues
-        run: pnpm lint
+      # - name: Check for linting issues
+      #   run: pnpm lint
       - name: Run functional tests
         run: pnpm test:func:run
