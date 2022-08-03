@@ -16,10 +16,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-          cache: 'npm'
+          cache: 'pnpm'
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install
       - name: Check for linting issues
-        run: npm run lint
+        run: pnpm lint
       - name: Run functional tests
-        run: npm run test:func:run
+        run: pnpm test:func:run

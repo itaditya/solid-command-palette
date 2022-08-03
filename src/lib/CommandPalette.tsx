@@ -283,7 +283,7 @@ const CommandPaletteInternal: Component<CommandPaletteProps> = (p) => {
             }}
           >
             <label
-              htmlFor={searchInputId}
+              for={searchInputId}
               id={searchLabelId}
               class={utilStyles.visuallyHidden}
             >

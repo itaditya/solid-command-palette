@@ -4,7 +4,7 @@ import { KbdShortcut } from './KbdShortcut';
 
 describe('Test <KbdShortcut />', () => {
   test('should render Control K', () => {
-    const { container } = render(() => <KbdShortcut shortcut='$mod+k' />);
+    const { container } = render(() => <KbdShortcut shortcut="$mod+k" />);
     expect(container).toHaveTextContent('Ctrlk');
   });
 });

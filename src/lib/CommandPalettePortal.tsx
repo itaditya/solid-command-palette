@@ -1,9 +1,9 @@
-import { Component, createRenderEffect, onCleanup } from 'solid-js';
+import { ParentComponent, createRenderEffect, onCleanup } from 'solid-js';
 import { Portal } from 'solid-js/web';
 
 type PortalElem = undefined | HTMLDivElement;
 
-export const CommandPalettePortal: Component = (p) => {
+export const CommandPalettePortal: ParentComponent = (p) => {
   let portalElem: PortalElem;
 
   createRenderEffect(() => {

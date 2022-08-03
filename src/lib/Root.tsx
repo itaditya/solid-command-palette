@@ -1,4 +1,4 @@
-import { Component } from 'solid-js';
+import { Component, ParentComponent } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
 import { createKbdShortcuts } from './createKbdShortcuts';
 import { getActiveParentAction } from './actionUtils/actionUtils';
@@ -12,7 +12,7 @@ const RootInternal: Component = () => {
   return null;
 };
 
-export const Root: Component<RootProps> = (p) => {
+export const Root: ParentComponent<RootProps> = (p) => {
   const initialActions = p.actions || {};
   const initialActionsContext = p.actionsContext || {};
 
@@ -33,7 +33,6 @@ export const Root: Component<RootProps> = (p) => {
       setState('searchText', newValue);
     },
     setActionsContext(actionId, newData) {
-      // @ts-expect-error need to figure out nested store setters.
       setState('actionsContext', 'dynamic', actionId, newData);
     },
     resetActionsContext(actionId) {

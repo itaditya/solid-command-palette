@@ -7,5 +7,5 @@ export function useControls() {
     openPalette: storeMethods.openPalette,
     closePalette: storeMethods.closePalette,
     togglePalette: storeMethods.togglePalette,
-  }
+  };
 }
