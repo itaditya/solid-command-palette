@@ -3,7 +3,7 @@ import { devices } from '@playwright/test';
 
 const isCi = Boolean(process.env.CI);
 
-const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000';
+const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:5173';
 const reporter: PlaywrightTestConfig['reporter'] = isCi ? 'html' : 'list';
 
 const config: PlaywrightTestConfig = {

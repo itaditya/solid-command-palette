@@ -8,10 +8,10 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": ["vite/client"],
+    "types": ["vite/client", "@types/testing-library__jest-dom"],
     "declaration": true,
     "outDir": "pkg-dist/types"
   },
   "include": ["./src"],
-  "exclude": ["./src/app", "./src/**/*.test.*"]
+  "exclude": ["./src/app"]
 }
