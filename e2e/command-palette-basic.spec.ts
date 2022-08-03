@@ -26,10 +26,12 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     await page.keyboard.type('GitHub');
 
-    const searchLocator = page.locator('input[type="search"]');
+    const searchLocator = page.locator('role=searchbox[name*="Search for an action"]');
     await expect(searchLocator).toHaveValue('GitHub');
 
-    const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+    const optionLocator = page.locator(
+      'role=combobox[name*="Search for an action"] >> role=option'
+    );
 
     const optionsNum = await optionLocator.count();
     expect(optionsNum).toBe(1);
@@ -45,7 +47,9 @@ test.describe('Test basic interactions of Command Palette', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
 
-    const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+    const optionLocator = page.locator(
+      'role=combobox[name*="Search for an action"] >> role=option'
+    );
     let isThirdOptionSelected = await optionLocator.nth(2).getAttribute('aria-selected');
 
     expect(isThirdOptionSelected).toEqual('true');
@@ -64,15 +68,18 @@ test.describe('Test basic interactions of Command Palette', () => {
     await page.goto('/demo');
     await triggerCommandPaletteOpen(page);
 
-    await expect(page.locator('[role="combobox"]')).not.toContainText('Unmute');
+    const paletteLocator = page.locator('role=combobox[name*="Search for an action"]');
+    await expect(paletteLocator).not.toContainText('Unmute');
 
     await page.keyboard.press('Escape');
-    await page.check('label >> text=Audible');
+    const unmuteLabelLocator = page.locator('label >> text=Audible');
+    await unmuteLabelLocator.check();
     await triggerCommandPaletteOpen(page);
-    await page.click('[role="combobox"] >> text=Unmute');
+    await paletteLocator.locator('text=Unmute').click();
 
-    const isUnmuted = await page.isChecked('label >> text=Audible');
-    expect(isUnmuted).toBeFalsy();
+    await expect(unmuteLabelLocator).toBeChecked({
+      checked: false,
+    });
   });
 
   test('should be able to run nested actions', async ({ page }) => {
@@ -81,11 +88,13 @@ test.describe('Test basic interactions of Command Palette', () => {
 
     await page.keyboard.type('Profile');
 
-    const optionLocator = page.locator('[role="combobox"] >> [role="option"]');
+    const optionLocator = page.locator(
+      'role=combobox[name*="Search for an action"] >> role=option'
+    );
 
     await optionLocator.locator('text=Set profile').click();
 
-    const searchLocator = page.locator('input[type="search"]');
+    const searchLocator = page.locator('role=searchbox[name*="Search for an action"]');
     await expect(searchLocator).toHaveValue('');
 
     const optionsNum = await optionLocator.count();
