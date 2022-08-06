@@ -19,6 +19,12 @@ const config: PlaywrightTestConfig = {
     actionTimeout: 0,
     baseURL,
     trace: 'on-first-retry',
+    headless: false,
+    video: 'on',
+    launchOptions: {
+      ignoreDefaultArgs: ['--mute-audio', '--disable-audio-output'],
+      slowMo: 3000,
+    },
   },
   projects: [
     {

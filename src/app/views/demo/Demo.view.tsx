@@ -15,6 +15,7 @@ const DemoView: Component = () => {
   const [muted, setMuted] = createSignal(false);
   const [profile, setProfile] = createSignal<Profile>('personal');
   const [searchParams] = useSearchParams();
+  let audioElem;
 
   const increment = () => {
     setCount((prev) => (prev += 1));
@@ -25,7 +26,14 @@ const DemoView: Component = () => {
   };
 
   const handleMuteInput = () => {
-    setMuted((old) => !old);
+    const existingState = muted();
+    const newState = !existingState;
+    if (newState) {
+      audioElem.play();
+    } else {
+      audioElem.pause();
+    }
+    setMuted(newState);
   };
 
   const handleProfileChange = (event: Event) => {
@@ -145,6 +153,12 @@ const DemoView: Component = () => {
                 </strong>
                 <span>(click to toggle)</span>
               </label>
+              <audio
+                src="/audio.mp3"
+                ref={audioElem}
+                controls
+                loop
+              />
             </div>
             <Show when={muted()}>
               <p class={demoStyles.demoInteractionDesc}>
