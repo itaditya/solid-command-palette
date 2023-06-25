@@ -25,7 +25,7 @@ const ResultContent: Component<ResultContentProps> = (p) => {
           {(shortcut) => (
             <KbdShortcut
               class={styles.resultShortcut}
-              shortcut={shortcut}
+              shortcut={shortcut()}
             />
           )}
         </Show>
