@@ -1,5 +1,5 @@
 import { onMount, onCleanup } from 'solid-js';
-import tinykeys from 'tinykeys';
+import { tinykeys } from 'tinykeys';
 import { useStore } from './StoreContext';
 import { createActionList } from './createActionList';
 import { getShortcutHandlersMap } from './actionUtils/actionUtils';
