@@ -1,10 +1,10 @@
 import { Component, lazy } from 'solid-js';
-import { RouteDefinition, useRoutes } from 'solid-app-router';
 import AppShellView from './views/app/AppShell.view';
 import DocsShellView from './views/docs/DocsShell/DocsShell.view';
 import DocsView from './views/docs/Docs.view';
 import ApiView from './views/docs/Api/Api.view';
 import HomeView from './views/home/Home.view';
+import { RouteDefinition, useRoutes } from '@solidjs/router';
 
 const routes: Array<RouteDefinition> = [
   {

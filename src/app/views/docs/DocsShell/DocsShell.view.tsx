@@ -1,7 +1,7 @@
-import { Component, Suspense } from 'solid-js';
-import { NavLink, NavLinkProps, Outlet, useIsRouting } from 'solid-app-router';
+import { Component, Show, Suspense } from 'solid-js';
 import { Loader } from '../../../shared/Loader/Loader';
 import styles from './DocsShell.module.css';
+import { NavLink, NavLinkProps, useIsRouting } from '@solidjs/router';
 
 const SidebarNavLink: Component<NavLinkProps> = (p) => {
   return (
@@ -51,7 +51,10 @@ const DocsShellView: Component = () => {
         </Show>
       </aside>
       <main class={styles.main}>
-        <Suspense fallback={<Loader size="large" />}>
+        <Suspense
+          fallback={<Loader size="large" />}
+          children={undefined}
+        >
           <div class={styles.mainContent}>
             <Outlet />
           </div>

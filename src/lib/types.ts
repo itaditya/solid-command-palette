@@ -1,4 +1,4 @@
-import { Component } from 'solid-js';
+import { Component, JSX } from 'solid-js';
 import { DeepReadonly, Store } from 'solid-js/store';
 
 export type ActionId = string;
@@ -60,6 +60,7 @@ export interface RootProps {
   actions: Actions;
   actionsContext: ActionContext;
   components?: Components;
+  children?: JSX.Element;
 }
 
 export interface StoreState {

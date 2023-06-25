@@ -1,5 +1,4 @@
 import { Component, createSignal, Show } from 'solid-js';
-import { useSearchParams } from 'solid-app-router';
 import { Root, CommandPalette, KbdShortcut } from '../../../lib';
 import { actions } from './actions';
 import { NestedActionDemo } from './NestedActionDemo/NestedActionDemo';
@@ -9,6 +8,7 @@ import { Profile } from './types';
 import utilStyles from '../../utils.module.css';
 import demoStyles from './demoUtils.module.css';
 import styles from './Demo.module.css';
+import { useSearchParams } from '@solidjs/router';
 
 const DemoView: Component = () => {
   const [count, setCount] = createSignal(0);

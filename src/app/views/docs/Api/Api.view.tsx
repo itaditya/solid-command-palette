@@ -1,4 +1,4 @@
-import { Navigate } from 'solid-app-router';
+import { Navigate } from '@solidjs/router';
 import { Component } from 'solid-js';
 
 const ApiView: Component = () => {
