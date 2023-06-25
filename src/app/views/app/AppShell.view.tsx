@@ -4,7 +4,7 @@ import { SocialIcon, socialsData } from './SocialIcons';
 import { actions } from './actions';
 import utilStyles from '../../utils.module.css';
 import styles from './AppShell.module.css';
-import { NavLink, NavLinkProps, Outlet, useMatch, useNavigate } from '@solidjs/router';
+import { Link, NavLink, NavLinkProps, Outlet, useMatch, useNavigate } from '@solidjs/router';
 
 const HeaderNavLink: Component<NavLinkProps> = (p) => {
   return (
