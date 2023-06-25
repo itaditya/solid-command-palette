@@ -42,7 +42,6 @@
     "happy-dom": "^2.31.1",
     "prettier": "2.6.0",
     "shiki": "^0.10.1",
-    "solid-app-router": "^0.4.2",
     "solid-js": "^1.7.6",
     "solid-transition-group": "^0.2.2",
     "tinykeys": "^2.1.0",
@@ -83,5 +82,8 @@
     "search bar",
     "solidhack",
     "best_ecosystem"
-  ]
+  ],
+  "dependencies": {
+    "@solidjs/router": "^0.8.2"
+  }
 }

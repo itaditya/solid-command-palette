@@ -60,7 +60,7 @@ export interface RootProps {
   actions: Actions;
   actionsContext: ActionContext;
   components?: Components;
-  children: JSX.Element;
+  children?: JSX.Element;
 }
 
 export interface StoreState {

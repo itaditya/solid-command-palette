@@ -1,7 +1,7 @@
 import { Component } from 'solid-js';
-import { Link } from 'solid-app-router';
 import { Snippet } from '../Snippet/Snippet';
 import docsStyles from '../docsUtils.module.css';
+import { Link } from '@solidjs/router';
 
 const ApiRootView: Component = () => {
   return (

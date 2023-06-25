@@ -1,10 +1,10 @@
 import { Component, Show } from 'solid-js';
-import { Link, NavLink, NavLinkProps, Outlet, useMatch, useNavigate } from 'solid-app-router';
 import { Root, CommandPalette } from '../../../lib';
 import { SocialIcon, socialsData } from './SocialIcons';
 import { actions } from './actions';
 import utilStyles from '../../utils.module.css';
 import styles from './AppShell.module.css';
+import { NavLink, NavLinkProps, Outlet, useMatch, useNavigate } from '@solidjs/router';
 
 const HeaderNavLink: Component<NavLinkProps> = (p) => {
   return (
